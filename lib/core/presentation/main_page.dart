@@ -24,7 +24,7 @@ class MainPage extends HookConsumerWidget {
         body: AppPadding.h10v20(
           child: Column(
             children: [
-              AppText(text: 'Quick Start'),
+              AppText.bold(text: 'Quick Start'),
             ],
           ),
         ),
