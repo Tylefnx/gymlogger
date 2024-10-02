@@ -12,6 +12,15 @@ class AppText extends StatelessWidget {
     );
   }
 
+  factory AppText.bold({required String text}) {
+    return AppText(
+      text: text,
+      textStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Text(
