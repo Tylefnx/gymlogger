@@ -5,7 +5,7 @@ class AppText extends StatelessWidget {
   final String text;
   const AppText({super.key, required this.text, this.textStyle});
 
-  factory AppText.normal(String text) {
+  factory AppText.normal({required String text}) {
     return AppText(
       text: text,
       textStyle: TextStyle(),
