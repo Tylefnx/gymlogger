@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 
 class AppPadding extends StatelessWidget {
   final EdgeInsets? padding;
-  const AppPadding({super.key, this.padding});
+  final Widget? child;
+  const AppPadding({super.key, this.padding, this.child});
 
-  factory AppPadding.h10v20() {
+  factory AppPadding.h10v20({required Widget child}) {
     return AppPadding(
       padding: EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 20,
       ),
+      child: child,
     );
   }
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.zero,
+      child: child,
     );
   }
 }
