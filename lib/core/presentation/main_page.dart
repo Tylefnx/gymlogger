@@ -26,7 +26,7 @@ class MainPage extends HookConsumerWidget {
           child: AppPadding.h10v20(
             child: Column(
               children: [
-                AppText.bold(text: 'Quick Start'),
+                AppText.big_bold(text: 'Quick Start'),
                 AppAddButton(
                   text: 'Start Empty Workout',
                 )
