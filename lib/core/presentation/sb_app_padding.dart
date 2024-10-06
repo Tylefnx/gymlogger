@@ -10,6 +10,11 @@ class SB_AppPadding extends StatelessWidget {
       height: 10,
     );
   }
+  factory SB_AppPadding.w15({Widget? child}) {
+    return SB_AppPadding(
+      width: 15,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
