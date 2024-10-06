@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
@@ -33,31 +34,6 @@ class MainPage extends HookConsumerWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class AppAddButton extends StatelessWidget {
-  final String text;
-  const AppAddButton({
-    super.key,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Row(
-        children: [
-          Icon(Icons.add),
-          AppPadding.h10v20(
-            child: AppText(
-              text: text,
-            ),
-          ),
-        ],
       ),
     );
   }
