@@ -21,6 +21,16 @@ class AppText extends StatelessWidget {
     );
   }
 
+  factory AppText.big_bold({required String text}) {
+    return AppText(
+      text: text,
+      textStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Text(
