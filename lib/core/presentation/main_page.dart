@@ -21,13 +21,43 @@ class MainPage extends HookConsumerWidget {
         bottomNavigationBar: CustomBottomNavigationBar(
           selectedIndex: bottomNavigationIndex,
         ),
-        body: AppPadding.h10v20(
-          child: Column(
-            children: [
-              AppText.bold(text: 'Quick Start'),
-            ],
+        body: Center(
+          child: AppPadding.h10v20(
+            child: Column(
+              children: [
+                AppText.bold(text: 'Quick Start'),
+                AppAddButton(
+                  text: 'Start Empty Workout',
+                )
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AppAddButton extends StatelessWidget {
+  final String text;
+  const AppAddButton({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Row(
+        children: [
+          Icon(Icons.add),
+          AppPadding.h10v20(
+            child: AppText(
+              text: text,
+            ),
+          ),
+        ],
       ),
     );
   }
