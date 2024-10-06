@@ -32,7 +32,9 @@ class MainPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(bottomNavigationLabels[bottomNavigationIndex.value]!),
+        title: AppText.bold(
+          text: bottomNavigationLabels[bottomNavigationIndex.value]!,
+        ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: bottomNavigationIndex,
