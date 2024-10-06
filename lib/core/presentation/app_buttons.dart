@@ -26,3 +26,24 @@ class AppAddButton extends StatelessWidget {
     );
   }
 }
+
+class AppTallButton extends StatelessWidget {
+  final IconData? icondata;
+  final String text;
+  const AppTallButton({super.key, required this.text, this.icondata});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: AppPadding.v25(
+        child: Row(
+          children: [
+            if (icondata != null) Icon(icondata),
+            AppText.big_bold(text: text),
+          ],
+        ),
+      ),
+    );
+  }
+}
