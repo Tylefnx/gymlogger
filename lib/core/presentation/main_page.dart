@@ -8,32 +8,45 @@ import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigat
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ProviderScope(
+      child: MaterialApp(
+        home: MainPage(),
+      ),
+    );
+  }
+}
+
 class MainPage extends HookConsumerWidget {
-  const MainPage({super.key});
+  const MainPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomNavigationIndex = useState(0);
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(bottomNavigationLabels[bottomNavigationIndex.value]!),
-        ),
-        bottomNavigationBar: CustomBottomNavigationBar(
-          selectedIndex: bottomNavigationIndex,
-        ),
-        body: Center(
-          child: AppPadding.h10v20(
-            child: Column(
-              children: [
-                AppText.big_bold(text: 'Quick Start'),
-                SB_AppPadding.h10(),
-                AppAddButton(
-                  text: 'Start Empty Workout',
-                )
-              ],
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(bottomNavigationLabels[bottomNavigationIndex.value]!),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: bottomNavigationIndex,
+      ),
+      body: Center(
+        child: AppPadding.h10v20(
+          child: Column(
+            children: [
+              AppText.big_bold(text: 'Quick Start'),
+              SB_AppPadding.h10(),
+              AppAddButton(
+                text: 'Start Empty Workout',
+              )
+            ],
           ),
         ),
       ),
