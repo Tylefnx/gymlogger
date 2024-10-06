@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class SB_AppPadding extends StatelessWidget {
   final double? height;
   final double? width;
-  final Widget? child;
-  const SB_AppPadding({super.key, this.height, this.width, this.child});
+  const SB_AppPadding({super.key, this.height, this.width});
 
-  factory SB_AppPadding.h10({required Widget? child}) {
+  factory SB_AppPadding.h10({Widget? child}) {
     return SB_AppPadding(
       height: 10,
-      child: child,
     );
   }
 
@@ -18,7 +16,6 @@ class SB_AppPadding extends StatelessWidget {
     return SizedBox(
       height: height ?? 0,
       width: width ?? 0,
-      child: child,
     );
   }
 }
