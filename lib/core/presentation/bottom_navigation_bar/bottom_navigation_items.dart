@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gymlogger/main_page/sub_screens/profile_screen.dart';
-import 'package:gymlogger/main_page/sub_screens/workout_screen.dart';
+import 'package:gymlogger/workout/presentation/workout_screen.dart';
 
 final bottomNavigationItems = [
   BottomNavigationBarItem(
