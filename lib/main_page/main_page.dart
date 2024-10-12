@@ -38,7 +38,7 @@ class MainPage extends HookConsumerWidget {
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: bottomNavigationIndex,
       ),
-      body: ProfileScreen(),
+      body: mainScreens[bottomNavigationIndex.value],
     );
   }
 }
