@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gymlogger/logs/presentation/log_screen.dart';
 import 'package:gymlogger/main_page/sub_screens/profile_screen.dart';
 import 'package:gymlogger/workout/presentation/workout_screen.dart';
 
@@ -9,10 +10,22 @@ final bottomNavigationItems = [
   ),
   BottomNavigationBarItem(
     label: bottomNavigationLabels[1],
+    icon: Icon(Icons.query_stats_sharp),
+  ),
+  BottomNavigationBarItem(
+    label: bottomNavigationLabels[2],
     icon: Icon(Icons.person),
   ),
 ];
 
-const List<String?> bottomNavigationLabels = ['Workout', 'Profile'];
+const List<String?> bottomNavigationLabels = [
+  'Workout',
+  'Logs',
+  'Profile',
+];
 
-const mainScreens = <Widget>[WorkoutScreen(), ProfileScreen()];
+const mainScreens = <Widget>[
+  WorkoutScreen(),
+  LogScreen(),
+  ProfileScreen(),
+];
