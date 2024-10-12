@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 
 final bottomNavigationItems = [
   BottomNavigationBarItem(
-    label: bottomNavigationLabels[1],
-    icon: Icon(Icons.home),
+    label: bottomNavigationLabels[0],
+    icon: Icon(Icons.fitness_center),
   ),
   BottomNavigationBarItem(
     label: bottomNavigationLabels[1],
-    icon: Icon(Icons.calendar_view_day),
-  ),
-  BottomNavigationBarItem(
-    label: bottomNavigationLabels[2],
     icon: Icon(Icons.person),
   ),
 ];
 
-const List<String?> bottomNavigationLabels = ['Home', 'Program', 'Profile'];
+const List<String?> bottomNavigationLabels = ['Workout', 'Profile'];
