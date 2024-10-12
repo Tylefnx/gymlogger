@@ -3,8 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_items.dart';
-import 'package:gymlogger/main_page/sub_screens/profile_screen.dart';
-import 'package:gymlogger/main_page/sub_screens/workout_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MainScreen extends StatelessWidget {
@@ -42,5 +40,3 @@ class MainPage extends HookConsumerWidget {
     );
   }
 }
-
-const mainScreens = <Widget>[WorkoutScreen(), ProfileScreen()];
