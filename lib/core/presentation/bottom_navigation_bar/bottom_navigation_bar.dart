@@ -10,6 +10,8 @@ class CustomBottomNavigationBar extends HookWidget {
   });
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      unselectedItemColor: Colors.grey,
+      showUnselectedLabels: true,
       currentIndex: selectedIndex.value,
       fixedColor: Colors.blueAccent,
       elevation: 50,
