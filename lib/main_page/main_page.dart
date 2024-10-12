@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_items.dart';
+import 'package:gymlogger/core/router/app_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MainScreen extends StatelessWidget {
@@ -10,9 +11,13 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _appRouter = AppRoute();
     return ProviderScope(
-      child: MaterialApp(
-        home: MainPage(),
+      child: MaterialApp.router(
+        routerDelegate: _appRouter.router.routerDelegate,
+        routeInformationParser: _appRouter.router.routeInformationParser,
+        routeInformationProvider: _appRouter.router.routeInformationProvider,
+        title: 'Gymlogger',
       ),
     );
   }
