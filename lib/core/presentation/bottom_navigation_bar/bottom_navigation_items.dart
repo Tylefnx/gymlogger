@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gymlogger/main_page/sub_screens/profile_screen.dart';
+import 'package:gymlogger/main_page/sub_screens/workout_screen.dart';
 
 final bottomNavigationItems = [
   BottomNavigationBarItem(
@@ -12,3 +14,5 @@ final bottomNavigationItems = [
 ];
 
 const List<String?> bottomNavigationLabels = ['Workout', 'Profile'];
+
+const mainScreens = <Widget>[WorkoutScreen(), ProfileScreen()];
