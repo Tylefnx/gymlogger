@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 
 class CalculatorsScreen extends StatelessWidget {
@@ -43,19 +44,24 @@ class CalculatorSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.blueGrey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(),
-          Icon(
-            icon,
-            size: 90,
-          ),
-          AppText.big_bold(text: label),
-        ],
+    return InkWell(
+      onTap: () {
+        GoRouter.of(context).push('/calculators/1RM');
+      },
+      child: Card(
+        color: Colors.blueGrey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(),
+            Icon(
+              icon,
+              size: 90,
+            ),
+            AppText.big_bold(text: label),
+          ],
+        ),
       ),
     );
   }
