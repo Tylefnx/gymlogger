@@ -15,6 +15,13 @@ class SB_AppPadding extends StatelessWidget {
       width: 15,
     );
   }
+
+  factory SB_AppPadding.w30({Widget? child}) {
+    return SB_AppPadding(
+      width: 30,
+    );
+  }
+
   factory SB_AppPadding.h30({Widget? child}) {
     return SB_AppPadding(
       height: 30,

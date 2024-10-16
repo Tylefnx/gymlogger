@@ -15,6 +15,16 @@ class AppPadding extends StatelessWidget {
     );
   }
 
+  factory AppPadding.h30v40({required Widget child}) {
+    return AppPadding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 30,
+        vertical: 40,
+      ),
+      child: child,
+    );
+  }
+
   factory AppPadding.v15({required Widget child}) {
     return AppPadding(
       padding: EdgeInsets.symmetric(
