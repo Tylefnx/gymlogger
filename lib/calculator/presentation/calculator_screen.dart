@@ -19,14 +19,17 @@ class CalculatorsScreen extends StatelessWidget {
         CalculatorSectionCard(
           label: '1RM',
           icon: Icons.fitness_center,
+          onTap: () => GoRouter.of(context).push('/calculators/1RM'),
         ),
         CalculatorSectionCard(
           label: 'Strength Level',
           icon: Icons.fitness_center_outlined,
+          onTap: () => null,
         ),
         CalculatorSectionCard(
           label: 'Fat Percentage',
           icon: Icons.generating_tokens_sharp,
+          onTap: () => null,
         ),
       ],
     );
@@ -34,20 +37,20 @@ class CalculatorsScreen extends StatelessWidget {
 }
 
 class CalculatorSectionCard extends StatelessWidget {
+  final void Function() onTap;
   final String label;
   final IconData icon;
   const CalculatorSectionCard({
     super.key,
     required this.label,
     required this.icon,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        GoRouter.of(context).push('/calculators/1RM');
-      },
+      onTap: onTap,
       child: Card(
         color: Colors.blueGrey,
         child: Column(
