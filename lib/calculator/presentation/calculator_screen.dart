@@ -24,7 +24,7 @@ class CalculatorsScreen extends StatelessWidget {
         CalculatorSectionCard(
           label: 'Strength Level',
           icon: Icons.fitness_center_outlined,
-          onTap: () => null,
+          onTap: () => GoRouter.of(context).push('/calculators/str_level'),
         ),
         CalculatorSectionCard(
           label: 'Fat Percentage',
