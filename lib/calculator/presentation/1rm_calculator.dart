@@ -30,24 +30,38 @@ class OneRepMaxCalculator extends HookWidget {
               repMaxes: repMaxes,
             ),
             SB_AppPadding.h10(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: repMaxes.value.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppText.big_bold(text: '${index + 1}RMX'),
-                      AppText.big_bold(
-                        text: repMaxes.value[index].toStringAsFixed(2),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
+            RepMaxCalculatorResult(repMaxes: repMaxes),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class RepMaxCalculatorResult extends StatelessWidget {
+  const RepMaxCalculatorResult({
+    super.key,
+    required this.repMaxes,
+  });
+
+  final ValueNotifier<List<double>> repMaxes;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: repMaxes.value.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AppText.big_bold(text: '${index + 1}RMX'),
+              AppText.big_bold(
+                text: repMaxes.value[index].toStringAsFixed(2),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
