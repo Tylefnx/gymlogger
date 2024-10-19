@@ -5,6 +5,17 @@ class StrengthLevelCalculator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Strength Level Calculator'),
+      ),
+      body: Column(
+        children: [
+          TextFormField(),
+          TextFormField(),
+          TextFormField(),
+        ],
+      ),
+    );
   }
 }

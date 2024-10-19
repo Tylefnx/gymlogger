@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
+import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -121,7 +122,13 @@ class WeightSelectionSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: TextFormField(
+          child: AppTextFormField(
+            controller: weight,
+            textInputType: TextInputType.numberWithOptions(
+              signed: true,
+            ),
+            label: 'Weight',
+            suffixText: 'KG',
             onChanged: (_) {
               repMaxes.value = calculateRepMaxes(
                 calculateOneRepMax(
@@ -131,17 +138,6 @@ class WeightSelectionSection extends StatelessWidget {
                 repMaxes,
               );
             },
-            controller: weight,
-            keyboardType: TextInputType.numberWithOptions(
-              signed: true,
-            ),
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              suffixText: 'KG',
-              label: AppText.bold(text: 'Weight'),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-            ),
           ),
         ),
       ],
