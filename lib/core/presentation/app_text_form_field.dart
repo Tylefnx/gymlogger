@@ -17,6 +17,20 @@ class AppTextFormField extends StatelessWidget {
   final String label;
   final void Function(String)? onChanged;
 
+  factory AppTextFormField.numberWithOptions({
+    required String label,
+    required TextEditingController controller,
+    String? suffixText,
+    void Function(String)? onChanged,
+  }) {
+    return AppTextFormField(
+      textInputType: TextInputType.numberWithOptions(),
+      label: label,
+      controller: controller,
+      suffixText: suffixText,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
