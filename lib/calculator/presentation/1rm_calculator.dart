@@ -122,11 +122,8 @@ class WeightSelectionSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: AppTextFormField(
+          child: AppTextFormField.numberWithOptions(
             controller: weight,
-            textInputType: TextInputType.numberWithOptions(
-              signed: true,
-            ),
             label: 'Weight',
             suffixText: 'KG',
             onChanged: (_) {
