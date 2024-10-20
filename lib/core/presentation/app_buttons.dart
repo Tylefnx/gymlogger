@@ -47,3 +47,28 @@ class AppTallButton extends StatelessWidget {
     );
   }
 }
+
+class AppButton extends StatelessWidget {
+  const AppButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+  });
+
+  final void Function() onPressed;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.lightBlue,
+        foregroundColor: Colors.white,
+      ),
+      onPressed: onPressed,
+      child: AppText.big_bold(
+        text: title,
+      ),
+    );
+  }
+}
