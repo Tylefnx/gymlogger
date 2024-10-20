@@ -30,6 +30,19 @@ class AppTextFormField extends StatelessWidget {
       suffixText: suffixText,
     );
   }
+  factory AppTextFormField.name({
+    required String label,
+    required TextEditingController controller,
+    String? suffixText,
+    void Function(String)? onChanged,
+  }) {
+    return AppTextFormField(
+      textInputType: TextInputType.name,
+      label: label,
+      controller: controller,
+      suffixText: suffixText,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
