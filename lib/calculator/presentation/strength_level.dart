@@ -135,18 +135,13 @@ String strengthLevel(
     final bwRatio = liftWeight / lifterBW;
     switch (excersize) {
       case 'Deadlift':
-        calculateDeadliftStrength(bwRatio, gender);
-        break;
+        return calculateDeadliftStrength(bwRatio, gender);
       case 'Squat':
-        calculateSquatStrength(bwRatio, gender);
-        break;
+        return calculateSquatStrength(bwRatio, gender);
       case 'Bench Press':
-        calculateBenchPressStrength(bwRatio, gender);
-        break;
+        return calculateBenchPressStrength(bwRatio, gender);
       case 'Overhead Press':
-        calculateOHPstrength(bwRatio, gender);
-      default:
-        break;
+        return calculateOHPstrength(bwRatio, gender);
     }
   }
   return '';
