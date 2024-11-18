@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/calculator/shared/dropdowns.dart';
 import 'package:gymlogger/core/constant_lists.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
-import 'package:gymlogger/core/presentation/app_dropdown_button.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
@@ -57,30 +56,6 @@ class StrengthLevelCalculator extends HookWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class GenderSelectionWidget extends StatelessWidget {
-  const GenderSelectionWidget({
-    super.key,
-    required this.gender,
-  });
-
-  final ValueNotifier<String?> gender;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppDropDownButton<String?>(
-      hint: 'Select Gender',
-      value: gender.value,
-      onChanged: (_) => gender.value = _!,
-      items: genders.map<DropdownMenuItem<String>>((String? _) {
-        return DropdownMenuItem(
-          value: _,
-          child: AppText.bold(text: _ ?? ''),
-        );
-      }).toList(),
     );
   }
 }
