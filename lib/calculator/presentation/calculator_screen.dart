@@ -29,7 +29,7 @@ class CalculatorsScreen extends StatelessWidget {
         CalculatorSectionCard(
           label: 'Fat Percentage',
           icon: Icons.generating_tokens_sharp,
-          onTap: () => null,
+          onTap: () => GoRouter.of(context).push('/calculators/fat_percentage'),
         ),
       ],
     );
