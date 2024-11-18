@@ -145,6 +145,8 @@ String strengthLevel(
         break;
       case 'Overhead Press':
         calculateOHPstrength(bwRatio, gender);
+      default:
+        break;
     }
   }
   return '';
