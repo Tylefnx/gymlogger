@@ -47,6 +47,42 @@ class WeightSelectionSection extends StatelessWidget {
   }
 }
 
+class MeasurementSelectionSection extends StatelessWidget {
+  const MeasurementSelectionSection({
+    super.key,
+    required this.weightController,
+    required this.label,
+  });
+
+  final TextEditingController weightController;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppTextFormField.numberWithOptions(
+      label: label,
+      controller: weightController,
+    );
+  }
+}
+
+class BWSelectionSection extends StatelessWidget {
+  const BWSelectionSection({
+    super.key,
+    required this.bwController,
+  });
+
+  final TextEditingController bwController;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppTextFormField.numberWithOptions(
+      label: 'Bodyweight',
+      controller: bwController,
+    );
+  }
+}
+
 class GenderSelectionWidget extends StatelessWidget {
   const GenderSelectionWidget({
     super.key,

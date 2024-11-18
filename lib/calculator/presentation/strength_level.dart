@@ -29,10 +29,7 @@ class StrengthLevelCalculator extends HookWidget {
               weightController: weightController,
             ),
             SB_AppPadding.h10(),
-            AppTextFormField.numberWithOptions(
-              label: 'Bodyweight',
-              controller: bwController,
-            ),
+            BWSelectionSection(bwController: bwController),
             SB_AppPadding.h10(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
