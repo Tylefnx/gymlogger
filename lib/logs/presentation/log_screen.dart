@@ -6,10 +6,27 @@ class LogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppGridviewWidget(children: []),
-      ],
-    );
+    return AppGridviewWidget(children: [
+      GridviewSectionCard(
+        label: 'Squat',
+        icon: Icons.fitness_center,
+        onTap: () {},
+      ),
+      GridviewSectionCard(
+        label: 'Bench',
+        icon: Icons.fitness_center,
+        onTap: () {},
+      ),
+      GridviewSectionCard(
+        label: 'Deadlift',
+        icon: Icons.fitness_center,
+        onTap: () {},
+      ),
+      GridviewSectionCard(
+        label: 'Overhead Press',
+        icon: Icons.fitness_center,
+        onTap: () {},
+      ),
+    ]);
   }
 }
