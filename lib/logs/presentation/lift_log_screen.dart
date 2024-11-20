@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/logs/presentation/dummy_lifts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
