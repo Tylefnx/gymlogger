@@ -21,7 +21,6 @@ class RoutineDetails extends HookWidget {
           itemCount: routine.value.length,
           itemBuilder: (BuildContext context, int index) {
             final movement = routine.value[index];
-
             return AppText.big_bold(
               text:
                   '${movement.key}: ${movement.value[0]} x ${movement.value[1]} x ${movement.value[2]}',
