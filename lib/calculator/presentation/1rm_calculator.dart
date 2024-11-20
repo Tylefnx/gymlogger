@@ -19,7 +19,7 @@ class OneRepMaxCalculator extends HookWidget {
       body: AppPadding.h30v40(
         child: Column(
           children: [
-            WeightSelectionSection(
+            OneRepMaxWeightSelectionSection(
               reps: selectedNumber,
               weight: weightFormController,
               repMaxes: repMaxes,
@@ -71,14 +71,14 @@ class RepMaxCalculatorResult extends StatelessWidget {
 class RepsPicker extends StatelessWidget {
   final ValueNotifier<List<double>> repMaxes;
   final TextEditingController weight;
+  final ValueNotifier<int> selectedNumber;
+
   const RepsPicker({
     super.key,
     required this.selectedNumber,
     required this.weight,
     required this.repMaxes,
   });
-
-  final ValueNotifier<int> selectedNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -105,11 +105,11 @@ class RepsPicker extends StatelessWidget {
   }
 }
 
-class WeightSelectionSection extends StatelessWidget {
+class OneRepMaxWeightSelectionSection extends StatelessWidget {
   final ValueNotifier<List<double>> repMaxes;
   final TextEditingController weight;
   final ValueNotifier<int> reps;
-  const WeightSelectionSection({
+  const OneRepMaxWeightSelectionSection({
     super.key,
     required this.reps,
     required this.weight,
