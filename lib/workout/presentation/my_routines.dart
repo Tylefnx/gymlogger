@@ -16,13 +16,6 @@ class MyRoutines extends StatelessWidget {
           RoutineCard(label: '2ct P.Bench Day'),
           RoutineCard(label: 'Heavy Deadlift Day'),
           RoutineCard(label: 'Spoto Day'),
-          RoutineCard(label: 'Spoto Day'),
-          RoutineCard(label: 'Spoto Day'),
-          RoutineCard(label: 'Spoto Day'),
-          RoutineCard(label: 'Spoto Day'),
-          RoutineCard(label: 'Spoto Day'),
-          RoutineCard(label: 'Spoto Day'),
-          RoutineCard(label: 'Spoto Day'),
         ],
       ),
     );
