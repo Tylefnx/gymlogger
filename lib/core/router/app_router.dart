@@ -3,6 +3,7 @@ import 'package:gymlogger/authentication/presentation/login_screen.dart';
 import 'package:gymlogger/calculator/presentation/1rm_calculator.dart';
 import 'package:gymlogger/calculator/presentation/fat_percentage_calculator.dart';
 import 'package:gymlogger/calculator/presentation/strength_level.dart';
+import 'package:gymlogger/logs/presentation/lift_log_screen.dart';
 import 'package:gymlogger/main_page/main_page.dart';
 
 class AppRoute {
@@ -39,6 +40,38 @@ class AppRoute {
         path: "/calculators/fat_percentage",
         builder: (context, state) {
           return const FatPercentageCalculator();
+        },
+      ),
+      GoRoute(
+        path: "/logs/squat",
+        builder: (context, state) {
+          return const LiftLogScreen(
+            lift: 'Squat',
+          );
+        },
+      ),
+      GoRoute(
+        path: "/logs/bench",
+        builder: (context, state) {
+          return const LiftLogScreen(
+            lift: 'Bench Press',
+          );
+        },
+      ),
+      GoRoute(
+        path: "/logs/deadlift",
+        builder: (context, state) {
+          return const LiftLogScreen(
+            lift: 'Deadlift',
+          );
+        },
+      ),
+      GoRoute(
+        path: "/logs/ohp",
+        builder: (context, state) {
+          return const LiftLogScreen(
+            lift: 'Overhead Press',
+          );
         },
       ),
     ],

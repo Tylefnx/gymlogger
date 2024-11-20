@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_gridview.dart';
 
 class LogScreen extends StatelessWidget {
@@ -10,22 +11,22 @@ class LogScreen extends StatelessWidget {
       GridviewSectionCard(
         label: 'Squat',
         icon: Icons.fitness_center,
-        onTap: () {},
+        onTap: () => GoRouter.of(context).push('/logs/squat'),
       ),
       GridviewSectionCard(
-        label: 'Bench',
+        label: 'Bench Press',
         icon: Icons.fitness_center,
-        onTap: () {},
+        onTap: () => GoRouter.of(context).push('/logs/bench'),
       ),
       GridviewSectionCard(
         label: 'Deadlift',
         icon: Icons.fitness_center,
-        onTap: () {},
+        onTap: () => GoRouter.of(context).push('/logs/deadlift'),
       ),
       GridviewSectionCard(
         label: 'Overhead Press',
         icon: Icons.fitness_center,
-        onTap: () {},
+        onTap: () => GoRouter.of(context).push('/logs/ohp'),
       ),
     ]);
   }
