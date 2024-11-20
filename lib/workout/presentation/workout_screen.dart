@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
+import 'package:gymlogger/workout/presentation/create_workout_screen.dart';
+import 'package:gymlogger/workout/presentation/dummy_training.dart';
 import 'package:gymlogger/workout/presentation/my_routines.dart';
 
-class WorkoutScreen extends StatelessWidget {
+class WorkoutScreen extends HookWidget {
   const WorkoutScreen({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final routines =
+        useState<Map<String, Map<String, List<int>>>>(DummyRoutines);
     return Center(
       child: AppPadding.h10v20(
         child: Column(
@@ -23,9 +29,15 @@ class WorkoutScreen extends StatelessWidget {
               ),
             ),
             AppText.big_bold(text: 'Routines'),
-            AppPadding.v15(child: RoutinesSection()),
+            AppPadding.v15(
+                child: RoutinesSection(
+              routines: routines,
+            )),
             AppText.big_bold(text: 'My Routines'),
-            Expanded(child: MyRoutines()),
+            Expanded(
+                child: MyRoutines(
+              routines: routines,
+            )),
           ],
         ),
       ),
@@ -34,8 +46,10 @@ class WorkoutScreen extends StatelessWidget {
 }
 
 class RoutinesSection extends StatelessWidget {
+  final ValueNotifier<Map<String, Map<String, List<int>>>> routines;
   const RoutinesSection({
     super.key,
+    required this.routines,
   });
 
   @override
@@ -45,6 +59,13 @@ class RoutinesSection extends StatelessWidget {
       children: [
         Expanded(
           child: AppTallButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => CreateRoutine(
+                  routineList: routines,
+                ),
+              ),
+            ),
             text: 'New Routine',
             icondata: Icons.bookmark_add,
           ),

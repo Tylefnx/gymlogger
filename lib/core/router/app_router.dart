@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gymlogger/authentication/presentation/login_screen.dart';
 import 'package:gymlogger/calculator/presentation/1rm_calculator.dart';
@@ -78,8 +79,8 @@ class AppRoute {
       GoRoute(
         path: "/workout/:routineName",
         builder: (context, state) {
-          final routineName = state.pathParameters['routineName'];
-          return RoutineDetails(routineName: routineName!);
+          var routineName = state.pathParameters['routineName']!;
+          return RoutineDetails(routineName: routineName);
         },
       ),
     ],

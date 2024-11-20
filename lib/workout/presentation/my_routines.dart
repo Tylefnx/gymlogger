@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 
-class MyRoutines extends StatelessWidget {
-  const MyRoutines({super.key});
-
+class MyRoutines extends HookWidget {
+  final ValueNotifier<Map<String, Map<String, List<int>>>> routines;
+  const MyRoutines({super.key, required this.routines});
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          RoutineCard(label: 'Heavy Squat Day'),
-          RoutineCard(label: 'Pause Deadlift Day'),
-          RoutineCard(label: '2ct P.Bench Day'),
-          RoutineCard(label: 'Heavy Deadlift Day'),
-          RoutineCard(label: 'Spoto Day'),
-        ],
-      ),
+    final routineList = useState(routines.value.keys.toList());
+    useEffect(
+      () {
+        routineList.value = routines.value.keys.toList();
+        return null;
+      },
+      [routines.value],
+    );
+    return ListView.builder(
+      itemCount: routines.value.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            RoutineCard(label: routineList.value[index]),
+          ],
+        );
+      },
     );
   }
 }

@@ -28,14 +28,20 @@ class AppAddButton extends StatelessWidget {
 }
 
 class AppTallButton extends StatelessWidget {
+  final void Function()? onPressed;
   final IconData? icondata;
   final String text;
-  const AppTallButton({super.key, required this.text, this.icondata});
+  const AppTallButton({
+    super.key,
+    required this.text,
+    this.icondata,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       child: AppPadding.v25(
         child: Row(
           children: [
