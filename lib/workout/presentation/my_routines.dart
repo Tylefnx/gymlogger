@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 
@@ -33,7 +34,7 @@ class RoutineCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.transparent,
-      onTap: () {},
+      onTap: () => GoRouter.of(context).push('/workout/$label'),
       child: Card(
         child: AppPadding.h10v20(
           child: AppText.bold(text: label),

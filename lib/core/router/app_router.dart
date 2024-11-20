@@ -5,6 +5,7 @@ import 'package:gymlogger/calculator/presentation/fat_percentage_calculator.dart
 import 'package:gymlogger/calculator/presentation/strength_level.dart';
 import 'package:gymlogger/logs/presentation/lift_log_screen.dart';
 import 'package:gymlogger/main_page/main_page.dart';
+import 'package:gymlogger/workout/presentation/routine.dart';
 
 class AppRoute {
   GoRouter router = GoRouter(
@@ -72,6 +73,13 @@ class AppRoute {
           return const LiftLogScreen(
             lift: 'Overhead Press',
           );
+        },
+      ),
+      GoRoute(
+        path: "/workout/:routineName",
+        builder: (context, state) {
+          final routineName = state.pathParameters['routineName'];
+          return RoutineDetails(routineName: routineName!);
         },
       ),
     ],
