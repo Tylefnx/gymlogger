@@ -107,6 +107,7 @@ class CreateRoutine extends HookWidget {
                 final routine_entry =
                     MapEntry(routineController.text, movements_list);
                 routinesTemp.addEntries([routine_entry]);
+                routineList.value = {};
                 routineList.value = routinesTemp;
                 GoRouter.of(context).pop();
               },

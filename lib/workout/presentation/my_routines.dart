@@ -9,21 +9,13 @@ class MyRoutines extends HookWidget {
   const MyRoutines({super.key, required this.routines});
   @override
   Widget build(BuildContext context) {
-    final routineList = useState(routines.value.keys.toList());
-    useEffect(
-      () {
-        routineList.value = routines.value.keys.toList();
-        return null;
-      },
-      [routines.value],
-    );
     return ListView.builder(
       itemCount: routines.value.length,
       itemBuilder: (BuildContext context, int index) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            RoutineCard(label: routineList.value[index]),
+            RoutineCard(label: routines.value.keys.elementAt(index)),
           ],
         );
       },
