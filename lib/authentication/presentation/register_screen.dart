@@ -9,13 +9,14 @@ import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginScreen extends HookConsumerWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends HookConsumerWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final username = useTextEditingController(text: '');
     final password = useTextEditingController(text: '');
+    final passwordAgain = useTextEditingController(text: '');
     return Scaffold(
       body: AppPadding.h30v40(
         child: Column(
@@ -30,25 +31,30 @@ class LoginScreen extends HookConsumerWidget {
             ),
             AppPadding.v15(
               child: AppTextFormField.password(
-                label: 'password',
+                label: 'Password',
                 controller: password,
               ),
             ),
+            AppTextFormField.password(
+              label: 'Password Again',
+              controller: passwordAgain,
+            ),
+            SB_AppPadding.h10(),
             AppButton(
-              onPressed: () => login(
+              onPressed: () async => register(
                 ref: ref,
                 username: username.text,
                 password: password.text,
+                passwordAgain: passwordAgain.text,
               ),
-              title: 'Login',
+              title: 'Register',
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppText.bold(text: "Don't have an account? Then"),
+                AppText.bold(text: "You have an account? Then"),
                 TextButton(
-                  onPressed: () => context.push('/authentication/register'),
-                  child: AppText.big_bold(text: 'Register'),
+                  onPressed: () => context.push('/authentication/login'),
+                  child: AppText.big_bold(text: 'login'),
                 )
               ],
             ),
@@ -59,16 +65,19 @@ class LoginScreen extends HookConsumerWidget {
   }
 }
 
-Future<void> login({
+Future<void> register({
   required WidgetRef ref,
-  required String? username,
-  required String? password,
+  required String username,
+  required String password,
+  required String passwordAgain,
 }) async {
-  if (username != null && password != null) {
-    await ref.read(authStateNotifierProvider.notifier).login(
-          username: username,
-          password: password,
-        );
-    print(ref.read(authStateNotifierProvider));
+  if (username != '' && password != '') {
+    if (password == passwordAgain) {
+      await ref.read(authStateNotifierProvider.notifier).register(
+            username: username,
+            password: password,
+          );
+      print(ref.read(authStateNotifierProvider));
+    }
   }
 }

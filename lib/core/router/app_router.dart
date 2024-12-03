@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gymlogger/authentication/presentation/login_screen.dart';
+import 'package:gymlogger/authentication/presentation/register_screen.dart';
 import 'package:gymlogger/calculator/presentation/1rm_calculator.dart';
 import 'package:gymlogger/calculator/presentation/fat_percentage_calculator.dart';
 import 'package:gymlogger/calculator/presentation/strength_level.dart';
@@ -10,13 +10,20 @@ import 'package:gymlogger/workout/presentation/routine.dart';
 
 class AppRoute {
   GoRouter router = GoRouter(
-    initialLocation: '/authentication',
+    initialLocation: '/authentication/login',
     routes: <GoRoute>[
       GoRoute(
-        name: "authenctication",
-        path: "/authentication",
+        name: "login",
+        path: "/authentication/login",
         builder: (context, state) {
           return const LoginScreen();
+        },
+      ),
+      GoRoute(
+        name: "register",
+        path: "/authentication/register",
+        builder: (context, state) {
+          return const RegisterScreen();
         },
       ),
       GoRoute(

@@ -17,7 +17,6 @@ class AuthenticationRepository {
         username: username,
         password: password,
       );
-      print(response);
       final json = response.data as Map;
       return Right(json['token'].toString());
     } on DioException catch (e) {
@@ -32,12 +31,11 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      final response = await _service.login(
+      final response = await _service.register(
         username: username,
         password: password,
       );
-      final uid = response.data['user_id'] as String;
-
+      final uid = response.data['token'] as String;
       return Right(uid);
     } on DioException catch (e) {
       return left(
