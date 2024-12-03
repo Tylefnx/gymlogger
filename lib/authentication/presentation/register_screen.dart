@@ -1,14 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gymlogger/authentication/shared/providers.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
+import 'package:gymlogger/core/router/app_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+@RoutePage()
 class RegisterScreen extends HookConsumerWidget {
   const RegisterScreen({super.key});
 
@@ -46,6 +48,7 @@ class RegisterScreen extends HookConsumerWidget {
                 username: username.text,
                 password: password.text,
                 passwordAgain: passwordAgain.text,
+                context: context,
               ),
               title: 'Register',
             ),
@@ -53,9 +56,14 @@ class RegisterScreen extends HookConsumerWidget {
               children: [
                 AppText.bold(text: "You have an account? Then"),
                 TextButton(
-                  onPressed: () => context.push('/authentication/login'),
+                  onPressed: () => AutoRouter.of(context).pushAndPopUntil(
+                    const MainRoute(),
+                    predicate: (Route<dynamic> route) {
+                      return false;
+                    },
+                  ),
                   child: AppText.big_bold(text: 'login'),
-                )
+                ),
               ],
             ),
           ],
@@ -70,6 +78,7 @@ Future<void> register({
   required String username,
   required String password,
   required String passwordAgain,
+  required BuildContext context,
 }) async {
   if (username != '' && password != '') {
     if (password == passwordAgain) {
@@ -77,6 +86,12 @@ Future<void> register({
             username: username,
             password: password,
           );
+      AutoRouter.of(context).pushAndPopUntil(
+        const MainRoute(),
+        predicate: (Route<dynamic> route) {
+          return true;
+        },
+      );
       print(ref.read(authStateNotifierProvider));
     }
   }

@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 
+@RoutePage()
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -10,9 +12,8 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ProfilePictureWidget(),
+            const ProfilePictureWidget(),
             SB_AppPadding.h10(),
             AppText.little_big_bold(text: 'EliteLifter'),
             AppText.little_big_bold(text: 'abuzerkomurcu@gmail.com'),
@@ -31,7 +32,7 @@ class ProfilePictureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
+    return const ClipOval(
       child: ColoredBox(
         color: Colors.grey,
         child: Icon(

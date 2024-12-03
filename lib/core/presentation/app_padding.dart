@@ -7,7 +7,7 @@ class AppPadding extends StatelessWidget {
 
   factory AppPadding.h10v20({required Widget child}) {
     return AppPadding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 20,
       ),
@@ -17,7 +17,7 @@ class AppPadding extends StatelessWidget {
 
   factory AppPadding.h30v40({required Widget child}) {
     return AppPadding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 30,
         vertical: 40,
       ),
@@ -27,7 +27,7 @@ class AppPadding extends StatelessWidget {
 
   factory AppPadding.v15({required Widget child}) {
     return AppPadding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 15,
       ),
       child: child,
@@ -36,7 +36,7 @@ class AppPadding extends StatelessWidget {
 
   factory AppPadding.v25({required Widget child}) {
     return AppPadding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 25,
       ),
       child: child,

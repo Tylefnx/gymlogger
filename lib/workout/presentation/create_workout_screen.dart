@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -7,14 +8,15 @@ import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 
-class CreateRoutine extends HookWidget {
+@RoutePage()
+class CreateRoutineScreen extends HookWidget {
   final ValueNotifier<Map<String, Map<String, List<int>>>> routineList;
-  const CreateRoutine({super.key, required this.routineList});
+  const CreateRoutineScreen({super.key, required this.routineList});
 
   @override
   Widget build(BuildContext context) {
     final routineController = useTextEditingController();
-    var textEditingControllers = useState<List<List<TextEditingController>>>(
+    final textEditingControllers = useState<List<List<TextEditingController>>>(
       [
         [
           TextEditingController(),
@@ -26,7 +28,7 @@ class CreateRoutine extends HookWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: AppText(text: 'Create Routine'),
+        title: const AppText(text: 'Create Routine'),
       ),
       body: AppPadding.h30v40(
         child: Column(
@@ -85,28 +87,28 @@ class CreateRoutine extends HookWidget {
             ),
             AppButton(
               onPressed: () {
-                textEditingControllers.value.forEach(
-                  (ctList) => ctList.forEach(
+                for (var ctList in textEditingControllers.value) {
+                  ctList.forEach(
                     (b) {
                       if (b.text == '') {
                         return;
                       }
                     },
-                  ),
-                );
-                Map<String, List<int>> movements_list = {};
-                textEditingControllers.value.forEach((ctList) {
-                  final movement_entry = MapEntry(ctList[0].text, [
+                  );
+                }
+                final Map<String, List<int>> movementsList = {};
+                for (var ctList in textEditingControllers.value) {
+                  final movementEntry = MapEntry(ctList[0].text, [
                     int.parse(ctList[1].text),
                     int.parse(ctList[2].text),
-                    int.parse(ctList[3].text)
+                    int.parse(ctList[3].text),
                   ]);
-                  movements_list.addEntries([movement_entry]);
-                });
-                var routinesTemp = routineList.value;
-                final routine_entry =
-                    MapEntry(routineController.text, movements_list);
-                routinesTemp.addEntries([routine_entry]);
+                  movementsList.addEntries([movementEntry]);
+                }
+                final routinesTemp = routineList.value;
+                final routineEntry =
+                    MapEntry(routineController.text, movementsList);
+                routinesTemp.addEntries([routineEntry]);
                 routineList.value = {};
                 routineList.value = routinesTemp;
                 GoRouter.of(context).pop();
@@ -118,8 +120,9 @@ class CreateRoutine extends HookWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          var tempList = List<List<TextEditingController>>.from(
-              textEditingControllers.value);
+          final tempList = List<List<TextEditingController>>.from(
+            textEditingControllers.value,
+          );
           tempList.add(
             [
               TextEditingController(),
@@ -130,7 +133,7 @@ class CreateRoutine extends HookWidget {
           );
           textEditingControllers.value = tempList;
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

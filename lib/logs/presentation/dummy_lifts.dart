@@ -2,7 +2,7 @@ Map<String, Map<String, double>> userLifts = {
   'Squat': squat,
   'Bench Press': bench,
   'Deadlift': deadlift,
-  'Overhead Press': ohp
+  'Overhead Press': ohp,
 };
 
 Map<String, double> squat = {

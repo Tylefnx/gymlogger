@@ -1,13 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
+import 'package:gymlogger/core/router/app_router.dart';
 import 'package:gymlogger/workout/presentation/create_workout_screen.dart';
 import 'package:gymlogger/workout/presentation/dummy_training.dart';
 import 'package:gymlogger/workout/presentation/my_routines.dart';
 
+@RoutePage()
 class WorkoutScreen extends HookWidget {
   const WorkoutScreen({
     super.key,
@@ -23,20 +26,22 @@ class WorkoutScreen extends HookWidget {
           children: [
             AppText.big_bold(text: 'Quick Start'),
             AppPadding.v15(
-              child: AppAddButton(
+              child: const AppAddButton(
                 text: 'Start Empty Workout',
               ),
             ),
             AppText.big_bold(text: 'Routines'),
             AppPadding.v15(
-                child: RoutinesSection(
-              routines: routines,
-            )),
+              child: RoutinesSection(
+                routines: routines,
+              ),
+            ),
             AppText.big_bold(text: 'My Routines'),
             Expanded(
-                child: MyRoutines(
-              routines: routines,
-            )),
+              child: MyRoutines(
+                routines: routines,
+              ),
+            ),
           ],
         ),
       ),
@@ -58,11 +63,9 @@ class RoutinesSection extends StatelessWidget {
       children: [
         Expanded(
           child: AppTallButton(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => CreateRoutine(
-                  routineList: routines,
-                ),
+            onPressed: () => AutoRouter.of(context).push(
+              CreateRoutineRoute(
+                routineList: routines,
               ),
             ),
             text: 'New Routine',
@@ -70,7 +73,7 @@ class RoutinesSection extends StatelessWidget {
           ),
         ),
         SB_AppPadding.w15(),
-        Expanded(
+        const Expanded(
           child: AppTallButton(
             text: 'Explore',
             icondata: Icons.search,

@@ -19,7 +19,7 @@ class ExcersizeSelectionSection extends StatelessWidget {
     return AppDropDownButton<String?>(
       hint: 'Select Excersize',
       value: excersize.value,
-      onChanged: (_) => excersize.value = _!,
+      onChanged: (_) => excersize.value = _,
       items: strengthLevelExcersize.map<DropdownMenuItem<String?>>((String? _) {
         return DropdownMenuItem(
           value: _,
@@ -96,7 +96,7 @@ class GenderSelectionWidget extends StatelessWidget {
     return AppDropDownButton<String?>(
       hint: 'Select Gender',
       value: gender.value,
-      onChanged: (_) => gender.value = _!,
+      onChanged: (_) => gender.value = _,
       items: genders.map<DropdownMenuItem<String>>((String? _) {
         return DropdownMenuItem(
           value: _,

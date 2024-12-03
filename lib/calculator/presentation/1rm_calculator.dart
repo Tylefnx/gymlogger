@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
@@ -6,6 +7,7 @@ import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:numberpicker/numberpicker.dart';
 
+@RoutePage()
 class OneRepMaxCalculator extends HookWidget {
   const OneRepMaxCalculator({super.key});
 
@@ -85,8 +87,8 @@ class RepsPicker extends StatelessWidget {
     return NumberPicker(
       itemCount: 5,
       infiniteLoop: true,
-      textStyle: TextStyle(fontSize: 18),
-      selectedTextStyle: TextStyle(fontSize: 32),
+      textStyle: const TextStyle(fontSize: 18),
+      selectedTextStyle: const TextStyle(fontSize: 32),
       axis: Axis.horizontal,
       minValue: 1,
       maxValue: 10,
@@ -151,7 +153,7 @@ List<double> calculateRepMaxes(
   ValueNotifier<List<double>> repMaxes,
 ) {
   if (oneRepMax == 0) return [];
-  var repMaxes = <double>[];
+  final repMaxes = <double>[];
   for (int i = 0; i < 10; i++) {
     final indexRepMax = oneRepMax / (36 / (37 - i - 1));
     repMaxes.add(indexRepMax);

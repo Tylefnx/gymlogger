@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/calculator/shared/dropdowns.dart';
@@ -7,6 +8,7 @@ import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 
+@RoutePage()
 class StrengthLevelCalculator extends HookWidget {
   const StrengthLevelCalculator({super.key});
   @override
@@ -18,7 +20,7 @@ class StrengthLevelCalculator extends HookWidget {
     final strLevel = useState<String>('');
     return Scaffold(
       appBar: AppBar(
-        title: Text('Strength Level Calculator'),
+        title: const Text('Strength Level Calculator'),
       ),
       body: AppPadding.h30v40(
         child: Column(
@@ -42,13 +44,14 @@ class StrengthLevelCalculator extends HookWidget {
             ),
             AppText.very_big_bold(text: strLevel.value),
             AppButton(
-                onPressed: () => strLevel.value = strengthLevel(
-                      weightController.text,
-                      excersize.value,
-                      bwController.text,
-                      gender.value ?? 'male', //TODO: create error if null
-                    ),
-                title: 'Submit'),
+              onPressed: () => strLevel.value = strengthLevel(
+                weightController.text,
+                excersize.value,
+                bwController.text,
+                gender.value ?? 'male', //TODO: create error if null
+              ),
+              title: 'Submit',
+            ),
           ],
         ),
       ),
@@ -57,7 +60,11 @@ class StrengthLevelCalculator extends HookWidget {
 }
 
 String strengthLevel(
-    String weight, String? excersize, String bw, String gender) {
+  String weight,
+  String? excersize,
+  String bw,
+  String gender,
+) {
   final liftWeight = double.tryParse(weight);
   final lifterBW = double.tryParse(bw);
   if (lifterBW != null && liftWeight != null) {

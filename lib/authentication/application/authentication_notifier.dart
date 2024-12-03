@@ -46,8 +46,10 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  Future<void> register(
-      {required String username, required String password}) async {
+  Future<void> register({
+    required String username,
+    required String password,
+  }) async {
     state = const AuthState.loading();
     final registerOrFailure = await _repository.register(
       username: username,

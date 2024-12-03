@@ -8,6 +8,7 @@ class CustomBottomNavigationBar extends HookWidget {
     required this.selectedIndex,
     super.key,
   });
+  @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       unselectedItemColor: Colors.grey,

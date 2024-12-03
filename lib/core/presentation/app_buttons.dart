@@ -15,7 +15,7 @@ class AppAddButton extends StatelessWidget {
       onPressed: () {},
       child: Row(
         children: [
-          Icon(Icons.add),
+          const Icon(Icons.add),
           AppPadding.h10v20(
             child: AppText(
               text: text,

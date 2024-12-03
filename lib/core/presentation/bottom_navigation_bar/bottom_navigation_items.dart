@@ -7,19 +7,19 @@ import 'package:gymlogger/workout/presentation/workout_screen.dart';
 final bottomNavigationItems = [
   BottomNavigationBarItem(
     label: bottomNavigationLabels[0],
-    icon: Icon(Icons.fitness_center),
+    icon: const Icon(Icons.fitness_center),
   ),
   BottomNavigationBarItem(
     label: bottomNavigationLabels[1],
-    icon: Icon(Icons.query_stats_sharp),
+    icon: const Icon(Icons.query_stats_sharp),
   ),
   BottomNavigationBarItem(
     label: bottomNavigationLabels[2],
-    icon: Icon(Icons.calculate),
+    icon: const Icon(Icons.calculate),
   ),
   BottomNavigationBarItem(
     label: bottomNavigationLabels[3],
-    icon: Icon(Icons.person),
+    icon: const Icon(Icons.person),
   ),
 ];
 

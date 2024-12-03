@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
@@ -5,6 +6,7 @@ import 'package:gymlogger/logs/presentation/add_lift.dart';
 import 'package:gymlogger/logs/presentation/dummy_lifts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+@RoutePage()
 class LiftLogScreen extends HookWidget {
   final String lift;
   const LiftLogScreen({super.key, required this.lift});
@@ -60,7 +62,7 @@ class LiftLogPageNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: navIndex.value,
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.graphic_eq),
           label: 'Logs',
@@ -94,7 +96,7 @@ class LiftGraphics extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-      primaryXAxis: CategoryAxis(
+      primaryXAxis: const CategoryAxis(
         labelRotation: -45, // Tarihlerin okunabilir olmasını sağlamak için
       ),
       title: ChartTitle(text: '$liftName PR Progress'),
@@ -104,8 +106,8 @@ class LiftGraphics extends HookWidget {
           xValueMapper: (MapEntry<String, double> data, _) => data.key, // Tarih
           yValueMapper: (MapEntry<String, double> data, _) =>
               data.value, // Ağırlık
-          dataLabelSettings:
-              DataLabelSettings(isVisible: true), // Veri etiketlerini göster
+          dataLabelSettings: const DataLabelSettings(
+              isVisible: true), // Veri etiketlerini göster
         ),
       ],
     );

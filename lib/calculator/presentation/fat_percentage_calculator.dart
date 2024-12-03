@@ -94,19 +94,23 @@ double calculateBodyFat(
 ) {
   double log10(num x) => m.log(x) / m.log(10);
   if (gender == 'male') {
-    return double.parse((495 /
-                (1.0324 -
-                    0.19077 * log10(waist - neck) +
-                    0.15456 * log10(height)) -
-            450)
-        .toStringAsFixed(2));
+    return double.parse(
+      (495 /
+                  (1.0324 -
+                      0.19077 * log10(waist - neck) +
+                      0.15456 * log10(height)) -
+              450)
+          .toStringAsFixed(2),
+    );
   } else if (gender == 'female' && hip != null) {
-    return double.parse((495 /
-                (1.29579 -
-                    0.35004 * log10(waist + hip - neck) +
-                    0.22100 * log10(height)) -
-            450)
-        .toStringAsFixed(2));
+    return double.parse(
+      (495 /
+                  (1.29579 -
+                      0.35004 * log10(waist + hip - neck) +
+                      0.22100 * log10(height)) -
+              450)
+          .toStringAsFixed(2),
+    );
   }
   return 0;
 }

@@ -13,7 +13,7 @@ class AppGridviewWidget extends StatelessWidget {
     return GridView.count(
       crossAxisSpacing: 20,
       mainAxisSpacing: 20,
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 40,
         vertical: 10,
       ),
@@ -41,10 +41,9 @@ class GridviewSectionCard extends StatelessWidget {
       child: Card(
         color: Colors.blueGrey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(),
+            const SizedBox(),
             Icon(
               icon,
               size: 90,

@@ -5,25 +5,25 @@ class SB_AppPadding extends StatelessWidget {
   final double? width;
   const SB_AppPadding({super.key, this.height, this.width});
 
-  factory SB_AppPadding.h10({Widget? child}) {
-    return SB_AppPadding(
+  factory SB_AppPadding.h10() {
+    return const SB_AppPadding(
       height: 10,
     );
   }
-  factory SB_AppPadding.w15({Widget? child}) {
-    return SB_AppPadding(
+  factory SB_AppPadding.w15() {
+    return const SB_AppPadding(
       width: 15,
     );
   }
 
-  factory SB_AppPadding.w30({Widget? child}) {
-    return SB_AppPadding(
+  factory SB_AppPadding.w30() {
+    return const SB_AppPadding(
       width: 30,
     );
   }
 
-  factory SB_AppPadding.h30({Widget? child}) {
-    return SB_AppPadding(
+  factory SB_AppPadding.h30() {
+    return const SB_AppPadding(
       height: 30,
     );
   }
