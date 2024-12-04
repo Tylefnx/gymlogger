@@ -9,6 +9,7 @@ import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigat
 import 'package:gymlogger/core/presentation/loading_screen.dart';
 import 'package:gymlogger/core/router/app_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:toastification/toastification.dart';
 
 final _appRouter = AppRouter();
 
@@ -18,9 +19,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: MaterialApp.router(
-        routerConfig: _appRouter.config(),
-        title: 'Gymlogger',
+      child: ToastificationWrapper(
+        child: MaterialApp.router(
+          routerConfig: _appRouter.config(),
+          title: 'Gymlogger',
+        ),
       ),
     );
   }
