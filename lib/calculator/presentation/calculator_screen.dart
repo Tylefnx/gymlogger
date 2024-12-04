@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_gridview.dart';
+import 'package:gymlogger/core/router/app_router.dart';
 
 @RoutePage()
 class CalculatorsScreen extends StatelessWidget {
@@ -14,17 +15,17 @@ class CalculatorsScreen extends StatelessWidget {
         GridviewSectionCard(
           label: '1RM',
           icon: Icons.fitness_center,
-          onTap: () => GoRouter.of(context).push('/calculators/1RM'),
+          onTap: () => AutoRouter.of(context).push(const OneRepMaxRoute()),
         ),
         GridviewSectionCard(
           label: 'Strength Level',
           icon: Icons.fitness_center_outlined,
-          onTap: () => GoRouter.of(context).push('/calculators/str_level'),
+          onTap: () => AutoRouter.of(context).push(const StrengthLevelRoute()),
         ),
         GridviewSectionCard(
           label: 'Fat Percentage',
           icon: Icons.generating_tokens_sharp,
-          onTap: () => GoRouter.of(context).push('/calculators/fat_percentage'),
+          onTap: () => AutoRouter.of(context).push(const FatPercentageRoute()),
         ),
       ],
     );

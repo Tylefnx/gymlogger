@@ -6,6 +6,7 @@ class AuthenticationService {
   const AuthenticationService(this._dio);
   static const loginEndPoint = 'login';
   static const registerEndPoint = 'register';
+  static const logoutEndPoint = 'logout';
   static const port = '8080';
   static const base = 'http://localhost:$port';
   Future<Response> login({
@@ -43,5 +44,22 @@ class AuthenticationService {
       data: {},
     );
     return response;
+  }
+
+  Future<void> logout({required String token}) async {
+    return;
+    // final response = await _dio.post(
+    //   '$base$logoutEndPoint',
+    //   options: Options(
+    //     headers: {
+    //       "Authorization": token,
+    //     },
+    //   ),
+    //   data: {
+    //     'token': token,
+    //   },
+    // );
+    // print(response.data);
+    // return response;
   }
 }

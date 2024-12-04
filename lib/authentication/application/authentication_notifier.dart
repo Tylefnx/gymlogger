@@ -65,12 +65,12 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  //Future<void> logout(String token) async {
-  //  state = const AuthState.loading();
-  //  final logoutOrFailure = await _repository.logout(token);
-  //  state = logoutOrFailure.fold(
-  //    (l) => AuthState.authenticated(user, l),
-  //    (r) => const AuthState.unauthenticated(null),
-  //  );
-  //}
+  Future<void> logout({required String token}) async {
+    state = const AuthState.loading();
+    final logoutOrFailure = await _repository.logout(token: token);
+    state = logoutOrFailure.fold(
+      (l) => AuthState.authenticated(token, null),
+      (r) => const AuthState.unauthenticated(null),
+    );
+  }
 }

@@ -133,6 +133,44 @@ class CreateRoutineRouteArgs {
 }
 
 /// generated route for
+/// [DashboardScreen]
+class DashboardRoute extends PageRouteInfo<void> {
+  const DashboardRoute({List<PageRouteInfo>? children})
+      : super(
+          DashboardRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DashboardRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DashboardScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [FatPercentageCalculator]
+class FatPercentageRoute extends PageRouteInfo<void> {
+  const FatPercentageRoute({List<PageRouteInfo>? children})
+      : super(
+          FatPercentageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FatPercentageRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const FatPercentageCalculator();
+    },
+  );
+}
+
+/// generated route for
 /// [LiftLogScreen]
 class LiftLogRoute extends PageRouteInfo<LiftLogRouteArgs> {
   LiftLogRoute({

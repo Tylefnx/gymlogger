@@ -6,7 +6,6 @@ import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:gymlogger/core/router/app_router.dart';
-import 'package:gymlogger/workout/presentation/create_workout_screen.dart';
 import 'package:gymlogger/workout/presentation/dummy_training.dart';
 import 'package:gymlogger/workout/presentation/my_routines.dart';
 

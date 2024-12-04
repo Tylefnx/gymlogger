@@ -1,4 +1,5 @@
 import 'dart:math' as m;
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/calculator/shared/dropdowns.dart';
@@ -7,6 +8,7 @@ import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 
+@RoutePage()
 class FatPercentageCalculator extends HookWidget {
   const FatPercentageCalculator({super.key});
 

@@ -63,14 +63,14 @@ class LoginScreen extends HookConsumerWidget {
   }
 }
 
-Future<void> login({
+void login({
   required WidgetRef ref,
   required String? username,
   required String? password,
   required BuildContext context,
-}) async {
+}) {
   if (username != null && password != null) {
-    await ref.read(authStateNotifierProvider.notifier).login(
+    ref.read(authStateNotifierProvider.notifier).login(
           username: username,
           password: password,
         );

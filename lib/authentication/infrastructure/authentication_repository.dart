@@ -43,4 +43,21 @@ class AuthenticationRepository {
       );
     }
   }
+
+  Future<Either<String, void>> logout({
+    required String token,
+  }) async {
+    try {
+      return const Right(null);
+      // final response = await _service.logout(
+      //   token: token,
+      // );
+      // print(response.data);
+      // return const Right(null);
+    } on DioException catch (e) {
+      return left(
+        token,
+      );
+    }
+  }
 }
