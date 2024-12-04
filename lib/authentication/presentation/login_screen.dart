@@ -9,6 +9,7 @@ import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:gymlogger/core/router/app_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:toastification/toastification.dart';
 
 @RoutePage()
 class LoginScreen extends HookConsumerWidget {
@@ -37,12 +38,20 @@ class LoginScreen extends HookConsumerWidget {
               ),
             ),
             AppButton(
-              onPressed: () => login(
-                ref: ref,
-                username: username.text,
-                password: password.text,
-                context: context,
-              ),
+              onPressed: () {
+                login(
+                  ref: ref,
+                  username: username.text,
+                  password: password.text,
+                );
+
+                AutoRouter.of(context).pushAndPopUntil(
+                  const MainRoute(),
+                  predicate: (_) {
+                    return false;
+                  },
+                );
+              },
               title: 'Login',
             ),
             Row(
@@ -67,18 +76,20 @@ void login({
   required WidgetRef ref,
   required String? username,
   required String? password,
-  required BuildContext context,
-}) {
+}) async {
   if (username != null && password != null) {
     ref.read(authStateNotifierProvider.notifier).login(
           username: username,
           password: password,
         );
-    AutoRouter.of(context).pushAndPopUntil(
-      const MainRoute(),
-      predicate: (_) {
-        return false;
-      },
+    final state = ref.read(authStateNotifierProvider);
+
+    toastification.show(
+      title: state.maybeMap(
+        orElse: () => AppText.bold(text: 'An unknown error occured'),
+        unauthenticated: (_) => AppText.bold(text: 'Failed to Log in'),
+        authenticated: (_) => AppText.bold(text: 'Successfuly logged in'),
+      ),
     );
     print(ref.read(authStateNotifierProvider));
   }
