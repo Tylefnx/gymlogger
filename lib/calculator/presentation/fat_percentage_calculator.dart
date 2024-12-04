@@ -58,9 +58,9 @@ class FatPercentageCalculator extends HookWidget {
               if (bwController.text != '0') SB_AppPadding.h10(),
               AppButton(
                 onPressed: () {
-                  final bw = double.parse(
-                    bwController.text,
-                  ); //TODO: add bw to calculator
+                  //final bw = double.parse(
+                  //  bwController.text,
+                  //); //TODO: add bw to calculator
                   final height = double.parse(heightController.text);
                   final neck = double.parse(neckController.text);
                   final waist = double.parse(waistController.text);

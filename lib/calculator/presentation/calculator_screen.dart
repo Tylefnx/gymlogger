@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_gridview.dart';
 import 'package:gymlogger/core/router/app_router.dart';
 

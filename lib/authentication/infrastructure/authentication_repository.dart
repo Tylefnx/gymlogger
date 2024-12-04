@@ -54,7 +54,7 @@ class AuthenticationRepository {
       // );
       // print(response.data);
       // return const Right(null);
-    } on DioException catch (e) {
+    } on DioException {
       return left(
         token,
       );
