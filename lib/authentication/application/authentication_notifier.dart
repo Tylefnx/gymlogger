@@ -33,7 +33,6 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       (l) => AuthState.unauthenticated(l),
       (r) => AuthState.authenticated(r, null),
     );
-    print("Notifier'dan dönen state: $state");
   }
 
   Future<void> register({
