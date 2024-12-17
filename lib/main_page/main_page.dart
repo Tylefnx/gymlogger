@@ -38,10 +38,10 @@ class MainScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateNotifierProvider);
-    return authState.when(
-      loading: () => const LoadingScreen(),
+    return authState.map(
+      loading: (_) => const LoadingScreen(),
       unauthenticated: (_) => const LoginScreen(),
-      authenticated: (_, __) => const DashboardScreen(),
+      authenticated: (_) => const DashboardScreen(),
     );
   }
 }
@@ -56,7 +56,7 @@ class DashboardScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomNavigationIndex = useState(0);
     final state = ref.watch(authStateNotifierProvider);
-    final uid = state.maybeMap(authenticated: (_) => _.uid, orElse: () {});
+    final uid = state.maybeMap(authenticated: (_) => _.token, orElse: () {});
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

@@ -8,8 +8,8 @@ import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:gymlogger/core/router/app_router.dart';
+import 'package:gymlogger/core/shared/app_toasts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:toastification/toastification.dart';
 
 @RoutePage()
 class LoginScreen extends HookConsumerWidget {
@@ -38,20 +38,12 @@ class LoginScreen extends HookConsumerWidget {
               ),
             ),
             AppButton(
-              onPressed: () {
-                login(
-                  ref: ref,
-                  username: username.text,
-                  password: password.text,
-                );
-
-                AutoRouter.of(context).pushAndPopUntil(
-                  const MainRoute(),
-                  predicate: (_) {
-                    return false;
-                  },
-                );
-              },
+              onPressed: () => _login(
+                ref: ref,
+                username: username.text,
+                password: password.text,
+                context: context,
+              ),
               title: 'Login',
             ),
             Row(
@@ -72,26 +64,46 @@ class LoginScreen extends HookConsumerWidget {
   }
 }
 
-void login({
+Future<void> _login({
   required WidgetRef ref,
-  required String? username,
-  required String? password,
+  required BuildContext context,
+  required String username,
+  required String password,
 }) async {
-  if (username != null && password != null) {
-    ref.read(authStateNotifierProvider.notifier).login(
+  if (usernameAndPasswordNotNull(
+        username: username,
+        password: password,
+      ) ==
+      null) {
+    await ref.read(authStateNotifierProvider.notifier).login(
           username: username,
           password: password,
         );
-    final state = ref.read(authStateNotifierProvider);
-
-    state.maybeMap(
-      orElse: () {},
-      unauthenticated: (_) => toastification.show(
-        title: AppText.bold(text: 'Failed to Log in'),
-      ),
-      authenticated: (_) => toastification.show(
-        title: AppText.bold(text: 'Successfuly logged in'),
-      ),
+  } else {
+    failureToast(
+      error: usernameAndPasswordNotNull(
+            username: username,
+            password: password,
+          ) ??
+          '',
+      context: context,
     );
   }
 }
+
+String? usernameAndPasswordNotNull({
+  required String username,
+  required String password,
+}) {
+  if (username == '' && password == '') {
+    return 'Enter your username and password';
+  } else if (username == '') {
+    return 'Please enter your username';
+  } else if (password == '') {
+    return 'Please enter your password';
+  } else {
+    return null;
+  }
+}
+
+void showLoginToast() {}

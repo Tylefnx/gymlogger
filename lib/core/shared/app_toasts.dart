@@ -11,7 +11,7 @@ ToastificationItem failureToast({
     type: ToastificationType.error,
     context: context,
     autoCloseDuration: toastDuration,
-    title: AppText.bold(text: error),
+    title: AppText.normal(text: error),
   );
 }
 
@@ -23,6 +23,6 @@ ToastificationItem successToast({
     type: ToastificationType.success,
     context: context,
     autoCloseDuration: toastDuration,
-    title: AppText.bold(text: success),
+    title: AppText.normal(text: success),
   );
 }

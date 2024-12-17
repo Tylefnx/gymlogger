@@ -8,14 +8,14 @@ class AuthenticationService {
   static const registerEndPoint = 'register';
   static const logoutEndPoint = 'logout';
   static const port = '8080';
-  static const base = 'http://localhost:$port';
+  static const base = 'http://127.0.0.1:$port';
+
   Future<Response> login({
     required String username,
     required String password,
   }) async {
     final response = await _dio.post(
       '$base/$loginEndPoint',
-      // '$base/$loginEndPoint',
       data: {
         'username': username,
         'password': password,
