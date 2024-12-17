@@ -19,46 +19,38 @@ class OneRepMaxCalculator extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('One Rep Max Calculator'), // Added title
+        title: const Text('One Rep Max Calculator'),
       ),
       body: AppPadding.h10v20(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch, // Added stretch
+          spacing: 10,
           children: [
-            Card(
-              // Wrapped in Card for visual separation
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: OneRepMaxWeightSelectionSection(
-                  reps: selectedNumber,
-                  weight: weightFormController,
-                  repMaxes: repMaxes,
-                ),
+            ColoredBox(
+              color: Colors.white,
+              child: Column(
+                spacing: 10,
+                children: [
+                  OneRepMaxWeightSelectionSection(
+                    reps: selectedNumber,
+                    weight: weightFormController,
+                    repMaxes: repMaxes,
+                  ),
+                  FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: RepsPicker(
+                      selectedNumber: selectedNumber,
+                      weight: weightFormController,
+                      repMaxes: repMaxes,
+                    ),
+                  ),
+                  SB_AppPadding.h10(),
+                ],
               ),
             ),
-            SB_AppPadding.h10(),
-            Card(
-              // Wrapped in Card
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: RepsPicker(
-                  selectedNumber: selectedNumber,
-                  weight: weightFormController,
-                  repMaxes: repMaxes,
-                ),
-              ),
-            ),
-            SB_AppPadding.h10(), // Increased spacing
             Expanded(
-              child: Card(
-                // Wrapped in Card
-                elevation: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: RepMaxCalculatorResult(repMaxes: repMaxes),
-                ),
+              child: RepMaxCalculatorResult(
+                selectedNumber: selectedNumber,
+                repMaxes: repMaxes,
               ),
             ),
           ],
@@ -69,24 +61,30 @@ class OneRepMaxCalculator extends HookWidget {
 }
 
 class RepMaxCalculatorResult extends StatelessWidget {
-  const RepMaxCalculatorResult({super.key, required this.repMaxes});
-
+  const RepMaxCalculatorResult({
+    super.key,
+    required this.repMaxes,
+    required this.selectedNumber,
+  });
+  final ValueNotifier<int> selectedNumber;
   final ValueNotifier<List<double>> repMaxes;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      // Use ListView.separated for dividers
+    return ListView.builder(
       itemCount: repMaxes.value.length,
-      separatorBuilder: (context, index) => const Divider(), // Added divider
       itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          // Added padding for list items
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Row(
+        final isEven = index % 2 == 1 ? false : true;
+        final color = index == selectedNumber.value - 1 ? Colors.red : null;
+        return ListTile(
+          tileColor: isEven ? Colors.white : Colors.grey[300],
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppText.big_bold(text: '${index + 1} RMX'), // Added space
+              AppText.big_bold(
+                text: '${index + 1}RM',
+                color: color,
+              ), // Added space
               AppText.big_bold(
                 text: repMaxes.value[index].toStringAsFixed(2),
               ),
