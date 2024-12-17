@@ -18,7 +18,6 @@ class AuthenticationRepository {
         password: password,
       );
       final json = response.data as Map<String, dynamic>;
-      print(json['token'].toString);
       return Right(json['token'].toString());
     } on DioException catch (e) {
       return left(
