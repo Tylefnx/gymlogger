@@ -1,12 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/workout/presentation/dummy_training.dart';
 
-class RoutineDetails extends HookWidget {
+@RoutePage(name: 'RoutineLiftDetailsRoute')
+class RoutineDetailsPage extends HookWidget {
   final String routineName;
-  const RoutineDetails({
+  const RoutineDetailsPage({
     super.key,
     required this.routineName,
   });

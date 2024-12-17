@@ -84,13 +84,14 @@ void login({
         );
     final state = ref.read(authStateNotifierProvider);
 
-    toastification.show(
-      title: state.maybeMap(
-        orElse: () => AppText.bold(text: 'An unknown error occured'),
-        unauthenticated: (_) => AppText.bold(text: 'Failed to Log in'),
-        authenticated: (_) => AppText.bold(text: 'Successfuly logged in'),
+    state.maybeMap(
+      orElse: () {},
+      unauthenticated: (_) => toastification.show(
+        title: AppText.bold(text: 'Failed to Log in'),
+      ),
+      authenticated: (_) => toastification.show(
+        title: AppText.bold(text: 'Successfuly logged in'),
       ),
     );
-    print(ref.read(authStateNotifierProvider));
   }
 }

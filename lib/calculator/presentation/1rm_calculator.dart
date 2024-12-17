@@ -16,24 +16,51 @@ class OneRepMaxCalculator extends HookWidget {
     final weightFormController = useTextEditingController(text: '0');
     final selectedNumber = useState(1);
     final repMaxes = useState(<double>[]);
+
     return Scaffold(
-      appBar: AppBar(),
-      body: AppPadding.h30v40(
+      appBar: AppBar(
+        title: const Text('One Rep Max Calculator'), // Added title
+      ),
+      body: AppPadding.h10v20(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch, // Added stretch
           children: [
-            OneRepMaxWeightSelectionSection(
-              reps: selectedNumber,
-              weight: weightFormController,
-              repMaxes: repMaxes,
+            Card(
+              // Wrapped in Card for visual separation
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: OneRepMaxWeightSelectionSection(
+                  reps: selectedNumber,
+                  weight: weightFormController,
+                  repMaxes: repMaxes,
+                ),
+              ),
             ),
             SB_AppPadding.h10(),
-            RepsPicker(
-              selectedNumber: selectedNumber,
-              weight: weightFormController,
-              repMaxes: repMaxes,
+            Card(
+              // Wrapped in Card
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: RepsPicker(
+                  selectedNumber: selectedNumber,
+                  weight: weightFormController,
+                  repMaxes: repMaxes,
+                ),
+              ),
             ),
-            SB_AppPadding.h10(),
-            RepMaxCalculatorResult(repMaxes: repMaxes),
+            SB_AppPadding.h10(), // Increased spacing
+            Expanded(
+              child: Card(
+                // Wrapped in Card
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: RepMaxCalculatorResult(repMaxes: repMaxes),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -42,30 +69,31 @@ class OneRepMaxCalculator extends HookWidget {
 }
 
 class RepMaxCalculatorResult extends StatelessWidget {
-  const RepMaxCalculatorResult({
-    super.key,
-    required this.repMaxes,
-  });
+  const RepMaxCalculatorResult({super.key, required this.repMaxes});
 
   final ValueNotifier<List<double>> repMaxes;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: repMaxes.value.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Row(
+    return ListView.separated(
+      // Use ListView.separated for dividers
+      itemCount: repMaxes.value.length,
+      separatorBuilder: (context, index) => const Divider(), // Added divider
+      itemBuilder: (BuildContext context, int index) {
+        return Padding(
+          // Added padding for list items
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppText.big_bold(text: '${index + 1}RMX'),
+              AppText.big_bold(text: '${index + 1} RMX'), // Added space
               AppText.big_bold(
                 text: repMaxes.value[index].toStringAsFixed(2),
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -60,8 +60,9 @@ class DashboardScreen extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () =>
-              ref.read(authStateNotifierProvider.notifier).logout(token: uid!),
+          onPressed: () => ref.read(authStateNotifierProvider.notifier).logout(
+                token: uid!,
+              ),
           icon: const Icon(Icons.logout),
         ),
         centerTitle: true,

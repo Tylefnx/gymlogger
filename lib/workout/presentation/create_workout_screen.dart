@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
@@ -111,7 +110,7 @@ class CreateRoutineScreen extends HookWidget {
                 routinesTemp.addEntries([routineEntry]);
                 routineList.value = {};
                 routineList.value = routinesTemp;
-                GoRouter.of(context).pop();
+                context.maybePop(); // TODO: MAYBEPOP?
               },
               title: 'Add Routine',
             ),

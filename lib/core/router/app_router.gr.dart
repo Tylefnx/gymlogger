@@ -331,6 +331,53 @@ class RegisterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [RoutineDetailsPage]
+class RoutineLiftDetailsRoute
+    extends PageRouteInfo<RoutineLiftDetailsRouteArgs> {
+  RoutineLiftDetailsRoute({
+    Key? key,
+    required String routineName,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RoutineLiftDetailsRoute.name,
+          args: RoutineLiftDetailsRouteArgs(
+            key: key,
+            routineName: routineName,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RoutineLiftDetailsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<RoutineLiftDetailsRouteArgs>();
+      return RoutineDetailsPage(
+        key: args.key,
+        routineName: args.routineName,
+      );
+    },
+  );
+}
+
+class RoutineLiftDetailsRouteArgs {
+  const RoutineLiftDetailsRouteArgs({
+    this.key,
+    required this.routineName,
+  });
+
+  final Key? key;
+
+  final String routineName;
+
+  @override
+  String toString() {
+    return 'RoutineLiftDetailsRouteArgs{key: $key, routineName: $routineName}';
+  }
+}
+
+/// generated route for
 /// [StrengthLevelCalculator]
 class StrengthLevelRoute extends PageRouteInfo<void> {
   const StrengthLevelRoute({List<PageRouteInfo>? children})

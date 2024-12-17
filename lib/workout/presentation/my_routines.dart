@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
+import 'package:gymlogger/core/router/app_router.dart';
 
 class MyRoutines extends HookWidget {
   final ValueNotifier<Map<String, Map<String, List<int>>>> routines;
@@ -34,7 +35,11 @@ class RoutineCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.transparent,
-      onTap: () => GoRouter.of(context).push('/workout/$label'),
+      onTap: () => context.pushRoute(
+        RoutineLiftDetailsRoute(
+          routineName: label,
+        ),
+      ),
       child: Card(
         child: AppPadding.h10v20(
           child: AppText.bold(text: label),

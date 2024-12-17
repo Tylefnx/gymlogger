@@ -12,6 +12,7 @@ import 'package:gymlogger/logs/presentation/log_screen.dart';
 import 'package:gymlogger/main_page/main_page.dart';
 import 'package:gymlogger/main_page/sub_screens/profile_screen.dart';
 import 'package:gymlogger/workout/presentation/create_workout_screen.dart';
+import 'package:gymlogger/workout/presentation/routine_details.dart';
 import 'package:gymlogger/workout/presentation/workout_screen.dart';
 part 'app_router.gr.dart';
 
@@ -32,7 +33,11 @@ class AppRouter extends RootStackRouter {
           page: LoginRoute.page,
         ),
         AutoRoute(
-          path: '/login',
+          path: '/register',
+          page: RegisterRoute.page,
+        ),
+        AutoRoute(
+          path: '/lift_logs',
           page: LiftLogRoute.page,
         ),
         AutoRoute(
@@ -40,7 +45,7 @@ class AppRouter extends RootStackRouter {
           page: CreateRoutineRoute.page,
         ),
         AutoRoute(
-          path: '/dashboart',
+          path: '/dashboard',
           page: DashboardRoute.page,
         ),
         AutoRoute(
@@ -59,6 +64,10 @@ class AppRouter extends RootStackRouter {
           path: '/strengthlevelcalc',
           page: StrengthLevelRoute.page,
         ),
+        // AutoRoute(
+        //   path: '/routine',
+        //   page: RoutineDetailsPage.page,
+        // ),
         AutoRoute(
           path: '/fatpercentagecalc',
           page: FatPercentageRoute.page,

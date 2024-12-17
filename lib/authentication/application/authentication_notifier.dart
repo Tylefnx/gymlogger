@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:gymlogger/authentication/domain/auth_failure.dart';
 import 'package:gymlogger/authentication/infrastructure/authentication_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'authentication_notifier.freezed.dart';
 
@@ -19,17 +19,6 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   final AuthenticationRepository _repository;
   AuthStateNotifier(this._repository)
       : super(const AuthState.unauthenticated(null));
-
-  // Future<void> checkAndUpdateAuthStatus() async {
-  //   final cachedcredentials = await _storage.read();
-  //   if (cachedcredentials != null) {
-  //     print('authencitaceede');
-  //     state = AuthState.authenticated(cachedcredentials, null);
-  //   } else {
-  //     print('unauth');
-  //     state = const AuthState.unauthenticated(null);
-  //   }
-  // }
 
   Future<void> login({
     required String username,
