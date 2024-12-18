@@ -46,20 +46,5 @@ class AuthenticationService {
     return response;
   }
 
-  Future<void> logout({required String token}) async {
-    return;
-    // final response = await _dio.post(
-    //   '$base$logoutEndPoint',
-    //   options: Options(
-    //     headers: {
-    //       "Authorization": token,
-    //     },
-    //   ),
-    //   data: {
-    //     'token': token,
-    //   },
-    // );
-    // print(response.data);
-    // return response;
-  }
+  Future<void> logout({required String token}) async {}
 }
