@@ -25,32 +25,27 @@ class OneRepMaxCalculator extends HookWidget {
         child: Column(
           spacing: 10,
           children: [
-            ColoredBox(
-              color: Colors.white,
-              child: Column(
-                spacing: 10,
-                children: [
-                  OneRepMaxWeightSelectionSection(
-                    reps: selectedNumber,
-                    weight: weightFormController,
-                    repMaxes: repMaxes,
-                  ),
-                  FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: RepsPicker(
-                      selectedNumber: selectedNumber,
-                      weight: weightFormController,
-                      repMaxes: repMaxes,
-                    ),
-                  ),
-                  SB_AppPadding.h10(),
-                ],
+            OneRepMaxWeightSelectionSection(
+              reps: selectedNumber,
+              weight: weightFormController,
+              repMaxes: repMaxes,
+            ),
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: RepsPicker(
+                selectedNumber: selectedNumber,
+                weight: weightFormController,
+                repMaxes: repMaxes,
               ),
             ),
+            SB_AppPadding.h10(),
             Expanded(
-              child: RepMaxCalculatorResult(
-                selectedNumber: selectedNumber,
-                repMaxes: repMaxes,
+              child: Card(
+                elevation: 0,
+                child: RepMaxCalculatorResult(
+                  selectedNumber: selectedNumber,
+                  repMaxes: repMaxes,
+                ),
               ),
             ),
           ],
@@ -74,10 +69,9 @@ class RepMaxCalculatorResult extends StatelessWidget {
     return ListView.builder(
       itemCount: repMaxes.value.length,
       itemBuilder: (BuildContext context, int index) {
-        final isEven = index % 2 == 1 ? false : true;
         final color = index == selectedNumber.value - 1 ? Colors.red : null;
         return ListTile(
-          tileColor: isEven ? Colors.white : Colors.grey[300],
+          tileColor: index.isOdd ? Colors.white : Colors.grey[300],
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
