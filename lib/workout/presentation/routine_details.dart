@@ -5,12 +5,12 @@ import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/workout/presentation/dummy_training.dart';
 
-@RoutePage(name: 'RoutineLiftDetailsRoute')
+@RoutePage(name: 'RoutineDetailsRoute')
 class RoutineDetailsPage extends HookWidget {
   final String routineName;
   const RoutineDetailsPage({
     super.key,
-    required this.routineName,
+    @PathParam('routineName') required this.routineName,
   });
 
   @override
