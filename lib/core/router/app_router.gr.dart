@@ -332,27 +332,30 @@ class RegisterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [RoutineDetailsPage]
-class RoutineLiftDetailsRoute
-    extends PageRouteInfo<RoutineLiftDetailsRouteArgs> {
-  RoutineLiftDetailsRoute({
+class RoutineDetailsRoute extends PageRouteInfo<RoutineDetailsRouteArgs> {
+  RoutineDetailsRoute({
     Key? key,
     required String routineName,
     List<PageRouteInfo>? children,
   }) : super(
-          RoutineLiftDetailsRoute.name,
-          args: RoutineLiftDetailsRouteArgs(
+          RoutineDetailsRoute.name,
+          args: RoutineDetailsRouteArgs(
             key: key,
             routineName: routineName,
           ),
+          rawPathParams: {'routineName': routineName},
           initialChildren: children,
         );
 
-  static const String name = 'RoutineLiftDetailsRoute';
+  static const String name = 'RoutineDetailsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<RoutineLiftDetailsRouteArgs>();
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<RoutineDetailsRouteArgs>(
+          orElse: () => RoutineDetailsRouteArgs(
+              routineName: pathParams.getString('routineName')));
       return RoutineDetailsPage(
         key: args.key,
         routineName: args.routineName,
@@ -361,8 +364,8 @@ class RoutineLiftDetailsRoute
   );
 }
 
-class RoutineLiftDetailsRouteArgs {
-  const RoutineLiftDetailsRouteArgs({
+class RoutineDetailsRouteArgs {
+  const RoutineDetailsRouteArgs({
     this.key,
     required this.routineName,
   });
@@ -373,7 +376,7 @@ class RoutineLiftDetailsRouteArgs {
 
   @override
   String toString() {
-    return 'RoutineLiftDetailsRouteArgs{key: $key, routineName: $routineName}';
+    return 'RoutineDetailsRouteArgs{key: $key, routineName: $routineName}';
   }
 }
 
