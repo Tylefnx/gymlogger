@@ -131,9 +131,14 @@ class OneLiftList extends HookWidget {
           itemCount: lifts.value.length,
           itemBuilder: (BuildContext context, int index) {
             final liftEntry = lifts.value[index];
+            final date = liftEntry.key.split('-');
             return ListTile(
-              title: AppText.big_bold(
-                text: '${liftEntry.key} : ${liftEntry.value}KG',
+              tileColor: index.isOdd ? Colors.grey[200] : Colors.white,
+              leading: AppText.big_bold(
+                text: '${date[2]}/${date[1]}/${date[0]}:',
+              ),
+              trailing: AppText.big_bold(
+                text: '${liftEntry.value}KG',
               ),
             );
           },

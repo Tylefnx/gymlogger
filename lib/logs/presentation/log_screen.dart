@@ -13,26 +13,27 @@ class LogScreen extends StatelessWidget {
       children: [
         GridviewSectionCard(
           label: 'Squat',
-          icon: Icons.fitness_center,
+          iconPath: 'assets/icons/squat.png',
           onTap: () => AutoRouter.of(context).push(LiftLogRoute(lift: 'Squat')),
         ),
         GridviewSectionCard(
           label: 'Bench Press',
-          icon: Icons.fitness_center,
+          iconPath: 'assets/icons/benchpress.png',
           onTap: () =>
               AutoRouter.of(context).push(LiftLogRoute(lift: 'Bench Press')),
         ),
         GridviewSectionCard(
           label: 'Deadlift',
-          icon: Icons.fitness_center,
+          iconPath: 'assets/icons/deadlift.png',
           onTap: () =>
               AutoRouter.of(context).push(LiftLogRoute(lift: 'Deadlift')),
         ),
         GridviewSectionCard(
           label: 'Overhead Press',
-          icon: Icons.fitness_center,
-          onTap: () =>
-              AutoRouter.of(context).push(LiftLogRoute(lift: 'Overhead Press')),
+          iconPath: 'assets/icons/ohp.png',
+          onTap: () => AutoRouter.of(context).push(
+            LiftLogRoute(lift: 'Overhead Press'),
+          ),
         ),
       ],
     );
