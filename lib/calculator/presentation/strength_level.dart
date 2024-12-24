@@ -18,6 +18,7 @@ class StrengthLevelCalculator extends HookWidget {
     final excersize = useState<String?>(null);
     final gender = useState<String?>(null);
     final strLevel = useState<String>('');
+    final row = useState<List<Widget>>([]);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Strength Level Calculator'),
@@ -42,14 +43,21 @@ class StrengthLevelCalculator extends HookWidget {
                 ),
               ],
             ),
-            AppText.very_big_bold(text: strLevel.value),
+            Row(
+              children: row.value,
+            ),
+            const Spacer(),
             AppButton(
-              onPressed: () => strLevel.value = strengthLevel(
-                weightController.text,
-                excersize.value,
-                bwController.text,
-                gender.value ?? 'male', //TODO: create error if null
-              ),
+              onPressed: () {
+                strLevel.value = strengthLevel(
+                  weightController.text,
+                  excersize.value,
+                  bwController.text,
+                  gender.value ?? 'male', //TODO: create error if null
+                );
+                row.value = addStars(strLevel.value);
+                print(strLevel.value);
+              },
               title: 'Submit',
             ),
           ],
@@ -192,5 +200,62 @@ String calculateOHPstrength(double bwRatio, String gender) {
     } else {
       return 'Novice';
     }
+  }
+}
+
+List<Widget> addStars(String strlevel) {
+  switch (strlevel) {
+    case 'Freak':
+      return [
+        FittedBox(child: AppText.little_big_bold(text: strlevel)),
+        const Spacer(),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+      ];
+    case 'Elite':
+      return [
+        FittedBox(child: AppText.little_big_bold(text: strlevel)),
+        const Spacer(),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star_border),
+      ];
+    case 'Advanced':
+      return [
+        FittedBox(child: AppText.little_big_bold(text: strlevel)),
+        const Spacer(),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star_border),
+        const Icon(Icons.star_border),
+      ];
+    case 'Intermediate':
+      return [
+        FittedBox(child: AppText.little_big_bold(text: strlevel)),
+        const Spacer(),
+        const Icon(Icons.star),
+        const Icon(Icons.star),
+        const Icon(Icons.star_border),
+        const Icon(Icons.star_border),
+        const Icon(Icons.star_border),
+      ];
+    case 'Novice':
+      return [
+        FittedBox(child: AppText.little_big_bold(text: strlevel)),
+        const Spacer(),
+        const Icon(Icons.star),
+        const Icon(Icons.star_border),
+        const Icon(Icons.star_border),
+        const Icon(Icons.star_border),
+        const Icon(Icons.star_border),
+      ];
+    default:
+      return [];
   }
 }

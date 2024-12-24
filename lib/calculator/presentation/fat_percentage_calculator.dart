@@ -7,6 +7,7 @@ import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 @RoutePage()
 class FatPercentageCalculator extends HookWidget {
@@ -23,66 +24,59 @@ class FatPercentageCalculator extends HookWidget {
     final hipController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(),
-      body: AppPadding.h30v40(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              GenderSelectionWidget(gender: genderController),
-              SB_AppPadding.h10(),
+      body: AppPadding.h10v20(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            GenderSelectionWidget(gender: genderController),
+            SB_AppPadding.h10(),
+            MeasurementSelectionSection(
+              weightController: heightController,
+              label: 'Height',
+            ),
+            SB_AppPadding.h10(),
+            MeasurementSelectionSection(
+              weightController: waistController,
+              label: 'Waist',
+            ),
+            SB_AppPadding.h10(),
+            MeasurementSelectionSection(
+              weightController: neckController,
+              label: 'Neck',
+            ),
+            SB_AppPadding.h10(),
+            if (genderController.value == 'female')
               MeasurementSelectionSection(
-                weightController: heightController,
-                label: 'Height',
+                weightController: hipController,
+                label: 'Hips',
               ),
-              SB_AppPadding.h10(),
-              MeasurementSelectionSection(
-                weightController: waistController,
-                label: 'Waist',
+            if (genderController.value == 'female') SB_AppPadding.h10(),
+            BWSelectionSection(bwController: bwController),
+            SB_AppPadding.h10(),
+            if (bodyFatController.value != 0)
+              AppText.big_bold(text: bodyFatController.value.toString()),
+            if (bwController.text != '0') SB_AppPadding.h10(),
+            SizedBox(
+              height: 100,
+              width: 100,
+              child: CircularPercentIndicator(
+                percent: 0.5,
+                radius: 40,
               ),
-              SB_AppPadding.h10(),
-              MeasurementSelectionSection(
-                weightController: neckController,
-                label: 'Neck',
+            ),
+            const Spacer(),
+            AppButton(
+              onPressed: () => _onPressed(
+                heightSize: heightController.text,
+                neckSize: neckController.text,
+                waistSize: waistController.text,
+                hipSize: hipController.text,
+                gender: genderController.value ?? '',
+                bodyFatController: bodyFatController,
               ),
-              SB_AppPadding.h10(),
-              if (genderController.value == 'female')
-                MeasurementSelectionSection(
-                  weightController: hipController,
-                  label: 'Hips',
-                ),
-              if (genderController.value == 'female') SB_AppPadding.h10(),
-              BWSelectionSection(bwController: bwController),
-              SB_AppPadding.h10(),
-              if (bodyFatController.value != 0)
-                AppText.big_bold(text: bodyFatController.value.toString()),
-              if (bwController.text != '0') SB_AppPadding.h10(),
-              AppButton(
-                onPressed: () {
-                  //final bw = double.parse(
-                  //  bwController.text,
-                  //); //TODO: add bw to calculator
-                  final height = double.parse(heightController.text);
-                  final neck = double.parse(neckController.text);
-                  final waist = double.parse(waistController.text);
-                  var hips = 0.0;
-                  if (genderController.value == 'female') {
-                    hips = double.parse(hipController.text);
-                  }
-                  if (genderController.value != null) {
-                    final bodyFat = calculateBodyFat(
-                      genderController.value!,
-                      waist,
-                      neck,
-                      height,
-                      hips,
-                    );
-                    bodyFatController.value = bodyFat;
-                  }
-                },
-                title: 'Submit',
-              ),
-            ],
-          ),
+              title: 'Submit',
+            ),
+          ],
         ),
       ),
     );
@@ -117,4 +111,35 @@ double calculateBodyFat(
     );
   }
   return 0;
+}
+
+void _onPressed(
+    {required String heightSize,
+    required String neckSize,
+    required String waistSize,
+    required String hipSize,
+    required String gender,
+    required ValueNotifier<double> bodyFatController}) {
+  {
+    //final bw = double.parse(
+    //  bwController.text,
+    //); //TODO: add bw to calculator
+    final height = double.parse(heightSize);
+    final neck = double.parse(neckSize);
+    final waist = double.parse(waistSize);
+    var hips = 0.0;
+    if (gender == 'female') {
+      hips = double.parse(hipSize);
+    }
+    if (gender != '') {
+      final bodyFat = calculateBodyFat(
+        gender,
+        waist,
+        neck,
+        height,
+        hips,
+      );
+      bodyFatController.value = bodyFat;
+    }
+  }
 }

@@ -13,17 +13,17 @@ class CalculatorsScreen extends StatelessWidget {
       children: [
         GridviewSectionCard(
           label: '1RM',
-          icon: Icons.fitness_center,
+          iconPath: 'assets/icons/plates.png',
           onTap: () => AutoRouter.of(context).push(const OneRepMaxRoute()),
         ),
         GridviewSectionCard(
           label: 'Strength Level',
-          icon: Icons.fitness_center_outlined,
+          iconPath: 'assets/icons/handgrip.png',
           onTap: () => AutoRouter.of(context).push(const StrengthLevelRoute()),
         ),
         GridviewSectionCard(
           label: 'Fat Percentage',
-          icon: Icons.generating_tokens_sharp,
+          iconPath: 'assets/icons/tarti.png',
           onTap: () => AutoRouter.of(context).push(const FatPercentageRoute()),
         ),
       ],
