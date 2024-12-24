@@ -5,6 +5,16 @@ class AppPadding extends StatelessWidget {
   final Widget? child;
   const AppPadding({super.key, required this.padding, this.child});
 
+  factory AppPadding.h5v10({required Widget child}) {
+    return AppPadding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 5,
+        vertical: 10,
+      ),
+      child: child,
+    );
+  }
+
   factory AppPadding.h10v20({required Widget child}) {
     return AppPadding(
       padding: const EdgeInsets.symmetric(

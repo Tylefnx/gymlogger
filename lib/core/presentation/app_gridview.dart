@@ -26,11 +26,11 @@ class AppGridviewWidget extends StatelessWidget {
 class GridviewSectionCard extends StatelessWidget {
   final void Function() onTap;
   final String label;
-  final IconData icon;
+  final String iconPath;
   const GridviewSectionCard({
     super.key,
     required this.label,
-    required this.icon,
+    required this.iconPath,
     required this.onTap,
   });
 
@@ -39,14 +39,18 @@ class GridviewSectionCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: Colors.blueGrey,
+        elevation: 15,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const SizedBox(),
-            Icon(
-              icon,
-              size: 90,
+            SizedBox(
+              height: 100,
+              width: 100,
+              child: Image.asset(
+                iconPath,
+                fit: BoxFit.cover,
+              ),
             ),
             AppText.big_bold(text: label),
           ],
