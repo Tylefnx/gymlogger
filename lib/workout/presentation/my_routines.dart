@@ -36,7 +36,7 @@ class RoutineCard extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () => context.pushRoute(
-        RoutineLiftDetailsRoute(
+        RoutineDetailsRoute(
           routineName: label,
         ),
       ),
