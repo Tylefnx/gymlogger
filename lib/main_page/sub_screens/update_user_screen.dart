@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gymlogger/authentication/domain/user.dart';
 import 'package:gymlogger/authentication/shared/providers.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
@@ -78,6 +79,10 @@ class UpdateUserScreen extends HookConsumerWidget {
                 ),
                 AppButton(
                   onPressed: () async {
+                    final oldUser = authState.maybeMap(
+                      orElse: () {},
+                      authenticated: (_) => _.user,
+                    );
                     final isIdentical = emailsAreIdentical(
                       email: emailController.text,
                       emailAgain: emailAgainController.text,
@@ -99,7 +104,11 @@ class UpdateUserScreen extends HookConsumerWidget {
                       );
                       authState.maybeMap(
                         orElse: () {},
-                        authenticated: (_) => context.maybePop(),
+                        authenticated: (_) {
+                          if (infoChanged(user: _.user, oldUser: oldUser!)) {
+                            context.maybePop();
+                          }
+                        },
                       );
                     }
                   },
@@ -120,4 +129,11 @@ bool emailsAreIdentical({
   required String emailAgain,
 }) {
   return email == emailAgain;
+}
+
+bool infoChanged({required User user, required User oldUser}) {
+  return user.email != oldUser.email ||
+      user.name != oldUser.name ||
+      user.surname != oldUser.surname ||
+      user.photo_url != oldUser.photo_url;
 }
