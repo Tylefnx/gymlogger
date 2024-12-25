@@ -10,6 +10,7 @@
 analyzer:
   errors:
     invalid_annotation_target: ignore
+    no_wildcard_variable_uses: ignore
 include: package:lint/strict.yaml
 
 linter:
