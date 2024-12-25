@@ -72,7 +72,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   }) async {
     final user = getUserFromState();
     state = const AuthState.loading();
-    final logoutOrFailure = await _repository.updateUser(
+    final updateOrFailure = await _repository.updateUser(
       token: token,
       username: username,
       password: password,
@@ -81,9 +81,15 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       name: name,
       surname: surname,
     );
-    logoutOrFailure.fold(
-      (l) => state = AuthState.authenticated(user!, l),
-      (r) => login(username: username, password: password),
+    updateOrFailure.fold(
+      (l) => state = AuthState.authenticated(
+        user!,
+        const AuthFailure.storage('Wrong Password'),
+      ),
+      (r) async => await login(
+        username: username,
+        password: password,
+      ),
     );
   }
 
