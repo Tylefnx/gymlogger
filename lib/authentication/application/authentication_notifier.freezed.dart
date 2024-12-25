@@ -20,21 +20,21 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) unauthenticated,
-    required TResult Function(String token, AuthFailure? failure) authenticated,
+    required TResult Function(User user, AuthFailure? failure) authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? unauthenticated,
-    TResult? Function(String token, AuthFailure? failure)? authenticated,
+    TResult? Function(User user, AuthFailure? failure)? authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? unauthenticated,
-    TResult Function(String token, AuthFailure? failure)? authenticated,
+    TResult Function(User user, AuthFailure? failure)? authenticated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ class _$LoadingImpl extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) unauthenticated,
-    required TResult Function(String token, AuthFailure? failure) authenticated,
+    required TResult Function(User user, AuthFailure? failure) authenticated,
   }) {
     return loading();
   }
@@ -135,7 +135,7 @@ class _$LoadingImpl extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? unauthenticated,
-    TResult? Function(String token, AuthFailure? failure)? authenticated,
+    TResult? Function(User user, AuthFailure? failure)? authenticated,
   }) {
     return loading?.call();
   }
@@ -145,7 +145,7 @@ class _$LoadingImpl extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? unauthenticated,
-    TResult Function(String token, AuthFailure? failure)? authenticated,
+    TResult Function(User user, AuthFailure? failure)? authenticated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -281,7 +281,7 @@ class _$UnAuthenticatedImpl extends _UnAuthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) unauthenticated,
-    required TResult Function(String token, AuthFailure? failure) authenticated,
+    required TResult Function(User user, AuthFailure? failure) authenticated,
   }) {
     return unauthenticated(failure);
   }
@@ -291,7 +291,7 @@ class _$UnAuthenticatedImpl extends _UnAuthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? unauthenticated,
-    TResult? Function(String token, AuthFailure? failure)? authenticated,
+    TResult? Function(User user, AuthFailure? failure)? authenticated,
   }) {
     return unauthenticated?.call(failure);
   }
@@ -301,7 +301,7 @@ class _$UnAuthenticatedImpl extends _UnAuthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? unauthenticated,
-    TResult Function(String token, AuthFailure? failure)? authenticated,
+    TResult Function(User user, AuthFailure? failure)? authenticated,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -365,8 +365,9 @@ abstract class _$$AuthenticatedImplCopyWith<$Res> {
           _$AuthenticatedImpl value, $Res Function(_$AuthenticatedImpl) then) =
       __$$AuthenticatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String token, AuthFailure? failure});
+  $Res call({User user, AuthFailure? failure});
 
+  $UserCopyWith<$Res> get user;
   $AuthFailureCopyWith<$Res>? get failure;
 }
 
@@ -383,19 +384,29 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
+    Object? user = null,
     Object? failure = freezed,
   }) {
     return _then(_$AuthenticatedImpl(
-      null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as AuthFailure?,
     ));
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 
   /// Create a copy of AuthState
@@ -416,16 +427,16 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthenticatedImpl extends _Authenticated {
-  const _$AuthenticatedImpl(this.token, this.failure) : super._();
+  const _$AuthenticatedImpl(this.user, this.failure) : super._();
 
   @override
-  final String token;
+  final User user;
   @override
   final AuthFailure? failure;
 
   @override
   String toString() {
-    return 'AuthState.authenticated(token: $token, failure: $failure)';
+    return 'AuthState.authenticated(user: $user, failure: $failure)';
   }
 
   @override
@@ -433,12 +444,12 @@ class _$AuthenticatedImpl extends _Authenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthenticatedImpl &&
-            (identical(other.token, token) || other.token == token) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, failure);
+  int get hashCode => Object.hash(runtimeType, user, failure);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -453,9 +464,9 @@ class _$AuthenticatedImpl extends _Authenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) unauthenticated,
-    required TResult Function(String token, AuthFailure? failure) authenticated,
+    required TResult Function(User user, AuthFailure? failure) authenticated,
   }) {
-    return authenticated(token, failure);
+    return authenticated(user, failure);
   }
 
   @override
@@ -463,9 +474,9 @@ class _$AuthenticatedImpl extends _Authenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? unauthenticated,
-    TResult? Function(String token, AuthFailure? failure)? authenticated,
+    TResult? Function(User user, AuthFailure? failure)? authenticated,
   }) {
-    return authenticated?.call(token, failure);
+    return authenticated?.call(user, failure);
   }
 
   @override
@@ -473,11 +484,11 @@ class _$AuthenticatedImpl extends _Authenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? unauthenticated,
-    TResult Function(String token, AuthFailure? failure)? authenticated,
+    TResult Function(User user, AuthFailure? failure)? authenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(token, failure);
+      return authenticated(user, failure);
     }
     return orElse();
   }
@@ -518,11 +529,11 @@ class _$AuthenticatedImpl extends _Authenticated {
 }
 
 abstract class _Authenticated extends AuthState {
-  const factory _Authenticated(final String token, final AuthFailure? failure) =
+  const factory _Authenticated(final User user, final AuthFailure? failure) =
       _$AuthenticatedImpl;
   const _Authenticated._() : super._();
 
-  String get token;
+  User get user;
   AuthFailure? get failure;
 
   /// Create a copy of AuthState

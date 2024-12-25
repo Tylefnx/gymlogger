@@ -56,7 +56,8 @@ class DashboardScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomNavigationIndex = useState(0);
     final state = ref.watch(authStateNotifierProvider);
-    final uid = state.maybeMap(authenticated: (_) => _.token, orElse: () {});
+    final uid =
+        state.maybeMap(authenticated: (_) => _.user.token, orElse: () {});
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

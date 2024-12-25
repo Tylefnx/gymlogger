@@ -11,6 +11,7 @@ import 'package:gymlogger/logs/presentation/lift_log_screen.dart';
 import 'package:gymlogger/logs/presentation/log_screen.dart';
 import 'package:gymlogger/main_page/main_page.dart';
 import 'package:gymlogger/main_page/sub_screens/profile_screen.dart';
+import 'package:gymlogger/main_page/sub_screens/update_user_screen.dart';
 import 'package:gymlogger/workout/presentation/create_workout_screen.dart';
 import 'package:gymlogger/workout/presentation/routine_details.dart';
 import 'package:gymlogger/workout/presentation/workout_screen.dart';
@@ -63,6 +64,10 @@ class AppRouter extends RootStackRouter {
         AutoRoute(
           path: '/strengthlevelcalc',
           page: StrengthLevelRoute.page,
+        ),
+        AutoRoute(
+          path: '/profile/update',
+          page: UpdateUserRoute.page,
         ),
         // AutoRoute(
         //   path: '/routine',

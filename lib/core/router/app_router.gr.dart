@@ -400,6 +400,25 @@ class StrengthLevelRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [UpdateUserScreen]
+class UpdateUserRoute extends PageRouteInfo<void> {
+  const UpdateUserRoute({List<PageRouteInfo>? children})
+      : super(
+          UpdateUserRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpdateUserRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UpdateUserScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [WorkoutScreen]
 class WorkoutRoute extends PageRouteInfo<void> {
   const WorkoutRoute({List<PageRouteInfo>? children})

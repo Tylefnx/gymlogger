@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:gymlogger/authentication/domain/auth_failure.dart';
+import 'package:gymlogger/authentication/domain/user.dart';
 import 'package:gymlogger/authentication/infrastructure/authentication_service.dart';
 
 class AuthenticationRepository {
@@ -8,7 +9,7 @@ class AuthenticationRepository {
 
   const AuthenticationRepository(this._service);
 
-  Future<Either<AuthFailure, String>> login({
+  Future<Either<AuthFailure, User>> login({
     required String username,
     required String password,
   }) async {
@@ -18,7 +19,8 @@ class AuthenticationRepository {
         password: password,
       );
       final json = response.data as Map<String, dynamic>;
-      return Right(json['token'].toString());
+      print(json);
+      return Right(User.fromJson(json));
     } on DioException catch (e) {
       return left(
         AuthFailure.storage(e.message),
@@ -57,6 +59,34 @@ class AuthenticationRepository {
     } on DioException {
       return left(
         token,
+      );
+    }
+  }
+
+  Future<Either<AuthFailure, String>> updateUser({
+    required String username,
+    required String token,
+    required String password,
+    String? email,
+    String? name,
+    String? surname,
+    String? photoUrl,
+  }) async {
+    try {
+      final response = await _service.updateUser(
+        username: username,
+        token: token,
+        email: email,
+        name: name,
+        surname: surname,
+        photoUrl: photoUrl,
+        password: password,
+      );
+      final json = response.data as Map<String, dynamic>;
+      return Right(json['message'].toString());
+    } on DioException catch (e) {
+      return left(
+        AuthFailure.storage(e.message),
       );
     }
   }

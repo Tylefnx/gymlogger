@@ -22,8 +22,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get token => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String? get photoUrl => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get photo_url => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get surname => throw _privateConstructorUsedError;
 
@@ -44,8 +44,8 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String token,
       String username,
-      String email,
-      String? photoUrl,
+      String? email,
+      String? photo_url,
       String? name,
       String? surname});
 }
@@ -67,8 +67,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? token = null,
     Object? username = null,
-    Object? email = null,
-    Object? photoUrl = freezed,
+    Object? email = freezed,
+    Object? photo_url = freezed,
     Object? name = freezed,
     Object? surname = freezed,
   }) {
@@ -81,13 +81,13 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo_url: freezed == photo_url
+          ? _value.photo_url
+          : photo_url // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -111,8 +111,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String token,
       String username,
-      String email,
-      String? photoUrl,
+      String? email,
+      String? photo_url,
       String? name,
       String? surname});
 }
@@ -131,8 +131,8 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? token = null,
     Object? username = null,
-    Object? email = null,
-    Object? photoUrl = freezed,
+    Object? email = freezed,
+    Object? photo_url = freezed,
     Object? name = freezed,
     Object? surname = freezed,
   }) {
@@ -145,13 +145,13 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo_url: freezed == photo_url
+          ? _value.photo_url
+          : photo_url // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -171,8 +171,8 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.token,
       required this.username,
-      required this.email,
-      this.photoUrl,
+      this.email,
+      this.photo_url,
       this.name,
       this.surname});
 
@@ -184,9 +184,9 @@ class _$UserImpl implements _User {
   @override
   final String username;
   @override
-  final String email;
+  final String? email;
   @override
-  final String? photoUrl;
+  final String? photo_url;
   @override
   final String? name;
   @override
@@ -194,7 +194,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(token: $token, username: $username, email: $email, photoUrl: $photoUrl, name: $name, surname: $surname)';
+    return 'User(token: $token, username: $username, email: $email, photo_url: $photo_url, name: $name, surname: $surname)';
   }
 
   @override
@@ -206,16 +206,16 @@ class _$UserImpl implements _User {
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl) &&
+            (identical(other.photo_url, photo_url) ||
+                other.photo_url == photo_url) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.surname, surname) || other.surname == surname));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, token, username, email, photoUrl, name, surname);
+  int get hashCode => Object.hash(
+      runtimeType, token, username, email, photo_url, name, surname);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -237,8 +237,8 @@ abstract class _User implements User {
   const factory _User(
       {required final String token,
       required final String username,
-      required final String email,
-      final String? photoUrl,
+      final String? email,
+      final String? photo_url,
       final String? name,
       final String? surname}) = _$UserImpl;
 
@@ -249,9 +249,9 @@ abstract class _User implements User {
   @override
   String get username;
   @override
-  String get email;
+  String? get email;
   @override
-  String? get photoUrl;
+  String? get photo_url;
   @override
   String? get name;
   @override
