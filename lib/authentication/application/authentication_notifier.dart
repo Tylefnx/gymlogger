@@ -86,7 +86,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         user!,
         const AuthFailure.storage('Wrong Password'),
       ),
-      (r) async => await login(
+      (r) => login(
         username: username,
         password: password,
       ),
