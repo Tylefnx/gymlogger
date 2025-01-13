@@ -5,19 +5,17 @@ class AuthenticationService {
   final Dio _dio;
 
   const AuthenticationService(this._dio);
-  static const loginEndPoint = 'login';
-  static const registerEndPoint = 'register';
-  static const updateUserEndPoint = 'update_user';
-  static const logoutEndPoint = 'logout';
-  static const port = '8080';
-  static const base = 'http://127.0.0.1:$port';
+  static const loginEndPoint = '/login';
+  static const registerEndPoint = '/register';
+  static const updateUserEndPoint = '/update_user';
+  static const logoutEndPoint = '/logout';
 
   Future<Response> login({
     required String username,
     required String password,
   }) async {
     final response = await _dio.post(
-      '$base/$loginEndPoint',
+      loginEndPoint,
       data: {
         'username': username,
         'password': password,
@@ -31,7 +29,7 @@ class AuthenticationService {
     required String password,
   }) {
     final response = _dio.post(
-      '$base/$registerEndPoint',
+      registerEndPoint,
       data: {
         'username': username,
         'password': password,
@@ -42,7 +40,7 @@ class AuthenticationService {
 
   Future<Response> forgotPassword() {
     final response = _dio.post(
-      '$base$loginEndPoint',
+      loginEndPoint,
       data: {},
     );
     return response;
@@ -67,9 +65,8 @@ class AuthenticationService {
     );
     var userData = updatedUser.toJson();
     userData.addAll({"password": password});
-    print(userData);
     final response = await _dio.post(
-      '$base/$updateUserEndPoint',
+      updateUserEndPoint,
       data: userData,
     );
     return response;
