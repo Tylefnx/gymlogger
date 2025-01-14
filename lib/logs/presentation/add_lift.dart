@@ -1,22 +1,27 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gymlogger/authentication/shared/providers.dart';
 import 'package:gymlogger/calculator/presentation/1rm_calculator.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_numberpicker.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
+import 'package:gymlogger/logs/shared/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 @RoutePage()
 class AddLiftScreen extends HookWidget {
+  final String lift;
   final PageController pageController;
   final ValueNotifier<int> navigatorIndex;
-  final ValueNotifier<List<MapEntry<String, double>>> lifts;
+  final List<MapEntry<String, double>> lifts;
   const AddLiftScreen({
     super.key,
     required this.lifts,
+    required this.lift,
     required this.pageController,
     required this.navigatorIndex,
   });
@@ -45,6 +50,7 @@ class AddLiftScreen extends HookWidget {
           AppNumberPicker(selectedReps: selectedRep),
           AppPadding.h10v20(
             child: _AddLiftButton(
+              lift: lift,
               weightController: weightController,
               selectedRep: selectedRep,
               selectedLiftDate: selectedLiftDate,
@@ -59,10 +65,12 @@ class AddLiftScreen extends HookWidget {
   }
 }
 
-class _AddLiftButton extends StatelessWidget {
+class _AddLiftButton extends ConsumerWidget {
   final PageController pageController;
+  final String lift;
   final ValueNotifier<int> navigatorIndex;
   const _AddLiftButton({
+    required this.lift,
     required this.weightController,
     required this.selectedRep,
     required this.selectedLiftDate,
@@ -74,19 +82,29 @@ class _AddLiftButton extends StatelessWidget {
   final TextEditingController weightController;
   final ValueNotifier<int> selectedRep;
   final ValueNotifier<DateTime> selectedLiftDate;
-  final ValueNotifier<List<MapEntry<String, double>>> lifts;
+  final List<MapEntry<String, double>> lifts;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppButton(
       onPressed: () {
-        if (weightController.text != '') {
+        final username = ref.read(authStateNotifierProvider).maybeMap(
+              orElse: () => '',
+              authenticated: (_) => _.user.username,
+            );
+        if (weightController.text != '' && username != '') {
           FocusScope.of(context).unfocus();
           final weight = double.parse(weightController.text);
-          final oneRepMax = calculateOneRepMax(weight, selectedRep.value);
+          final oneRepMax = double.parse(
+            calculateOneRepMax(weight, selectedRep.value).toStringAsFixed(2),
+          );
           final date = selectedLiftDate.value.toString().substring(0, 10);
-          lifts.value = List.from(lifts.value)
-            ..add(MapEntry<String, double>(date, oneRepMax));
+          ref.read(movementsStateNotifierProvider.notifier).saveUserLifts(
+                username: username,
+                exercize: lift,
+                date: date,
+                weight: oneRepMax,
+              );
         }
         navigatorIndex.value = 1;
         pageController.jumpToPage(1);
