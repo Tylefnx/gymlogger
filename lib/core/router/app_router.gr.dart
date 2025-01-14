@@ -14,7 +14,8 @@ part of 'app_router.dart';
 class AddLiftRoute extends PageRouteInfo<AddLiftRouteArgs> {
   AddLiftRoute({
     Key? key,
-    required ValueNotifier<List<MapEntry<String, double>>> lifts,
+    required List<MapEntry<String, double>> lifts,
+    required String lift,
     required PageController pageController,
     required ValueNotifier<int> navigatorIndex,
     List<PageRouteInfo>? children,
@@ -23,6 +24,7 @@ class AddLiftRoute extends PageRouteInfo<AddLiftRouteArgs> {
           args: AddLiftRouteArgs(
             key: key,
             lifts: lifts,
+            lift: lift,
             pageController: pageController,
             navigatorIndex: navigatorIndex,
           ),
@@ -38,6 +40,7 @@ class AddLiftRoute extends PageRouteInfo<AddLiftRouteArgs> {
       return AddLiftScreen(
         key: args.key,
         lifts: args.lifts,
+        lift: args.lift,
         pageController: args.pageController,
         navigatorIndex: args.navigatorIndex,
       );
@@ -49,13 +52,16 @@ class AddLiftRouteArgs {
   const AddLiftRouteArgs({
     this.key,
     required this.lifts,
+    required this.lift,
     required this.pageController,
     required this.navigatorIndex,
   });
 
   final Key? key;
 
-  final ValueNotifier<List<MapEntry<String, double>>> lifts;
+  final List<MapEntry<String, double>> lifts;
+
+  final String lift;
 
   final PageController pageController;
 
@@ -63,7 +69,7 @@ class AddLiftRouteArgs {
 
   @override
   String toString() {
-    return 'AddLiftRouteArgs{key: $key, lifts: $lifts, pageController: $pageController, navigatorIndex: $navigatorIndex}';
+    return 'AddLiftRouteArgs{key: $key, lifts: $lifts, lift: $lift, pageController: $pageController, navigatorIndex: $navigatorIndex}';
   }
 }
 
