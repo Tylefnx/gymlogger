@@ -1,0 +1,89 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gymlogger/authentication/domain/auth_failure.dart';
+import 'package:gymlogger/logs/domain/lift_logs.dart';
+import 'package:gymlogger/logs/infrastructure/movement_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+part 'movements_notifier.freezed.dart';
+
+@freezed
+class MovementsState with _$MovementsState {
+  const MovementsState._();
+  const factory MovementsState.loading() = _Loading;
+  const factory MovementsState.failed(AuthFailure? failure) = _Failed;
+  const factory MovementsState.loaded({required LiftLogs liftLogs}) = _Loaded;
+}
+
+class MovementsStateNotifier extends StateNotifier<MovementsState> {
+  final MovementLogsRepository _repository;
+  MovementsStateNotifier(this._repository)
+      : super(const MovementsState.failed(null));
+
+  Future<void> getUserLifts({
+    required String username,
+  }) async {
+    state = const MovementsState.loading();
+    final logsOrFailure = await _repository.getUserLifts(
+      username: username,
+    );
+    state = logsOrFailure.fold(
+      (l) => MovementsState.failed(l),
+      (r) => MovementsState.loaded(liftLogs: r),
+    );
+  }
+
+  Future<void> updateUserLifts({
+    required String username,
+    required String exercize,
+    required String date,
+    required double weight,
+  }) async {
+    state = const MovementsState.loading();
+    final updateOrFailure = await _repository.updateUserLifts(
+      username: username,
+      exercize: exercize,
+      date: date,
+      weight: weight,
+    );
+    state = await updateOrFailure.fold(
+      (l) => MovementsState.failed(l),
+      (r) => state,
+    );
+    await getUserLifts(
+      username: username,
+    );
+  }
+
+  Future<void> saveUserLifts({
+    required String username,
+    required String exercize,
+    required String date,
+    required double weight,
+  }) async {
+    state = const MovementsState.loading();
+    final saveOrFailure = await _repository.saveUserLifts(
+      username: username,
+      exercize: exercize,
+      date: date,
+      weight: weight,
+    );
+    state = saveOrFailure.fold((l) => MovementsState.failed(l), (r) => state);
+    await getUserLifts(username: username);
+  }
+
+  Future<void> deleteUserLifts({
+    required String username,
+    required String exercize,
+    required String date,
+    required double weight,
+  }) async {
+    state = const MovementsState.loading();
+    final saveOrFailure = await _repository.deleteUserLifts(
+      username: username,
+      exercize: exercize,
+      date: date,
+    );
+    state = saveOrFailure.fold((l) => MovementsState.failed(l), (r) => state);
+    await getUserLifts(username: username);
+  }
+}
