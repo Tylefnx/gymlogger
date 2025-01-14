@@ -4,7 +4,7 @@ class MovementLogsService {
   final Dio _dio;
 
   const MovementLogsService(this._dio);
-  static const saveEndpoint = '/save_user_lifts';
+  static const saveEndpoint = '/save_user_lift';
   static const updateEndPoint = '/update_user_lifts';
   static const deleteEndPoint = '/delete_user_lifts';
   static const getEndPoint = '/get_all_user_lifts';
@@ -31,7 +31,7 @@ class MovementLogsService {
       saveEndpoint,
       data: {
         'username': username,
-        'exercize': exercize,
+        'exercise': exercize,
         'date': date,
         'weight': weight,
       },
