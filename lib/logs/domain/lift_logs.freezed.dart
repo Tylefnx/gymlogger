@@ -15,15 +15,19 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LiftLogs _$LiftLogsFromJson(Map<String, dynamic> json) {
-  return _MovementsLogs.fromJson(json);
+  return _LiftLogs.fromJson(json);
 }
 
 /// @nodoc
 mixin _$LiftLogs {
-  MovementLog? get squat => throw _privateConstructorUsedError;
-  MovementLog? get bench => throw _privateConstructorUsedError;
-  MovementLog? get deadlift => throw _privateConstructorUsedError;
-  MovementLog? get ohp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Squat')
+  Map<String, double>? get squat => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Bench Press')
+  Map<String, double>? get bench => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Deadlift')
+  Map<String, double>? get deadlift => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Overhead Press')
+  Map<String, double>? get ohp => throw _privateConstructorUsedError;
 
   /// Serializes this LiftLogs to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,15 +45,10 @@ abstract class $LiftLogsCopyWith<$Res> {
       _$LiftLogsCopyWithImpl<$Res, LiftLogs>;
   @useResult
   $Res call(
-      {MovementLog? squat,
-      MovementLog? bench,
-      MovementLog? deadlift,
-      MovementLog? ohp});
-
-  $MovementLogCopyWith<$Res>? get squat;
-  $MovementLogCopyWith<$Res>? get bench;
-  $MovementLogCopyWith<$Res>? get deadlift;
-  $MovementLogCopyWith<$Res>? get ohp;
+      {@JsonKey(name: 'Squat') Map<String, double>? squat,
+      @JsonKey(name: 'Bench Press') Map<String, double>? bench,
+      @JsonKey(name: 'Deadlift') Map<String, double>? deadlift,
+      @JsonKey(name: 'Overhead Press') Map<String, double>? ohp});
 }
 
 /// @nodoc
@@ -76,109 +75,44 @@ class _$LiftLogsCopyWithImpl<$Res, $Val extends LiftLogs>
       squat: freezed == squat
           ? _value.squat
           : squat // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
       bench: freezed == bench
           ? _value.bench
           : bench // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
       deadlift: freezed == deadlift
           ? _value.deadlift
           : deadlift // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
       ohp: freezed == ohp
           ? _value.ohp
           : ohp // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
     ) as $Val);
-  }
-
-  /// Create a copy of LiftLogs
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $MovementLogCopyWith<$Res>? get squat {
-    if (_value.squat == null) {
-      return null;
-    }
-
-    return $MovementLogCopyWith<$Res>(_value.squat!, (value) {
-      return _then(_value.copyWith(squat: value) as $Val);
-    });
-  }
-
-  /// Create a copy of LiftLogs
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $MovementLogCopyWith<$Res>? get bench {
-    if (_value.bench == null) {
-      return null;
-    }
-
-    return $MovementLogCopyWith<$Res>(_value.bench!, (value) {
-      return _then(_value.copyWith(bench: value) as $Val);
-    });
-  }
-
-  /// Create a copy of LiftLogs
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $MovementLogCopyWith<$Res>? get deadlift {
-    if (_value.deadlift == null) {
-      return null;
-    }
-
-    return $MovementLogCopyWith<$Res>(_value.deadlift!, (value) {
-      return _then(_value.copyWith(deadlift: value) as $Val);
-    });
-  }
-
-  /// Create a copy of LiftLogs
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $MovementLogCopyWith<$Res>? get ohp {
-    if (_value.ohp == null) {
-      return null;
-    }
-
-    return $MovementLogCopyWith<$Res>(_value.ohp!, (value) {
-      return _then(_value.copyWith(ohp: value) as $Val);
-    });
   }
 }
 
 /// @nodoc
-abstract class _$$MovementsLogsImplCopyWith<$Res>
+abstract class _$$LiftLogsImplCopyWith<$Res>
     implements $LiftLogsCopyWith<$Res> {
-  factory _$$MovementsLogsImplCopyWith(
-          _$MovementsLogsImpl value, $Res Function(_$MovementsLogsImpl) then) =
-      __$$MovementsLogsImplCopyWithImpl<$Res>;
+  factory _$$LiftLogsImplCopyWith(
+          _$LiftLogsImpl value, $Res Function(_$LiftLogsImpl) then) =
+      __$$LiftLogsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {MovementLog? squat,
-      MovementLog? bench,
-      MovementLog? deadlift,
-      MovementLog? ohp});
-
-  @override
-  $MovementLogCopyWith<$Res>? get squat;
-  @override
-  $MovementLogCopyWith<$Res>? get bench;
-  @override
-  $MovementLogCopyWith<$Res>? get deadlift;
-  @override
-  $MovementLogCopyWith<$Res>? get ohp;
+      {@JsonKey(name: 'Squat') Map<String, double>? squat,
+      @JsonKey(name: 'Bench Press') Map<String, double>? bench,
+      @JsonKey(name: 'Deadlift') Map<String, double>? deadlift,
+      @JsonKey(name: 'Overhead Press') Map<String, double>? ohp});
 }
 
 /// @nodoc
-class __$$MovementsLogsImplCopyWithImpl<$Res>
-    extends _$LiftLogsCopyWithImpl<$Res, _$MovementsLogsImpl>
-    implements _$$MovementsLogsImplCopyWith<$Res> {
-  __$$MovementsLogsImplCopyWithImpl(
-      _$MovementsLogsImpl _value, $Res Function(_$MovementsLogsImpl) _then)
+class __$$LiftLogsImplCopyWithImpl<$Res>
+    extends _$LiftLogsCopyWithImpl<$Res, _$LiftLogsImpl>
+    implements _$$LiftLogsImplCopyWith<$Res> {
+  __$$LiftLogsImplCopyWithImpl(
+      _$LiftLogsImpl _value, $Res Function(_$LiftLogsImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of LiftLogs
@@ -191,44 +125,87 @@ class __$$MovementsLogsImplCopyWithImpl<$Res>
     Object? deadlift = freezed,
     Object? ohp = freezed,
   }) {
-    return _then(_$MovementsLogsImpl(
+    return _then(_$LiftLogsImpl(
       squat: freezed == squat
-          ? _value.squat
+          ? _value._squat
           : squat // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
       bench: freezed == bench
-          ? _value.bench
+          ? _value._bench
           : bench // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
       deadlift: freezed == deadlift
-          ? _value.deadlift
+          ? _value._deadlift
           : deadlift // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
       ohp: freezed == ohp
-          ? _value.ohp
+          ? _value._ohp
           : ohp // ignore: cast_nullable_to_non_nullable
-              as MovementLog?,
+              as Map<String, double>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$MovementsLogsImpl extends _MovementsLogs {
-  const _$MovementsLogsImpl({this.squat, this.bench, this.deadlift, this.ohp})
-      : super._();
+class _$LiftLogsImpl extends _LiftLogs {
+  const _$LiftLogsImpl(
+      {@JsonKey(name: 'Squat') final Map<String, double>? squat,
+      @JsonKey(name: 'Bench Press') final Map<String, double>? bench,
+      @JsonKey(name: 'Deadlift') final Map<String, double>? deadlift,
+      @JsonKey(name: 'Overhead Press') final Map<String, double>? ohp})
+      : _squat = squat,
+        _bench = bench,
+        _deadlift = deadlift,
+        _ohp = ohp,
+        super._();
 
-  factory _$MovementsLogsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MovementsLogsImplFromJson(json);
+  factory _$LiftLogsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LiftLogsImplFromJson(json);
 
+  final Map<String, double>? _squat;
   @override
-  final MovementLog? squat;
+  @JsonKey(name: 'Squat')
+  Map<String, double>? get squat {
+    final value = _squat;
+    if (value == null) return null;
+    if (_squat is EqualUnmodifiableMapView) return _squat;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, double>? _bench;
   @override
-  final MovementLog? bench;
+  @JsonKey(name: 'Bench Press')
+  Map<String, double>? get bench {
+    final value = _bench;
+    if (value == null) return null;
+    if (_bench is EqualUnmodifiableMapView) return _bench;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, double>? _deadlift;
   @override
-  final MovementLog? deadlift;
+  @JsonKey(name: 'Deadlift')
+  Map<String, double>? get deadlift {
+    final value = _deadlift;
+    if (value == null) return null;
+    if (_deadlift is EqualUnmodifiableMapView) return _deadlift;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, double>? _ohp;
   @override
-  final MovementLog? ohp;
+  @JsonKey(name: 'Overhead Press')
+  Map<String, double>? get ohp {
+    final value = _ohp;
+    if (value == null) return null;
+    if (_ohp is EqualUnmodifiableMapView) return _ohp;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
@@ -239,58 +216,67 @@ class _$MovementsLogsImpl extends _MovementsLogs {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MovementsLogsImpl &&
-            (identical(other.squat, squat) || other.squat == squat) &&
-            (identical(other.bench, bench) || other.bench == bench) &&
-            (identical(other.deadlift, deadlift) ||
-                other.deadlift == deadlift) &&
-            (identical(other.ohp, ohp) || other.ohp == ohp));
+            other is _$LiftLogsImpl &&
+            const DeepCollectionEquality().equals(other._squat, _squat) &&
+            const DeepCollectionEquality().equals(other._bench, _bench) &&
+            const DeepCollectionEquality().equals(other._deadlift, _deadlift) &&
+            const DeepCollectionEquality().equals(other._ohp, _ohp));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, squat, bench, deadlift, ohp);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_squat),
+      const DeepCollectionEquality().hash(_bench),
+      const DeepCollectionEquality().hash(_deadlift),
+      const DeepCollectionEquality().hash(_ohp));
 
   /// Create a copy of LiftLogs
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MovementsLogsImplCopyWith<_$MovementsLogsImpl> get copyWith =>
-      __$$MovementsLogsImplCopyWithImpl<_$MovementsLogsImpl>(this, _$identity);
+  _$$LiftLogsImplCopyWith<_$LiftLogsImpl> get copyWith =>
+      __$$LiftLogsImplCopyWithImpl<_$LiftLogsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MovementsLogsImplToJson(
+    return _$$LiftLogsImplToJson(
       this,
     );
   }
 }
 
-abstract class _MovementsLogs extends LiftLogs {
-  const factory _MovementsLogs(
-      {final MovementLog? squat,
-      final MovementLog? bench,
-      final MovementLog? deadlift,
-      final MovementLog? ohp}) = _$MovementsLogsImpl;
-  const _MovementsLogs._() : super._();
+abstract class _LiftLogs extends LiftLogs {
+  const factory _LiftLogs(
+          {@JsonKey(name: 'Squat') final Map<String, double>? squat,
+          @JsonKey(name: 'Bench Press') final Map<String, double>? bench,
+          @JsonKey(name: 'Deadlift') final Map<String, double>? deadlift,
+          @JsonKey(name: 'Overhead Press') final Map<String, double>? ohp}) =
+      _$LiftLogsImpl;
+  const _LiftLogs._() : super._();
 
-  factory _MovementsLogs.fromJson(Map<String, dynamic> json) =
-      _$MovementsLogsImpl.fromJson;
+  factory _LiftLogs.fromJson(Map<String, dynamic> json) =
+      _$LiftLogsImpl.fromJson;
 
   @override
-  MovementLog? get squat;
+  @JsonKey(name: 'Squat')
+  Map<String, double>? get squat;
   @override
-  MovementLog? get bench;
+  @JsonKey(name: 'Bench Press')
+  Map<String, double>? get bench;
   @override
-  MovementLog? get deadlift;
+  @JsonKey(name: 'Deadlift')
+  Map<String, double>? get deadlift;
   @override
-  MovementLog? get ohp;
+  @JsonKey(name: 'Overhead Press')
+  Map<String, double>? get ohp;
 
   /// Create a copy of LiftLogs
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MovementsLogsImplCopyWith<_$MovementsLogsImpl> get copyWith =>
+  _$$LiftLogsImplCopyWith<_$LiftLogsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

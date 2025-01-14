@@ -6,26 +6,26 @@ part of 'lift_logs.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MovementsLogsImpl _$$MovementsLogsImplFromJson(Map<String, dynamic> json) =>
-    _$MovementsLogsImpl(
-      squat: json['squat'] == null
-          ? null
-          : MovementLog.fromJson(json['squat'] as Map<String, dynamic>),
-      bench: json['bench'] == null
-          ? null
-          : MovementLog.fromJson(json['bench'] as Map<String, dynamic>),
-      deadlift: json['deadlift'] == null
-          ? null
-          : MovementLog.fromJson(json['deadlift'] as Map<String, dynamic>),
-      ohp: json['ohp'] == null
-          ? null
-          : MovementLog.fromJson(json['ohp'] as Map<String, dynamic>),
+_$LiftLogsImpl _$$LiftLogsImplFromJson(Map<String, dynamic> json) =>
+    _$LiftLogsImpl(
+      squat: (json['Squat'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
+      bench: (json['Bench Press'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
+      deadlift: (json['Deadlift'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
+      ohp: (json['Overhead Press'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
     );
 
-Map<String, dynamic> _$$MovementsLogsImplToJson(_$MovementsLogsImpl instance) =>
+Map<String, dynamic> _$$LiftLogsImplToJson(_$LiftLogsImpl instance) =>
     <String, dynamic>{
-      'squat': instance.squat,
-      'bench': instance.bench,
-      'deadlift': instance.deadlift,
-      'ohp': instance.ohp,
+      'Squat': instance.squat,
+      'Bench Press': instance.bench,
+      'Deadlift': instance.deadlift,
+      'Overhead Press': instance.ohp,
     };
