@@ -14,9 +14,9 @@ class MovementLogsRepository {
   }) async {
     try {
       final response = await _service.getUserLifts(username: username);
-      final json = response.data as Map<String, dynamic>;
-      final liftLogs = LiftLogs.fromJson(json);
-
+      final json = response.data as Map<String, dynamic>?;
+      print(json);
+      final liftLogs = LiftLogs.fromJson(json ?? <String, dynamic>{});
       return Right(liftLogs);
     } catch (e) {
       return Left(
@@ -75,7 +75,6 @@ class MovementLogsRepository {
     required String username,
     required String exercize,
     required String date,
-    required double weight,
   }) async {
     try {
       final response = await _service.deleteUserLifts(
