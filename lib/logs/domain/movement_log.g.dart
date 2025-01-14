@@ -8,7 +8,6 @@ part of 'movement_log.dart';
 
 _$MovementLogImpl _$$MovementLogImplFromJson(Map<String, dynamic> json) =>
     _$MovementLogImpl(
-      title: json['title'] as String,
       logs: (json['logs'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, (e as num).toDouble()),
       ),
@@ -16,6 +15,5 @@ _$MovementLogImpl _$$MovementLogImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$MovementLogImplToJson(_$MovementLogImpl instance) =>
     <String, dynamic>{
-      'title': instance.title,
       'logs': instance.logs,
     };

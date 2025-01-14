@@ -20,7 +20,6 @@ MovementLog _$MovementLogFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovementLog {
-  String get title => throw _privateConstructorUsedError;
   Map<String, double> get logs => throw _privateConstructorUsedError;
 
   /// Serializes this MovementLog to a JSON map.
@@ -39,7 +38,7 @@ abstract class $MovementLogCopyWith<$Res> {
           MovementLog value, $Res Function(MovementLog) then) =
       _$MovementLogCopyWithImpl<$Res, MovementLog>;
   @useResult
-  $Res call({String title, Map<String, double> logs});
+  $Res call({Map<String, double> logs});
 }
 
 /// @nodoc
@@ -57,14 +56,9 @@ class _$MovementLogCopyWithImpl<$Res, $Val extends MovementLog>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
     Object? logs = null,
   }) {
     return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       logs: null == logs
           ? _value.logs
           : logs // ignore: cast_nullable_to_non_nullable
@@ -81,7 +75,7 @@ abstract class _$$MovementLogImplCopyWith<$Res>
       __$$MovementLogImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, Map<String, double> logs});
+  $Res call({Map<String, double> logs});
 }
 
 /// @nodoc
@@ -97,14 +91,9 @@ class __$$MovementLogImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
     Object? logs = null,
   }) {
     return _then(_$MovementLogImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       logs: null == logs
           ? _value._logs
           : logs // ignore: cast_nullable_to_non_nullable
@@ -116,16 +105,13 @@ class __$$MovementLogImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MovementLogImpl extends _MovementLog {
-  const _$MovementLogImpl(
-      {required this.title, required final Map<String, double> logs})
+  const _$MovementLogImpl({required final Map<String, double> logs})
       : _logs = logs,
         super._();
 
   factory _$MovementLogImpl.fromJson(Map<String, dynamic> json) =>
       _$$MovementLogImplFromJson(json);
 
-  @override
-  final String title;
   final Map<String, double> _logs;
   @override
   Map<String, double> get logs {
@@ -136,7 +122,7 @@ class _$MovementLogImpl extends _MovementLog {
 
   @override
   String toString() {
-    return 'MovementLog(title: $title, logs: $logs)';
+    return 'MovementLog(logs: $logs)';
   }
 
   @override
@@ -144,14 +130,13 @@ class _$MovementLogImpl extends _MovementLog {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MovementLogImpl &&
-            (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality().equals(other._logs, _logs));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, const DeepCollectionEquality().hash(_logs));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_logs));
 
   /// Create a copy of MovementLog
   /// with the given fields replaced by the non-null parameter values.
@@ -170,16 +155,13 @@ class _$MovementLogImpl extends _MovementLog {
 }
 
 abstract class _MovementLog extends MovementLog {
-  const factory _MovementLog(
-      {required final String title,
-      required final Map<String, double> logs}) = _$MovementLogImpl;
+  const factory _MovementLog({required final Map<String, double> logs}) =
+      _$MovementLogImpl;
   const _MovementLog._() : super._();
 
   factory _MovementLog.fromJson(Map<String, dynamic> json) =
       _$MovementLogImpl.fromJson;
 
-  @override
-  String get title;
   @override
   Map<String, double> get logs;
 

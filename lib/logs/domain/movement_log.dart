@@ -6,7 +6,6 @@ part 'movement_log.g.dart';
 @freezed
 class MovementLog with _$MovementLog {
   const factory MovementLog({
-    required String title,
     required Map<String, double> logs,
   }) = _MovementLog;
 
