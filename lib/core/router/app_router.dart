@@ -69,10 +69,10 @@ class AppRouter extends RootStackRouter {
           path: '/profile/update',
           page: UpdateUserRoute.page,
         ),
-        // AutoRoute(
-        //   path: '/routine',
-        //   page: RoutineDetailsPage.page,
-        // ),
+        AutoRoute(
+          path: '/routine',
+          page: RoutineDetailsRoute.page,
+        ),
         AutoRoute(
           path: '/fatpercentagecalc',
           page: FatPercentageRoute.page,
