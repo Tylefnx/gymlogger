@@ -37,7 +37,7 @@ class CreateRoutineScreen extends HookWidget {
               label: 'Routine Name',
               controller: routineController,
             ),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             Expanded(
               child: ListView.builder(
                 itemCount: textEditingControllers.value.length,
@@ -45,12 +45,12 @@ class CreateRoutineScreen extends HookWidget {
                   return Column(
                     children: [
                       AppText.big_bold(text: 'Movement ${index + 1}'),
-                      SB_AppPadding.h10(),
+                      SBAppPadding.h10(),
                       AppTextFormField.name(
                         label: 'Movement Name',
                         controller: textEditingControllers.value[index][0],
                       ),
-                      SB_AppPadding.h10(),
+                      SBAppPadding.h10(),
                       Row(
                         children: [
                           Expanded(
@@ -60,7 +60,7 @@ class CreateRoutineScreen extends HookWidget {
                                   [1],
                             ),
                           ),
-                          SB_AppPadding.w15(),
+                          SBAppPadding.w15(),
                           Expanded(
                             child: AppTextFormField.numberWithOptions(
                               label: 'Sets',
@@ -68,7 +68,7 @@ class CreateRoutineScreen extends HookWidget {
                                   [2],
                             ),
                           ),
-                          SB_AppPadding.w15(),
+                          SBAppPadding.w15(),
                           Expanded(
                             child: AppTextFormField.numberWithOptions(
                               label: 'Reps',
@@ -78,7 +78,7 @@ class CreateRoutineScreen extends HookWidget {
                           ),
                         ],
                       ),
-                      SB_AppPadding.h30(),
+                      SBAppPadding.h30(),
                     ],
                   );
                 },

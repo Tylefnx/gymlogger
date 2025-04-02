@@ -26,7 +26,7 @@ class LoginScreen extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppText.very_big_bold(text: 'Welcome to Gymlogger'),
-            SB_AppPadding.h30(),
+            SBAppPadding.h30(),
             AppTextFormField.name(
               label: 'Username',
               controller: username,

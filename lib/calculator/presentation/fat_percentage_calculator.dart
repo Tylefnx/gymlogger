@@ -29,33 +29,33 @@ class FatPercentageCalculator extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             GenderSelectionWidget(gender: genderController),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             MeasurementSelectionSection(
               weightController: heightController,
               label: 'Height',
             ),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             MeasurementSelectionSection(
               weightController: waistController,
               label: 'Waist',
             ),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             MeasurementSelectionSection(
               weightController: neckController,
               label: 'Neck',
             ),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             if (genderController.value == 'female')
               MeasurementSelectionSection(
                 weightController: hipController,
                 label: 'Hips',
               ),
-            if (genderController.value == 'female') SB_AppPadding.h10(),
+            if (genderController.value == 'female') SBAppPadding.h10(),
             BWSelectionSection(bwController: bwController),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             if (bodyFatController.value != 0)
               AppText.big_bold(text: bodyFatController.value.toString()),
-            if (bwController.text != '0') SB_AppPadding.h10(),
+            if (bwController.text != '0') SBAppPadding.h10(),
             SizedBox(
               height: 100,
               width: 100,
@@ -113,13 +113,14 @@ double calculateBodyFat(
   return 0;
 }
 
-void _onPressed(
-    {required String heightSize,
-    required String neckSize,
-    required String waistSize,
-    required String hipSize,
-    required String gender,
-    required ValueNotifier<double> bodyFatController}) {
+void _onPressed({
+  required String heightSize,
+  required String neckSize,
+  required String waistSize,
+  required String hipSize,
+  required String gender,
+  required ValueNotifier<double> bodyFatController,
+}) {
   {
     //final bw = double.parse(
     //  bwController.text,

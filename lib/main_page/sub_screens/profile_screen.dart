@@ -23,7 +23,7 @@ class ProfileScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Center(child: ProfilePictureWidget()),
-              SB_AppPadding.h10(),
+              SBAppPadding.h10(),
               ListTile(
                 tileColor: Colors.grey[200],
                 leading: const Icon(Icons.person),

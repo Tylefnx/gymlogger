@@ -38,7 +38,7 @@ class OneRepMaxCalculator extends HookWidget {
                 repMaxes: repMaxes,
               ),
             ),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             Expanded(
               child: Card(
                 elevation: 0,
@@ -178,6 +178,5 @@ List<double> calculateRepMaxes(
     final indexRepMax = oneRepMax / (36 / (37 - i - 1));
     repMaxes.add(indexRepMax);
   }
-  print(repMaxes);
   return repMaxes;
 }

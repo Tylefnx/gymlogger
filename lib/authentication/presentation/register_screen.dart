@@ -26,7 +26,7 @@ class RegisterScreen extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppText.very_big_bold(text: 'Welcome to Gymlogger'),
-            SB_AppPadding.h30(),
+            SBAppPadding.h30(),
             AppTextFormField.name(
               label: 'Username',
               controller: username,
@@ -41,7 +41,7 @@ class RegisterScreen extends HookConsumerWidget {
               label: 'Password Again',
               controller: passwordAgain,
             ),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             AppButton(
               onPressed: () async => register(
                 ref: ref,
@@ -86,13 +86,13 @@ Future<void> register({
             username: username,
             password: password,
           );
+      // ignore: use_build_context_synchronously
       AutoRouter.of(context).pushAndPopUntil(
         const MainRoute(),
         predicate: (Route<dynamic> route) {
           return true;
         },
       );
-      print(ref.read(authStateNotifierProvider));
     }
   }
 }

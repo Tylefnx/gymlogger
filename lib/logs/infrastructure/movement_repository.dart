@@ -15,8 +15,8 @@ class MovementLogsRepository {
     try {
       final response = await _service.getUserLifts(username: username);
       final json = response.data as Map<String, dynamic>?;
-      print(json);
       final liftLogs = LiftLogs.fromJson(json ?? <String, dynamic>{});
+      print(liftLogs);
       return Right(liftLogs);
     } catch (e) {
       return Left(

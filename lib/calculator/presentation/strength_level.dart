@@ -30,9 +30,9 @@ class StrengthLevelCalculator extends HookWidget {
             WeightSelectionSection(
               weightController: weightController,
             ),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             BWSelectionSection(bwController: bwController),
-            SB_AppPadding.h10(),
+            SBAppPadding.h10(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -56,7 +56,6 @@ class StrengthLevelCalculator extends HookWidget {
                   gender.value ?? 'male', //TODO: create error if null
                 );
                 row.value = addStars(strLevel.value);
-                print(strLevel.value);
               },
               title: 'Submit',
             ),

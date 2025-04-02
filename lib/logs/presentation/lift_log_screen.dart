@@ -121,7 +121,8 @@ class LiftGraphics extends HookWidget {
           yValueMapper: (MapEntry<String, double> data, _) =>
               data.value, // Ağırlık
           dataLabelSettings: const DataLabelSettings(
-              isVisible: true), // Veri etiketlerini göster
+            isVisible: true,
+          ), // Veri etiketlerini göster
         ),
       ],
     );
@@ -162,8 +163,11 @@ class OneLiftList extends HookWidget {
   }
 }
 
-Map<String, double>? getMovementLogForLift(
-    {required String lift, required LiftLogs logs}) {
+Map<String, double>? getMovementLogForLift({
+  required String lift,
+  required LiftLogs logs,
+}) {
+  print(logs);
   switch (lift) {
     case 'Squat':
       return logs.squat;

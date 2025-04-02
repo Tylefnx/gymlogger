@@ -71,7 +71,7 @@ class RoutinesSection extends StatelessWidget {
             icondata: Icons.bookmark_add,
           ),
         ),
-        SB_AppPadding.w15(),
+        SBAppPadding.w15(),
         const Expanded(
           child: AppTallButton(
             text: 'Explore',

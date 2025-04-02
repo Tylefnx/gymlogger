@@ -19,7 +19,6 @@ class AuthenticationRepository {
         password: password,
       );
       final json = response.data as Map<String, dynamic>;
-      print(json);
       return Right(User.fromJson(json));
     } on DioException catch (e) {
       return left(
@@ -37,6 +36,7 @@ class AuthenticationRepository {
         username: username,
         password: password,
       );
+      // ignore: avoid_dynamic_calls
       final uid = response.data['token'] as String;
       return Right(uid);
     } on DioException catch (e) {

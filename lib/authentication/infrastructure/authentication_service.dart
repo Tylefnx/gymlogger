@@ -63,6 +63,7 @@ class AuthenticationService {
       name: name,
       surname: surname,
     );
+    // ignore: prefer_final_locals
     var userData = updatedUser.toJson();
     userData.addAll({"password": password});
     final response = await _dio.post(

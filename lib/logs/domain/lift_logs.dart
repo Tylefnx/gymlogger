@@ -7,9 +7,9 @@ part 'lift_logs.g.dart';
 class LiftLogs with _$LiftLogs {
   const factory LiftLogs({
     @JsonKey(name: 'Squat') Map<String, double>? squat,
-    @JsonKey(name: 'Bench Press') Map<String, double>? bench,
-    @JsonKey(name: 'Deadlift') Map<String, double>? deadlift,
-    @JsonKey(name: 'Overhead Press') Map<String, double>? ohp,
+    @JsonKey(name: 'bench press') Map<String, double>? bench,
+    @JsonKey(name: 'deadlift') Map<String, double>? deadlift,
+    @JsonKey(name: 'overhead press') Map<String, double>? ohp,
   }) = _LiftLogs;
   const LiftLogs._();
 

@@ -10,11 +10,14 @@ _$RoutineImpl _$$RoutineImplFromJson(Map<String, dynamic> json) =>
     _$RoutineImpl(
       routine: (json['routine'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(
-            k,
-            (e as Map<String, dynamic>).map(
-              (k, e) => MapEntry(k,
-                  (e as List<dynamic>).map((e) => (e as num).toInt()).toList()),
-            )),
+          k,
+          (e as Map<String, dynamic>).map(
+            (k, e) => MapEntry(
+              k,
+              (e as List<dynamic>).map((e) => (e as num).toInt()).toList(),
+            ),
+          ),
+        ),
       ),
     );
 
