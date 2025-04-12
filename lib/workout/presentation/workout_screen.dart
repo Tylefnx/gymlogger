@@ -36,10 +36,8 @@ class WorkoutScreen extends HookWidget {
               ),
             ),
             AppText.big_bold(text: 'My Routines'),
-            Expanded(
-              child: MyRoutines(
-                routines: routines,
-              ),
+            const Expanded(
+              child: MyRoutines(),
             ),
           ],
         ),

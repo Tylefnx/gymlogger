@@ -8,24 +8,16 @@ part of 'lift_logs.dart';
 
 _$LiftLogsImpl _$$LiftLogsImplFromJson(Map<String, dynamic> json) =>
     _$LiftLogsImpl(
-      squat: (json['Squat'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, (e as num).toDouble()),
-      ),
-      bench: (json['Bench Press'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, (e as num).toDouble()),
-      ),
-      deadlift: (json['Deadlift'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, (e as num).toDouble()),
-      ),
-      ohp: (json['Overhead Press'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, (e as num).toDouble()),
-      ),
+      squat: json['Squat'] as Map<String, dynamic>?,
+      bench: json['bench press'] as Map<String, dynamic>?,
+      deadlift: json['deadlift'] as Map<String, dynamic>?,
+      ohp: json['overhead press'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$LiftLogsImplToJson(_$LiftLogsImpl instance) =>
     <String, dynamic>{
       'Squat': instance.squat,
-      'Bench Press': instance.bench,
-      'Deadlift': instance.deadlift,
-      'Overhead Press': instance.ohp,
+      'bench press': instance.bench,
+      'deadlift': instance.deadlift,
+      'overhead press': instance.ohp,
     };

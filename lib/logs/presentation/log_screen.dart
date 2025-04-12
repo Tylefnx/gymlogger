@@ -21,9 +21,13 @@ class LogScreen extends HookConsumerWidget {
     useEffect(
       () {
         Future(() {
-          ref
-              .read(movementsStateNotifierProvider.notifier)
-              .getUserLifts(username: username);
+          ref.read(movementsStateNotifierProvider.notifier).getUserLifts(
+                username: username,
+                token: authState.maybeMap(
+                  orElse: () => '',
+                  authenticated: (_) => _.user.token,
+                ),
+              );
         });
         return null;
       },

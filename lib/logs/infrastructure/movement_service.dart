@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:gymlogger/core/shared/dio.dart';
 
 class MovementLogsService {
   final Dio _dio;
@@ -11,19 +12,25 @@ class MovementLogsService {
 
   Future<Response> getUserLifts({
     required String username,
+    required String token,
   }) async {
     final response = await _dio.post(
       getEndPoint,
       data: {
         'username': username,
       },
+      options: authenticator(
+        token: token,
+      ),
     );
+    print(response);
     return response;
   }
 
   Future<Response> saveUserLifts({
     required String username,
     required String exercize,
+    required String token,
     required String date,
     required double weight,
   }) async {
@@ -35,6 +42,9 @@ class MovementLogsService {
         'date': date,
         'weight': weight,
       },
+      options: authenticator(
+        token: token,
+      ),
     );
     return response;
   }
@@ -42,6 +52,7 @@ class MovementLogsService {
   Future<Response> updateUserLifts({
     required String username,
     required String exercize,
+    required String token,
     required String date,
     required double weight,
   }) async {
@@ -53,6 +64,9 @@ class MovementLogsService {
         'date': date,
         'weight': weight,
       },
+      options: authenticator(
+        token: token,
+      ),
     );
     return response;
   }
@@ -60,6 +74,7 @@ class MovementLogsService {
   Future<Response> deleteUserLifts({
     required String username,
     required String exercize,
+    required String token,
     required String date,
   }) async {
     final response = await _dio.post(
@@ -69,6 +84,9 @@ class MovementLogsService {
         'exercize': exercize,
         'date': date,
       },
+      options: authenticator(
+        token: token,
+      ),
     );
     return response;
   }

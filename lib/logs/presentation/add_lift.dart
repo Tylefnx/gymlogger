@@ -17,7 +17,7 @@ class AddLiftScreen extends HookWidget {
   final String lift;
   final PageController pageController;
   final ValueNotifier<int> navigatorIndex;
-  final List<MapEntry<String, double>> lifts;
+  final List<MapEntry<String, dynamic>> lifts;
   const AddLiftScreen({
     super.key,
     required this.lifts,
@@ -82,10 +82,12 @@ class _AddLiftButton extends ConsumerWidget {
   final TextEditingController weightController;
   final ValueNotifier<int> selectedRep;
   final ValueNotifier<DateTime> selectedLiftDate;
-  final List<MapEntry<String, double>> lifts;
+  final List<MapEntry<String, dynamic>> lifts;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.read(authStateNotifierProvider);
+
     return AppButton(
       onPressed: () {
         final username = ref.read(authStateNotifierProvider).maybeMap(
@@ -104,6 +106,10 @@ class _AddLiftButton extends ConsumerWidget {
                 exercize: lift,
                 date: date,
                 weight: oneRepMax,
+                token: authState.maybeMap(
+                  orElse: () => '',
+                  authenticated: (_) => _.user.token,
+                ),
               );
         }
         navigatorIndex.value = 1;

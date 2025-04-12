@@ -21,13 +21,13 @@ LiftLogs _$LiftLogsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LiftLogs {
   @JsonKey(name: 'Squat')
-  Map<String, double>? get squat => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Bench Press')
-  Map<String, double>? get bench => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Deadlift')
-  Map<String, double>? get deadlift => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Overhead Press')
-  Map<String, double>? get ohp => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get squat => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bench press')
+  Map<String, dynamic>? get bench => throw _privateConstructorUsedError;
+  @JsonKey(name: 'deadlift')
+  Map<String, dynamic>? get deadlift => throw _privateConstructorUsedError;
+  @JsonKey(name: 'overhead press')
+  Map<String, dynamic>? get ohp => throw _privateConstructorUsedError;
 
   /// Serializes this LiftLogs to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,10 +45,10 @@ abstract class $LiftLogsCopyWith<$Res> {
       _$LiftLogsCopyWithImpl<$Res, LiftLogs>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Squat') Map<String, double>? squat,
-      @JsonKey(name: 'Bench Press') Map<String, double>? bench,
-      @JsonKey(name: 'Deadlift') Map<String, double>? deadlift,
-      @JsonKey(name: 'Overhead Press') Map<String, double>? ohp});
+      {@JsonKey(name: 'Squat') Map<String, dynamic>? squat,
+      @JsonKey(name: 'bench press') Map<String, dynamic>? bench,
+      @JsonKey(name: 'deadlift') Map<String, dynamic>? deadlift,
+      @JsonKey(name: 'overhead press') Map<String, dynamic>? ohp});
 }
 
 /// @nodoc
@@ -75,19 +75,19 @@ class _$LiftLogsCopyWithImpl<$Res, $Val extends LiftLogs>
       squat: freezed == squat
           ? _value.squat
           : squat // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
       bench: freezed == bench
           ? _value.bench
           : bench // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
       deadlift: freezed == deadlift
           ? _value.deadlift
           : deadlift // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
       ohp: freezed == ohp
           ? _value.ohp
           : ohp // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -101,10 +101,10 @@ abstract class _$$LiftLogsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Squat') Map<String, double>? squat,
-      @JsonKey(name: 'Bench Press') Map<String, double>? bench,
-      @JsonKey(name: 'Deadlift') Map<String, double>? deadlift,
-      @JsonKey(name: 'Overhead Press') Map<String, double>? ohp});
+      {@JsonKey(name: 'Squat') Map<String, dynamic>? squat,
+      @JsonKey(name: 'bench press') Map<String, dynamic>? bench,
+      @JsonKey(name: 'deadlift') Map<String, dynamic>? deadlift,
+      @JsonKey(name: 'overhead press') Map<String, dynamic>? ohp});
 }
 
 /// @nodoc
@@ -129,19 +129,19 @@ class __$$LiftLogsImplCopyWithImpl<$Res>
       squat: freezed == squat
           ? _value._squat
           : squat // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
       bench: freezed == bench
           ? _value._bench
           : bench // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
       deadlift: freezed == deadlift
           ? _value._deadlift
           : deadlift // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
       ohp: freezed == ohp
           ? _value._ohp
           : ohp // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -150,10 +150,10 @@ class __$$LiftLogsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LiftLogsImpl extends _LiftLogs {
   const _$LiftLogsImpl(
-      {@JsonKey(name: 'Squat') final Map<String, double>? squat,
-      @JsonKey(name: 'Bench Press') final Map<String, double>? bench,
-      @JsonKey(name: 'Deadlift') final Map<String, double>? deadlift,
-      @JsonKey(name: 'Overhead Press') final Map<String, double>? ohp})
+      {@JsonKey(name: 'Squat') final Map<String, dynamic>? squat,
+      @JsonKey(name: 'bench press') final Map<String, dynamic>? bench,
+      @JsonKey(name: 'deadlift') final Map<String, dynamic>? deadlift,
+      @JsonKey(name: 'overhead press') final Map<String, dynamic>? ohp})
       : _squat = squat,
         _bench = bench,
         _deadlift = deadlift,
@@ -163,10 +163,10 @@ class _$LiftLogsImpl extends _LiftLogs {
   factory _$LiftLogsImpl.fromJson(Map<String, dynamic> json) =>
       _$$LiftLogsImplFromJson(json);
 
-  final Map<String, double>? _squat;
+  final Map<String, dynamic>? _squat;
   @override
   @JsonKey(name: 'Squat')
-  Map<String, double>? get squat {
+  Map<String, dynamic>? get squat {
     final value = _squat;
     if (value == null) return null;
     if (_squat is EqualUnmodifiableMapView) return _squat;
@@ -174,10 +174,10 @@ class _$LiftLogsImpl extends _LiftLogs {
     return EqualUnmodifiableMapView(value);
   }
 
-  final Map<String, double>? _bench;
+  final Map<String, dynamic>? _bench;
   @override
-  @JsonKey(name: 'Bench Press')
-  Map<String, double>? get bench {
+  @JsonKey(name: 'bench press')
+  Map<String, dynamic>? get bench {
     final value = _bench;
     if (value == null) return null;
     if (_bench is EqualUnmodifiableMapView) return _bench;
@@ -185,10 +185,10 @@ class _$LiftLogsImpl extends _LiftLogs {
     return EqualUnmodifiableMapView(value);
   }
 
-  final Map<String, double>? _deadlift;
+  final Map<String, dynamic>? _deadlift;
   @override
-  @JsonKey(name: 'Deadlift')
-  Map<String, double>? get deadlift {
+  @JsonKey(name: 'deadlift')
+  Map<String, dynamic>? get deadlift {
     final value = _deadlift;
     if (value == null) return null;
     if (_deadlift is EqualUnmodifiableMapView) return _deadlift;
@@ -196,10 +196,10 @@ class _$LiftLogsImpl extends _LiftLogs {
     return EqualUnmodifiableMapView(value);
   }
 
-  final Map<String, double>? _ohp;
+  final Map<String, dynamic>? _ohp;
   @override
-  @JsonKey(name: 'Overhead Press')
-  Map<String, double>? get ohp {
+  @JsonKey(name: 'overhead press')
+  Map<String, dynamic>? get ohp {
     final value = _ohp;
     if (value == null) return null;
     if (_ohp is EqualUnmodifiableMapView) return _ohp;
@@ -250,10 +250,10 @@ class _$LiftLogsImpl extends _LiftLogs {
 
 abstract class _LiftLogs extends LiftLogs {
   const factory _LiftLogs(
-          {@JsonKey(name: 'Squat') final Map<String, double>? squat,
-          @JsonKey(name: 'Bench Press') final Map<String, double>? bench,
-          @JsonKey(name: 'Deadlift') final Map<String, double>? deadlift,
-          @JsonKey(name: 'Overhead Press') final Map<String, double>? ohp}) =
+          {@JsonKey(name: 'Squat') final Map<String, dynamic>? squat,
+          @JsonKey(name: 'bench press') final Map<String, dynamic>? bench,
+          @JsonKey(name: 'deadlift') final Map<String, dynamic>? deadlift,
+          @JsonKey(name: 'overhead press') final Map<String, dynamic>? ohp}) =
       _$LiftLogsImpl;
   const _LiftLogs._() : super._();
 
@@ -262,16 +262,16 @@ abstract class _LiftLogs extends LiftLogs {
 
   @override
   @JsonKey(name: 'Squat')
-  Map<String, double>? get squat;
+  Map<String, dynamic>? get squat;
   @override
-  @JsonKey(name: 'Bench Press')
-  Map<String, double>? get bench;
+  @JsonKey(name: 'bench press')
+  Map<String, dynamic>? get bench;
   @override
-  @JsonKey(name: 'Deadlift')
-  Map<String, double>? get deadlift;
+  @JsonKey(name: 'deadlift')
+  Map<String, dynamic>? get deadlift;
   @override
-  @JsonKey(name: 'Overhead Press')
-  Map<String, double>? get ohp;
+  @JsonKey(name: 'overhead press')
+  Map<String, dynamic>? get ohp;
 
   /// Create a copy of LiftLogs
   /// with the given fields replaced by the non-null parameter values.

@@ -21,10 +21,12 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
 
   Future<void> getUserLifts({
     required String username,
+    required String token,
   }) async {
     state = const MovementsState.loading();
     final logsOrFailure = await _repository.getUserLifts(
       username: username,
+      token: token,
     );
     state = logsOrFailure.fold(
       (l) => MovementsState.failed(l),
@@ -37,6 +39,7 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
     required String exercize,
     required String date,
     required double weight,
+    required String token,
   }) async {
     state = const MovementsState.loading();
     final updateOrFailure = await _repository.updateUserLifts(
@@ -44,6 +47,7 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
       exercize: exercize,
       date: date,
       weight: weight,
+      token: token,
     );
     state = await updateOrFailure.fold(
       (l) => MovementsState.failed(l),
@@ -51,12 +55,14 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
     );
     await getUserLifts(
       username: username,
+      token: token,
     );
   }
 
   Future<void> saveUserLifts({
     required String username,
     required String exercize,
+    required String token,
     required String date,
     required double weight,
   }) async {
@@ -66,14 +72,19 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
       exercize: exercize,
       date: date,
       weight: weight,
+      token: token,
     );
     state = saveOrFailure.fold((l) => MovementsState.failed(l), (r) => state);
-    await getUserLifts(username: username);
+    await getUserLifts(
+      username: username,
+      token: token,
+    );
   }
 
   Future<void> deleteUserLifts({
     required String username,
     required String exercize,
+    required String token,
     required String date,
     required double weight,
   }) async {
@@ -82,8 +93,12 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
       username: username,
       exercize: exercize,
       date: date,
+      token: token,
     );
     state = saveOrFailure.fold((l) => MovementsState.failed(l), (r) => state);
-    await getUserLifts(username: username);
+    await getUserLifts(
+      username: username,
+      token: token,
+    );
   }
 }

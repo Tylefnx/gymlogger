@@ -99,7 +99,7 @@ class LiftLogPageNavigationBar extends StatelessWidget {
 
 class LiftGraphics extends HookWidget {
   final String liftName;
-  final List<MapEntry<String, double>> lifts;
+  final List<MapEntry<String, dynamic>> lifts;
   const LiftGraphics({
     super.key,
     required this.liftName,
@@ -114,12 +114,12 @@ class LiftGraphics extends HookWidget {
       ),
       title: ChartTitle(text: '$liftName PR Progress'),
       series: <CartesianSeries>[
-        LineSeries<MapEntry<String, double>, DateTime>(
+        LineSeries<MapEntry<String, dynamic>, DateTime>(
           dataSource: lifts,
-          xValueMapper: (MapEntry<String, double> data, _) =>
+          xValueMapper: (MapEntry<String, dynamic> data, _) =>
               DateTime.parse(data.key).toLocal(),
-          yValueMapper: (MapEntry<String, double> data, _) =>
-              data.value, // Ağırlık
+          yValueMapper: (MapEntry<String, dynamic> data, _) =>
+              double.parse(data.value.toString()), // Ağırlık
           dataLabelSettings: const DataLabelSettings(
             isVisible: true,
           ), // Veri etiketlerini göster
@@ -130,7 +130,7 @@ class LiftGraphics extends HookWidget {
 }
 
 class OneLiftList extends HookWidget {
-  final List<MapEntry<String, double>> lifts;
+  final List<MapEntry<String, dynamic>> lifts;
   final String liftName;
   const OneLiftList({
     super.key,
@@ -163,13 +163,13 @@ class OneLiftList extends HookWidget {
   }
 }
 
-Map<String, double>? getMovementLogForLift({
+Map<String, dynamic>? getMovementLogForLift({
   required String lift,
   required LiftLogs logs,
 }) {
   print(logs);
   switch (lift) {
-    case 'Squat':
+    case 'Squat<':
       return logs.squat;
     case 'Bench Press':
       return logs.bench;

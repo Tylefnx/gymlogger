@@ -11,12 +11,17 @@ class MovementLogsRepository {
 
   Future<Either<AuthFailure, LiftLogs>> getUserLifts({
     required String username,
+    required String token,
   }) async {
     try {
-      final response = await _service.getUserLifts(username: username);
-      final json = response.data as Map<String, dynamic>?;
-      final liftLogs = LiftLogs.fromJson(json ?? <String, dynamic>{});
-      print(liftLogs);
+      final response = await _service.getUserLifts(
+        username: username,
+        token: token,
+      );
+      final json = response.data as Map<String, dynamic>;
+      print(json);
+      final liftLogs = LiftLogs.fromJson(json);
+      print("LOGGGSSSS: $LiftLogs");
       return Right(liftLogs);
     } catch (e) {
       return Left(
@@ -32,6 +37,7 @@ class MovementLogsRepository {
     required String exercize,
     required String date,
     required double weight,
+    required String token,
   }) async {
     try {
       final response = await _service.saveUserLifts(
@@ -39,6 +45,7 @@ class MovementLogsRepository {
         exercize: exercize,
         date: date,
         weight: weight,
+        token: token,
       );
       final successMessage = response.data.toString();
       return Right(successMessage);
@@ -53,6 +60,7 @@ class MovementLogsRepository {
     required String username,
     required String exercize,
     required String date,
+    required String token,
     required double weight,
   }) async {
     try {
@@ -60,6 +68,7 @@ class MovementLogsRepository {
         username: username,
         exercize: exercize,
         date: date,
+        token: token,
         weight: weight,
       );
       final successMessage = response.data.toString();
@@ -75,12 +84,14 @@ class MovementLogsRepository {
     required String username,
     required String exercize,
     required String date,
+    required String token,
   }) async {
     try {
       final response = await _service.deleteUserLifts(
         username: username,
         exercize: exercize,
         date: date,
+        token: token,
       );
       final successMessage = response.data.toString();
       return Right(successMessage);

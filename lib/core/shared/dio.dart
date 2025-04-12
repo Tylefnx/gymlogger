@@ -9,4 +9,15 @@ Dio dealWithDio() {
   return dio;
 }
 
+Options Authenticator(String token) {
+  return Options(
+    headers: {
+      "Authorization": "Bearer $token",
+    },
+  );
+}
+
 final dio = dealWithDio();
+Options authenticator({required String token}) {
+  return Authenticator(token);
+}
