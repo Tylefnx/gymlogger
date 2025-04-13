@@ -6,6 +6,7 @@ import 'package:gymlogger/calculator/presentation/1rm_calculator.dart';
 import 'package:gymlogger/calculator/presentation/calculator_screen.dart';
 import 'package:gymlogger/calculator/presentation/fat_percentage_calculator.dart';
 import 'package:gymlogger/calculator/presentation/strength_level.dart';
+import 'package:gymlogger/logs/domain/movement_log_for_specific_lift.dart';
 import 'package:gymlogger/logs/presentation/add_lift.dart';
 import 'package:gymlogger/logs/presentation/lift_log_screen.dart';
 import 'package:gymlogger/logs/presentation/log_screen.dart';

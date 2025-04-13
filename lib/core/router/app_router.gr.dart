@@ -14,7 +14,7 @@ part of 'app_router.dart';
 class AddLiftRoute extends PageRouteInfo<AddLiftRouteArgs> {
   AddLiftRoute({
     Key? key,
-    required List<MapEntry<String, double>> lifts,
+    required MovementLogsForSpecificLift movementLogsForSpecificLift,
     required String lift,
     required PageController pageController,
     required ValueNotifier<int> navigatorIndex,
@@ -23,7 +23,7 @@ class AddLiftRoute extends PageRouteInfo<AddLiftRouteArgs> {
           AddLiftRoute.name,
           args: AddLiftRouteArgs(
             key: key,
-            lifts: lifts,
+            movementLogsForSpecificLift: movementLogsForSpecificLift,
             lift: lift,
             pageController: pageController,
             navigatorIndex: navigatorIndex,
@@ -39,7 +39,7 @@ class AddLiftRoute extends PageRouteInfo<AddLiftRouteArgs> {
       final args = data.argsAs<AddLiftRouteArgs>();
       return AddLiftScreen(
         key: args.key,
-        lifts: args.lifts,
+        movementLogsForSpecificLift: args.movementLogsForSpecificLift,
         lift: args.lift,
         pageController: args.pageController,
         navigatorIndex: args.navigatorIndex,
@@ -51,7 +51,7 @@ class AddLiftRoute extends PageRouteInfo<AddLiftRouteArgs> {
 class AddLiftRouteArgs {
   const AddLiftRouteArgs({
     this.key,
-    required this.lifts,
+    required this.movementLogsForSpecificLift,
     required this.lift,
     required this.pageController,
     required this.navigatorIndex,
@@ -59,7 +59,7 @@ class AddLiftRouteArgs {
 
   final Key? key;
 
-  final List<MapEntry<String, double>> lifts;
+  final MovementLogsForSpecificLift movementLogsForSpecificLift;
 
   final String lift;
 
@@ -69,7 +69,7 @@ class AddLiftRouteArgs {
 
   @override
   String toString() {
-    return 'AddLiftRouteArgs{key: $key, lifts: $lifts, lift: $lift, pageController: $pageController, navigatorIndex: $navigatorIndex}';
+    return 'AddLiftRouteArgs{key: $key, movementLogsForSpecificLift: $movementLogsForSpecificLift, lift: $lift, pageController: $pageController, navigatorIndex: $navigatorIndex}';
   }
 }
 
