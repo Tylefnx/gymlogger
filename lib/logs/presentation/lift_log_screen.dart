@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/logs/domain/lift_logs.dart';
+import 'package:gymlogger/logs/domain/movement_log.dart';
+import 'package:gymlogger/logs/domain/movement_log_for_specific_lift.dart';
 import 'package:gymlogger/logs/presentation/add_lift.dart';
 import 'package:gymlogger/logs/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,14 +18,12 @@ class LiftLogScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final liftsState = ref.watch(movementsStateNotifierProvider);
-    final lifts = liftsState.maybeMap(
-      orElse: () => <String, double>{},
-      loaded: (_) =>
-          getMovementLogForLift(
-            lift: lift,
-            logs: _.liftLogs,
-          ) ??
-          <String, double>{},
+    final movementLogsForSpecificLift = liftsState.maybeMap(
+      orElse: () => const MovementLogsForSpecificLift(lift: '', logs: []),
+      loaded: (_) => getMovementLogForLift(
+        lift: lift,
+        movementLogs: _.movementLogs,
+      ),
     );
     //useState(userLifts[lift]!.entries.toList());
     final navIndex = useState<int>(0);
@@ -43,15 +43,15 @@ class LiftLogScreen extends HookConsumerWidget {
         children: [
           LiftGraphics(
             liftName: lift,
-            lifts: lifts.entries.toList(),
+            movementLogsForSpecificLift: movementLogsForSpecificLift,
           ),
           OneLiftList(
             liftName: lift,
-            lifts: lifts.entries.toList(),
+            movementLogsForSpecificLift: movementLogsForSpecificLift,
           ),
           AddLiftScreen(
             lift: lift,
-            lifts: lifts.entries.toList(),
+            movementLogsForSpecificLift: movementLogsForSpecificLift,
             pageController: pageController,
             navigatorIndex: navIndex,
           ),
@@ -99,30 +99,28 @@ class LiftLogPageNavigationBar extends StatelessWidget {
 
 class LiftGraphics extends HookWidget {
   final String liftName;
-  final List<MapEntry<String, dynamic>> lifts;
+  final MovementLogsForSpecificLift movementLogsForSpecificLift;
   const LiftGraphics({
     super.key,
     required this.liftName,
-    required this.lifts,
+    required this.movementLogsForSpecificLift,
   });
 
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
       primaryXAxis: const DateTimeAxis(
-        labelRotation: -45, // Tarihlerin okunabilir olmasını sağlamak için
+        labelRotation: -45,
       ),
       title: ChartTitle(text: '$liftName PR Progress'),
       series: <CartesianSeries>[
-        LineSeries<MapEntry<String, dynamic>, DateTime>(
-          dataSource: lifts,
-          xValueMapper: (MapEntry<String, dynamic> data, _) =>
-              DateTime.parse(data.key).toLocal(),
-          yValueMapper: (MapEntry<String, dynamic> data, _) =>
-              double.parse(data.value.toString()), // Ağırlık
+        LineSeries<LiftLog, DateTime>(
+          dataSource: movementLogsForSpecificLift.logs,
+          xValueMapper: (LiftLog log, _) => DateTime.parse(log.date).toLocal(),
+          yValueMapper: (LiftLog log, _) => log.weight, // Ağırlık
           dataLabelSettings: const DataLabelSettings(
             isVisible: true,
-          ), // Veri etiketlerini göster
+          ),
         ),
       ],
     );
@@ -130,12 +128,12 @@ class LiftGraphics extends HookWidget {
 }
 
 class OneLiftList extends HookWidget {
-  final List<MapEntry<String, dynamic>> lifts;
+  final MovementLogsForSpecificLift movementLogsForSpecificLift;
   final String liftName;
   const OneLiftList({
     super.key,
     required this.liftName,
-    required this.lifts,
+    required this.movementLogsForSpecificLift,
   });
 
   @override
@@ -143,17 +141,17 @@ class OneLiftList extends HookWidget {
     return Stack(
       children: [
         ListView.builder(
-          itemCount: lifts.length,
+          itemCount: movementLogsForSpecificLift.logs.length,
           itemBuilder: (BuildContext context, int index) {
-            final liftEntry = lifts[index];
-            final date = liftEntry.key.split('-');
+            final liftEntry = movementLogsForSpecificLift.logs[index];
+            final date = liftEntry.date.split('-');
             return ListTile(
               tileColor: index.isOdd ? Colors.grey[200] : Colors.white,
               leading: AppText.big_bold(
                 text: '${date[2]}/${date[1]}/${date[0]}:',
               ),
               trailing: AppText.big_bold(
-                text: '${liftEntry.value}KG',
+                text: '${liftEntry.weight}KG',
               ),
             );
           },
@@ -163,21 +161,11 @@ class OneLiftList extends HookWidget {
   }
 }
 
-Map<String, dynamic>? getMovementLogForLift({
-  required String lift,
-  required LiftLogs logs,
-}) {
-  print(logs);
-  switch (lift) {
-    case 'Squat<':
-      return logs.squat;
-    case 'Bench Press':
-      return logs.bench;
-    case 'Deadlift':
-      return logs.deadlift;
-    case 'Overhead Press':
-      return logs.ohp;
-    default:
-      return null;
-  }
+MovementLogsForSpecificLift getMovementLogForLift(
+    {required String lift, required MovementLogs movementLogs}) {
+  final movementLogsForSpecificLift = MovementLogsForSpecificLift(
+    lift: lift,
+    logs: movementLogs.logs.where((log) => log.exercise == lift).toList(),
+  );
+  return movementLogsForSpecificLift;
 }

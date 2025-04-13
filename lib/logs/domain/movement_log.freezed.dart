@@ -14,44 +14,44 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-MovementLog _$MovementLogFromJson(Map<String, dynamic> json) {
+MovementLogs _$MovementLogsFromJson(Map<String, dynamic> json) {
   return _MovementLog.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MovementLog {
-  Map<String, double> get logs => throw _privateConstructorUsedError;
+mixin _$MovementLogs {
+  List<LiftLog> get logs => throw _privateConstructorUsedError;
 
-  /// Serializes this MovementLog to a JSON map.
+  /// Serializes this MovementLogs to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of MovementLog
+  /// Create a copy of MovementLogs
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $MovementLogCopyWith<MovementLog> get copyWith =>
+  $MovementLogsCopyWith<MovementLogs> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MovementLogCopyWith<$Res> {
-  factory $MovementLogCopyWith(
-          MovementLog value, $Res Function(MovementLog) then) =
-      _$MovementLogCopyWithImpl<$Res, MovementLog>;
+abstract class $MovementLogsCopyWith<$Res> {
+  factory $MovementLogsCopyWith(
+          MovementLogs value, $Res Function(MovementLogs) then) =
+      _$MovementLogsCopyWithImpl<$Res, MovementLogs>;
   @useResult
-  $Res call({Map<String, double> logs});
+  $Res call({List<LiftLog> logs});
 }
 
 /// @nodoc
-class _$MovementLogCopyWithImpl<$Res, $Val extends MovementLog>
-    implements $MovementLogCopyWith<$Res> {
-  _$MovementLogCopyWithImpl(this._value, this._then);
+class _$MovementLogsCopyWithImpl<$Res, $Val extends MovementLogs>
+    implements $MovementLogsCopyWith<$Res> {
+  _$MovementLogsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MovementLog
+  /// Create a copy of MovementLogs
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -62,31 +62,31 @@ class _$MovementLogCopyWithImpl<$Res, $Val extends MovementLog>
       logs: null == logs
           ? _value.logs
           : logs // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>,
+              as List<LiftLog>,
     ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$MovementLogImplCopyWith<$Res>
-    implements $MovementLogCopyWith<$Res> {
+    implements $MovementLogsCopyWith<$Res> {
   factory _$$MovementLogImplCopyWith(
           _$MovementLogImpl value, $Res Function(_$MovementLogImpl) then) =
       __$$MovementLogImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, double> logs});
+  $Res call({List<LiftLog> logs});
 }
 
 /// @nodoc
 class __$$MovementLogImplCopyWithImpl<$Res>
-    extends _$MovementLogCopyWithImpl<$Res, _$MovementLogImpl>
+    extends _$MovementLogsCopyWithImpl<$Res, _$MovementLogImpl>
     implements _$$MovementLogImplCopyWith<$Res> {
   __$$MovementLogImplCopyWithImpl(
       _$MovementLogImpl _value, $Res Function(_$MovementLogImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MovementLog
+  /// Create a copy of MovementLogs
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -97,7 +97,7 @@ class __$$MovementLogImplCopyWithImpl<$Res>
       logs: null == logs
           ? _value._logs
           : logs // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>,
+              as List<LiftLog>,
     ));
   }
 }
@@ -105,24 +105,24 @@ class __$$MovementLogImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MovementLogImpl extends _MovementLog {
-  const _$MovementLogImpl({required final Map<String, double> logs})
+  const _$MovementLogImpl({required final List<LiftLog> logs})
       : _logs = logs,
         super._();
 
   factory _$MovementLogImpl.fromJson(Map<String, dynamic> json) =>
       _$$MovementLogImplFromJson(json);
 
-  final Map<String, double> _logs;
+  final List<LiftLog> _logs;
   @override
-  Map<String, double> get logs {
-    if (_logs is EqualUnmodifiableMapView) return _logs;
+  List<LiftLog> get logs {
+    if (_logs is EqualUnmodifiableListView) return _logs;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_logs);
+    return EqualUnmodifiableListView(_logs);
   }
 
   @override
   String toString() {
-    return 'MovementLog(logs: $logs)';
+    return 'MovementLogs(logs: $logs)';
   }
 
   @override
@@ -138,7 +138,7 @@ class _$MovementLogImpl extends _MovementLog {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_logs));
 
-  /// Create a copy of MovementLog
+  /// Create a copy of MovementLogs
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -154,8 +154,8 @@ class _$MovementLogImpl extends _MovementLog {
   }
 }
 
-abstract class _MovementLog extends MovementLog {
-  const factory _MovementLog({required final Map<String, double> logs}) =
+abstract class _MovementLog extends MovementLogs {
+  const factory _MovementLog({required final List<LiftLog> logs}) =
       _$MovementLogImpl;
   const _MovementLog._() : super._();
 
@@ -163,9 +163,9 @@ abstract class _MovementLog extends MovementLog {
       _$MovementLogImpl.fromJson;
 
   @override
-  Map<String, double> get logs;
+  List<LiftLog> get logs;
 
-  /// Create a copy of MovementLog
+  /// Create a copy of MovementLogs
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)

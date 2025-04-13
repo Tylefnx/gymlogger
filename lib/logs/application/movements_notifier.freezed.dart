@@ -20,21 +20,21 @@ mixin _$MovementsState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(LiftLogs liftLogs) loaded,
+    required TResult Function(MovementLogs movementLogs) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(LiftLogs liftLogs)? loaded,
+    TResult? Function(MovementLogs movementLogs)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(LiftLogs liftLogs)? loaded,
+    TResult Function(MovementLogs movementLogs)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,7 +126,7 @@ class _$LoadingImpl extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(LiftLogs liftLogs) loaded,
+    required TResult Function(MovementLogs movementLogs) loaded,
   }) {
     return loading();
   }
@@ -136,7 +136,7 @@ class _$LoadingImpl extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(LiftLogs liftLogs)? loaded,
+    TResult? Function(MovementLogs movementLogs)? loaded,
   }) {
     return loading?.call();
   }
@@ -146,7 +146,7 @@ class _$LoadingImpl extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(LiftLogs liftLogs)? loaded,
+    TResult Function(MovementLogs movementLogs)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -281,7 +281,7 @@ class _$FailedImpl extends _Failed {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(LiftLogs liftLogs) loaded,
+    required TResult Function(MovementLogs movementLogs) loaded,
   }) {
     return failed(failure);
   }
@@ -291,7 +291,7 @@ class _$FailedImpl extends _Failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(LiftLogs liftLogs)? loaded,
+    TResult? Function(MovementLogs movementLogs)? loaded,
   }) {
     return failed?.call(failure);
   }
@@ -301,7 +301,7 @@ class _$FailedImpl extends _Failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(LiftLogs liftLogs)? loaded,
+    TResult Function(MovementLogs movementLogs)? loaded,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -364,9 +364,9 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({LiftLogs liftLogs});
+  $Res call({MovementLogs movementLogs});
 
-  $LiftLogsCopyWith<$Res> get liftLogs;
+  $MovementLogsCopyWith<$Res> get movementLogs;
 }
 
 /// @nodoc
@@ -382,13 +382,13 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? liftLogs = null,
+    Object? movementLogs = null,
   }) {
     return _then(_$LoadedImpl(
-      liftLogs: null == liftLogs
-          ? _value.liftLogs
-          : liftLogs // ignore: cast_nullable_to_non_nullable
-              as LiftLogs,
+      movementLogs: null == movementLogs
+          ? _value.movementLogs
+          : movementLogs // ignore: cast_nullable_to_non_nullable
+              as MovementLogs,
     ));
   }
 
@@ -396,9 +396,9 @@ class __$$LoadedImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $LiftLogsCopyWith<$Res> get liftLogs {
-    return $LiftLogsCopyWith<$Res>(_value.liftLogs, (value) {
-      return _then(_value.copyWith(liftLogs: value));
+  $MovementLogsCopyWith<$Res> get movementLogs {
+    return $MovementLogsCopyWith<$Res>(_value.movementLogs, (value) {
+      return _then(_value.copyWith(movementLogs: value));
     });
   }
 }
@@ -406,14 +406,14 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl extends _Loaded {
-  const _$LoadedImpl({required this.liftLogs}) : super._();
+  const _$LoadedImpl({required this.movementLogs}) : super._();
 
   @override
-  final LiftLogs liftLogs;
+  final MovementLogs movementLogs;
 
   @override
   String toString() {
-    return 'MovementsState.loaded(liftLogs: $liftLogs)';
+    return 'MovementsState.loaded(movementLogs: $movementLogs)';
   }
 
   @override
@@ -421,12 +421,12 @@ class _$LoadedImpl extends _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            (identical(other.liftLogs, liftLogs) ||
-                other.liftLogs == liftLogs));
+            (identical(other.movementLogs, movementLogs) ||
+                other.movementLogs == movementLogs));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, liftLogs);
+  int get hashCode => Object.hash(runtimeType, movementLogs);
 
   /// Create a copy of MovementsState
   /// with the given fields replaced by the non-null parameter values.
@@ -441,9 +441,9 @@ class _$LoadedImpl extends _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(LiftLogs liftLogs) loaded,
+    required TResult Function(MovementLogs movementLogs) loaded,
   }) {
-    return loaded(liftLogs);
+    return loaded(movementLogs);
   }
 
   @override
@@ -451,9 +451,9 @@ class _$LoadedImpl extends _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(LiftLogs liftLogs)? loaded,
+    TResult? Function(MovementLogs movementLogs)? loaded,
   }) {
-    return loaded?.call(liftLogs);
+    return loaded?.call(movementLogs);
   }
 
   @override
@@ -461,11 +461,11 @@ class _$LoadedImpl extends _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(LiftLogs liftLogs)? loaded,
+    TResult Function(MovementLogs movementLogs)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(liftLogs);
+      return loaded(movementLogs);
     }
     return orElse();
   }
@@ -506,10 +506,11 @@ class _$LoadedImpl extends _Loaded {
 }
 
 abstract class _Loaded extends MovementsState {
-  const factory _Loaded({required final LiftLogs liftLogs}) = _$LoadedImpl;
+  const factory _Loaded({required final MovementLogs movementLogs}) =
+      _$LoadedImpl;
   const _Loaded._() : super._();
 
-  LiftLogs get liftLogs;
+  MovementLogs get movementLogs;
 
   /// Create a copy of MovementsState
   /// with the given fields replaced by the non-null parameter values.

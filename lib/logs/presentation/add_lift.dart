@@ -8,6 +8,7 @@ import 'package:gymlogger/core/presentation/app_numberpicker.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
+import 'package:gymlogger/logs/domain/movement_log_for_specific_lift.dart';
 import 'package:gymlogger/logs/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
@@ -17,10 +18,10 @@ class AddLiftScreen extends HookWidget {
   final String lift;
   final PageController pageController;
   final ValueNotifier<int> navigatorIndex;
-  final List<MapEntry<String, dynamic>> lifts;
+  final MovementLogsForSpecificLift movementLogsForSpecificLift;
   const AddLiftScreen({
     super.key,
-    required this.lifts,
+    required this.movementLogsForSpecificLift,
     required this.lift,
     required this.pageController,
     required this.navigatorIndex,
@@ -54,7 +55,7 @@ class AddLiftScreen extends HookWidget {
               weightController: weightController,
               selectedRep: selectedRep,
               selectedLiftDate: selectedLiftDate,
-              lifts: lifts,
+              movementLogsForSpecificLift: movementLogsForSpecificLift,
               pageController: pageController,
               navigatorIndex: navigatorIndex,
             ),
@@ -74,7 +75,7 @@ class _AddLiftButton extends ConsumerWidget {
     required this.weightController,
     required this.selectedRep,
     required this.selectedLiftDate,
-    required this.lifts,
+    required this.movementLogsForSpecificLift,
     required this.pageController,
     required this.navigatorIndex,
   });
@@ -82,7 +83,7 @@ class _AddLiftButton extends ConsumerWidget {
   final TextEditingController weightController;
   final ValueNotifier<int> selectedRep;
   final ValueNotifier<DateTime> selectedLiftDate;
-  final List<MapEntry<String, dynamic>> lifts;
+  final MovementLogsForSpecificLift movementLogsForSpecificLift;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

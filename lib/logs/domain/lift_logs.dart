@@ -4,15 +4,17 @@ part 'lift_logs.freezed.dart';
 part 'lift_logs.g.dart';
 
 @freezed
-class LiftLogs with _$LiftLogs {
-  const factory LiftLogs({
-    @JsonKey(name: 'Squat') Map<String, dynamic>? squat,
-    @JsonKey(name: 'bench press') Map<String, dynamic>? bench,
-    @JsonKey(name: 'deadlift') Map<String, dynamic>? deadlift,
-    @JsonKey(name: 'overhead press') Map<String, dynamic>? ohp,
-  }) = _LiftLogs;
-  const LiftLogs._();
+class LiftLog with _$LiftLog {
+  const factory LiftLog({
+    required String exercise,
+    required int age,
+    required double bodyweight,
+    required String date,
+    required String sex,
+    required double weight,
+  }) = _LiftLog;
+  const LiftLog._();
 
-  factory LiftLogs.fromJson(Map<String, Object?> json) =>
-      _$LiftLogsFromJson(json);
+  factory LiftLog.fromJson(Map<String, Object?> json) =>
+      _$LiftLogFromJson(json);
 }

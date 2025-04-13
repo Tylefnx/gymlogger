@@ -23,7 +23,6 @@ class MovementLogsService {
         token: token,
       ),
     );
-    print(response);
     return response;
   }
 

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:gymlogger/authentication/domain/auth_failure.dart';
 import 'package:gymlogger/logs/domain/lift_logs.dart';
+import 'package:gymlogger/logs/domain/movement_log.dart';
 import 'package:gymlogger/logs/infrastructure/movement_service.dart';
 
 class MovementLogsRepository {
@@ -9,7 +10,7 @@ class MovementLogsRepository {
 
   const MovementLogsRepository(this._service);
 
-  Future<Either<AuthFailure, LiftLogs>> getUserLifts({
+  Future<Either<AuthFailure, MovementLogs>> getUserLifts({
     required String username,
     required String token,
   }) async {
@@ -18,11 +19,10 @@ class MovementLogsRepository {
         username: username,
         token: token,
       );
-      final json = response.data as Map<String, dynamic>;
-      print(json);
-      final liftLogs = LiftLogs.fromJson(json);
-      print("LOGGGSSSS: $LiftLogs");
-      return Right(liftLogs);
+      final json = response.data as List<dynamic>;
+      final logs =
+          json.map((a) => LiftLog.fromJson(a as Map<String, dynamic>)).toList();
+      return Right(MovementLogs(logs: logs));
     } catch (e) {
       return Left(
         AuthFailure.storage(

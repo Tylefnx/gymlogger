@@ -6,18 +6,22 @@ part of 'lift_logs.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LiftLogsImpl _$$LiftLogsImplFromJson(Map<String, dynamic> json) =>
-    _$LiftLogsImpl(
-      squat: json['Squat'] as Map<String, dynamic>?,
-      bench: json['bench press'] as Map<String, dynamic>?,
-      deadlift: json['deadlift'] as Map<String, dynamic>?,
-      ohp: json['overhead press'] as Map<String, dynamic>?,
+_$LiftLogImpl _$$LiftLogImplFromJson(Map<String, dynamic> json) =>
+    _$LiftLogImpl(
+      exercise: json['exercise'] as String,
+      age: (json['age'] as num).toInt(),
+      bodyweight: (json['bodyweight'] as num).toDouble(),
+      date: json['date'] as String,
+      sex: json['sex'] as String,
+      weight: (json['weight'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$LiftLogsImplToJson(_$LiftLogsImpl instance) =>
+Map<String, dynamic> _$$LiftLogImplToJson(_$LiftLogImpl instance) =>
     <String, dynamic>{
-      'Squat': instance.squat,
-      'bench press': instance.bench,
-      'deadlift': instance.deadlift,
-      'overhead press': instance.ohp,
+      'exercise': instance.exercise,
+      'age': instance.age,
+      'bodyweight': instance.bodyweight,
+      'date': instance.date,
+      'sex': instance.sex,
+      'weight': instance.weight,
     };
