@@ -163,9 +163,10 @@ class OneLiftList extends HookWidget {
 
 MovementLogsForSpecificLift getMovementLogForLift(
     {required String lift, required MovementLogs movementLogs}) {
+  final logs = movementLogs.logs.where((log) => log.exercise == lift).toList();
   final movementLogsForSpecificLift = MovementLogsForSpecificLift(
     lift: lift,
-    logs: movementLogs.logs.where((log) => log.exercise == lift).toList(),
+    logs: logs,
   );
   return movementLogsForSpecificLift;
 }
