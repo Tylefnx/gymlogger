@@ -1,19 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gymlogger/authentication/shared/providers.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
+import 'package:gymlogger/workout/domain/routine.dart';
+import 'package:gymlogger/workout/shared/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class CreateRoutineScreen extends HookWidget {
+class CreateRoutineScreen extends HookConsumerWidget {
   final ValueNotifier<Map<String, Map<String, List<int>>>> routineList;
   const CreateRoutineScreen({super.key, required this.routineList});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authStateNotifierProvider);
     final routineController = useTextEditingController();
     final textEditingControllers = useState<List<List<TextEditingController>>>(
       [
@@ -86,30 +91,45 @@ class CreateRoutineScreen extends HookWidget {
             ),
             AppButton(
               onPressed: () {
-                for (var ctList in textEditingControllers.value) {
-                  ctList.forEach(
-                    (b) {
-                      if (b.text == '') {
-                        return;
-                      }
-                    },
-                  );
+                for (final ctList in textEditingControllers.value) {
+                  for (final b in ctList) {
+                    if (b.text == '') {
+                      continue;
+                    }
+                  }
                 }
-                final Map<String, List<int>> movementsList = {};
-                for (var ctList in textEditingControllers.value) {
-                  final movementEntry = MapEntry(ctList[0].text, [
-                    int.parse(ctList[1].text),
-                    int.parse(ctList[2].text),
-                    int.parse(ctList[3].text),
-                  ]);
-                  movementsList.addEntries([movementEntry]);
-                }
-                final routinesTemp = routineList.value;
-                final routineEntry =
-                    MapEntry(routineController.text, movementsList);
-                routinesTemp.addEntries([routineEntry]);
-                routineList.value = {};
-                routineList.value = routinesTemp;
+                authState.maybeMap(
+                  orElse: () {},
+                  authenticated: (_) {
+                    final username = _.user.username;
+                    final token = _.user.token;
+                    var exercises = <String, List<int>>{};
+                    for (final ctList in textEditingControllers.value) {
+                      final exerciseName = ctList[0].text;
+                      final weight = int.parse(ctList[1].text);
+                      final sets = int.parse(ctList[2].text);
+                      final reps = int.parse(ctList[3].text);
+                      exercises.addEntries(
+                        [
+                          MapEntry(exerciseName, [weight, sets, reps])
+                        ],
+                      );
+                    }
+                    final routine = Routine(
+                      routineName: routineController.text,
+                      exercises: exercises,
+                    );
+                    print(routine);
+                    ref
+                        .read(workoutStateNotifierProvider.notifier)
+                        .saveWorkoutRoutine(
+                          username: username,
+                          routineName: routine.routineName,
+                          token: token,
+                          exercises: exercises,
+                        );
+                  },
+                );
                 context.maybePop(); // TODO: MAYBEPOP?
               },
               title: 'Add Routine',

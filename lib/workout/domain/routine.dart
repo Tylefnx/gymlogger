@@ -6,7 +6,8 @@ part 'routine.g.dart';
 @freezed
 class Routine with _$Routine {
   const factory Routine({
-    required Map<String, Map<String, List<int>>> routine,
+    @JsonKey(name: 'routine_name') required String routineName,
+    required Map<String, List<int>> exercises,
   }) = _Routine;
 
   factory Routine.fromJson(Map<String, Object?> json) =>

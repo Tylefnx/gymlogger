@@ -8,17 +8,15 @@ part of 'routine.dart';
 
 _$RoutineImpl _$$RoutineImplFromJson(Map<String, dynamic> json) =>
     _$RoutineImpl(
-      routine: (json['routine'] as Map<String, dynamic>).map(
+      routineName: json['routine_name'] as String,
+      exercises: (json['exercises'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(
-            k,
-            (e as Map<String, dynamic>).map(
-              (k, e) => MapEntry(k,
-                  (e as List<dynamic>).map((e) => (e as num).toInt()).toList()),
-            )),
+            k, (e as List<dynamic>).map((e) => (e as num).toInt()).toList()),
       ),
     );
 
 Map<String, dynamic> _$$RoutineImplToJson(_$RoutineImpl instance) =>
     <String, dynamic>{
-      'routine': instance.routine,
+      'routine_name': instance.routineName,
+      'exercises': instance.exercises,
     };

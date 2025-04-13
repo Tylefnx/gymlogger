@@ -20,7 +20,7 @@ UserRoutines _$UserRoutinesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserRoutines {
-  List<Routine> get routine => throw _privateConstructorUsedError;
+  List<Routine> get routines => throw _privateConstructorUsedError;
 
   /// Serializes this UserRoutines to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $UserRoutinesCopyWith<$Res> {
           UserRoutines value, $Res Function(UserRoutines) then) =
       _$UserRoutinesCopyWithImpl<$Res, UserRoutines>;
   @useResult
-  $Res call({List<Routine> routine});
+  $Res call({List<Routine> routines});
 }
 
 /// @nodoc
@@ -56,12 +56,12 @@ class _$UserRoutinesCopyWithImpl<$Res, $Val extends UserRoutines>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? routine = null,
+    Object? routines = null,
   }) {
     return _then(_value.copyWith(
-      routine: null == routine
-          ? _value.routine
-          : routine // ignore: cast_nullable_to_non_nullable
+      routines: null == routines
+          ? _value.routines
+          : routines // ignore: cast_nullable_to_non_nullable
               as List<Routine>,
     ) as $Val);
   }
@@ -75,7 +75,7 @@ abstract class _$$UserRoutinesImplCopyWith<$Res>
       __$$UserRoutinesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Routine> routine});
+  $Res call({List<Routine> routines});
 }
 
 /// @nodoc
@@ -91,12 +91,12 @@ class __$$UserRoutinesImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? routine = null,
+    Object? routines = null,
   }) {
     return _then(_$UserRoutinesImpl(
-      routine: null == routine
-          ? _value._routine
-          : routine // ignore: cast_nullable_to_non_nullable
+      routines: null == routines
+          ? _value._routines
+          : routines // ignore: cast_nullable_to_non_nullable
               as List<Routine>,
     ));
   }
@@ -105,23 +105,23 @@ class __$$UserRoutinesImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserRoutinesImpl implements _UserRoutines {
-  const _$UserRoutinesImpl({required final List<Routine> routine})
-      : _routine = routine;
+  const _$UserRoutinesImpl({required final List<Routine> routines})
+      : _routines = routines;
 
   factory _$UserRoutinesImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserRoutinesImplFromJson(json);
 
-  final List<Routine> _routine;
+  final List<Routine> _routines;
   @override
-  List<Routine> get routine {
-    if (_routine is EqualUnmodifiableListView) return _routine;
+  List<Routine> get routines {
+    if (_routines is EqualUnmodifiableListView) return _routines;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_routine);
+    return EqualUnmodifiableListView(_routines);
   }
 
   @override
   String toString() {
-    return 'UserRoutines(routine: $routine)';
+    return 'UserRoutines(routines: $routines)';
   }
 
   @override
@@ -129,13 +129,13 @@ class _$UserRoutinesImpl implements _UserRoutines {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserRoutinesImpl &&
-            const DeepCollectionEquality().equals(other._routine, _routine));
+            const DeepCollectionEquality().equals(other._routines, _routines));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_routine));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_routines));
 
   /// Create a copy of UserRoutines
   /// with the given fields replaced by the non-null parameter values.
@@ -154,14 +154,14 @@ class _$UserRoutinesImpl implements _UserRoutines {
 }
 
 abstract class _UserRoutines implements UserRoutines {
-  const factory _UserRoutines({required final List<Routine> routine}) =
+  const factory _UserRoutines({required final List<Routine> routines}) =
       _$UserRoutinesImpl;
 
   factory _UserRoutines.fromJson(Map<String, dynamic> json) =
       _$UserRoutinesImpl.fromJson;
 
   @override
-  List<Routine> get routine;
+  List<Routine> get routines;
 
   /// Create a copy of UserRoutines
   /// with the given fields replaced by the non-null parameter values.

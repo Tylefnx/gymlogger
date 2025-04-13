@@ -13,6 +13,7 @@ import 'package:gymlogger/logs/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
+//TODO: ADD AGE ETC.
 @RoutePage()
 class AddLiftScreen extends HookWidget {
   final String lift;

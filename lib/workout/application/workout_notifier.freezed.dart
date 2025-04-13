@@ -20,21 +20,21 @@ mixin _$WorkoutRoutineState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(Routine liftLogs) loaded,
+    required TResult Function(UserRoutines liftLogs) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(Routine liftLogs)? loaded,
+    TResult? Function(UserRoutines liftLogs)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(Routine liftLogs)? loaded,
+    TResult Function(UserRoutines liftLogs)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,7 +126,7 @@ class _$LoadingImpl extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(Routine liftLogs) loaded,
+    required TResult Function(UserRoutines liftLogs) loaded,
   }) {
     return loading();
   }
@@ -136,7 +136,7 @@ class _$LoadingImpl extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(Routine liftLogs)? loaded,
+    TResult? Function(UserRoutines liftLogs)? loaded,
   }) {
     return loading?.call();
   }
@@ -146,7 +146,7 @@ class _$LoadingImpl extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(Routine liftLogs)? loaded,
+    TResult Function(UserRoutines liftLogs)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -281,7 +281,7 @@ class _$FailedImpl extends _Failed {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(Routine liftLogs) loaded,
+    required TResult Function(UserRoutines liftLogs) loaded,
   }) {
     return failed(failure);
   }
@@ -291,7 +291,7 @@ class _$FailedImpl extends _Failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(Routine liftLogs)? loaded,
+    TResult? Function(UserRoutines liftLogs)? loaded,
   }) {
     return failed?.call(failure);
   }
@@ -301,7 +301,7 @@ class _$FailedImpl extends _Failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(Routine liftLogs)? loaded,
+    TResult Function(UserRoutines liftLogs)? loaded,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -364,9 +364,9 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Routine liftLogs});
+  $Res call({UserRoutines liftLogs});
 
-  $RoutineCopyWith<$Res> get liftLogs;
+  $UserRoutinesCopyWith<$Res> get liftLogs;
 }
 
 /// @nodoc
@@ -388,7 +388,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
       liftLogs: null == liftLogs
           ? _value.liftLogs
           : liftLogs // ignore: cast_nullable_to_non_nullable
-              as Routine,
+              as UserRoutines,
     ));
   }
 
@@ -396,8 +396,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $RoutineCopyWith<$Res> get liftLogs {
-    return $RoutineCopyWith<$Res>(_value.liftLogs, (value) {
+  $UserRoutinesCopyWith<$Res> get liftLogs {
+    return $UserRoutinesCopyWith<$Res>(_value.liftLogs, (value) {
       return _then(_value.copyWith(liftLogs: value));
     });
   }
@@ -409,7 +409,7 @@ class _$LoadedImpl extends _Loaded {
   const _$LoadedImpl({required this.liftLogs}) : super._();
 
   @override
-  final Routine liftLogs;
+  final UserRoutines liftLogs;
 
   @override
   String toString() {
@@ -441,7 +441,7 @@ class _$LoadedImpl extends _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(AuthFailure? failure) failed,
-    required TResult Function(Routine liftLogs) loaded,
+    required TResult Function(UserRoutines liftLogs) loaded,
   }) {
     return loaded(liftLogs);
   }
@@ -451,7 +451,7 @@ class _$LoadedImpl extends _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(AuthFailure? failure)? failed,
-    TResult? Function(Routine liftLogs)? loaded,
+    TResult? Function(UserRoutines liftLogs)? loaded,
   }) {
     return loaded?.call(liftLogs);
   }
@@ -461,7 +461,7 @@ class _$LoadedImpl extends _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(AuthFailure? failure)? failed,
-    TResult Function(Routine liftLogs)? loaded,
+    TResult Function(UserRoutines liftLogs)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -506,10 +506,10 @@ class _$LoadedImpl extends _Loaded {
 }
 
 abstract class _Loaded extends WorkoutRoutineState {
-  const factory _Loaded({required final Routine liftLogs}) = _$LoadedImpl;
+  const factory _Loaded({required final UserRoutines liftLogs}) = _$LoadedImpl;
   const _Loaded._() : super._();
 
-  Routine get liftLogs;
+  UserRoutines get liftLogs;
 
   /// Create a copy of WorkoutRoutineState
   /// with the given fields replaced by the non-null parameter values.
