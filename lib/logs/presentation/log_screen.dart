@@ -20,15 +20,25 @@ class LogScreen extends HookConsumerWidget {
     );
     useEffect(
       () {
-        Future(() {
-          ref.read(movementsStateNotifierProvider.notifier).getUserLifts(
-                username: username,
-                token: authState.maybeMap(
-                  orElse: () => '',
-                  authenticated: (_) => _.user.token,
-                ),
-              );
-        });
+        Future(
+          () {
+            ref.read(movementsStateNotifierProvider.notifier).getUserLifts(
+                  username: username,
+                  token: authState.maybeMap(
+                    orElse: () => '',
+                    authenticated: (_) => _.user.token,
+                  ),
+                );
+            ref.read(predictionsStateNotifierProvider.notifier).getPredictions(
+                  username: username,
+                  token: authState.maybeMap(
+                    orElse: () => '',
+                    authenticated: (_) => _.user.token,
+                  ),
+                  exercise: 'Squat',
+                );
+          },
+        );
         return null;
       },
       [],
@@ -38,9 +48,11 @@ class LogScreen extends HookConsumerWidget {
         GridviewSectionCard(
           label: 'Squat',
           iconPath: 'assets/icons/squat.png',
-          onTap: () => AutoRouter.of(context).push(
-            LiftLogRoute(lift: 'Squat'),
-          ),
+          onTap: () {
+            AutoRouter.of(context).push(
+              LiftLogRoute(lift: 'Squat'),
+            );
+          },
         ),
         GridviewSectionCard(
           label: 'Bench Press',

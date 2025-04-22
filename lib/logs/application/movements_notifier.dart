@@ -11,8 +11,9 @@ class MovementsState with _$MovementsState {
   const MovementsState._();
   const factory MovementsState.loading() = _Loading;
   const factory MovementsState.failed(AuthFailure? failure) = _Failed;
-  const factory MovementsState.loaded({required MovementLogs movementLogs}) =
-      _Loaded;
+  const factory MovementsState.loaded({
+    required MovementLogs movementLogs,
+  }) = _Loaded;
 }
 
 class MovementsStateNotifier extends StateNotifier<MovementsState> {
@@ -94,6 +95,24 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
       username: username,
       exercize: exercize,
       date: date,
+      token: token,
+    );
+    state = saveOrFailure.fold((l) => MovementsState.failed(l), (r) => state);
+    await getUserLifts(
+      username: username,
+      token: token,
+    );
+  }
+
+  Future<void> getPredictions({
+    required String username,
+    required String exercise,
+    required String token,
+  }) async {
+    state = const MovementsState.loading();
+    final saveOrFailure = await _repository.getPredictions(
+      username: username,
+      exercise: exercise,
       token: token,
     );
     state = saveOrFailure.fold((l) => MovementsState.failed(l), (r) => state);

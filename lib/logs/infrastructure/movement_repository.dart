@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:gymlogger/authentication/domain/auth_failure.dart';
 import 'package:gymlogger/logs/domain/lift_logs.dart';
 import 'package:gymlogger/logs/domain/movement_log.dart';
+import 'package:gymlogger/logs/domain/predictions.dart';
 import 'package:gymlogger/logs/infrastructure/movement_service.dart';
 
 class MovementLogsRepository {
@@ -98,6 +99,29 @@ class MovementLogsRepository {
     } on DioException catch (e) {
       return left(
         AuthFailure.storage(e.message),
+      );
+    }
+  }
+
+  Future<Either<AuthFailure, Predictions>> getPredictions({
+    required String username,
+    required String exercise,
+    required String token,
+  }) async {
+    try {
+      final response = await _service.getPredictions(
+        username: username,
+        token: token,
+        exercize: exercise,
+      );
+      final json = response.data as Map<String, dynamic>;
+      final predictions = Predictions.fromJson(json);
+      return Right(predictions);
+    } catch (e) {
+      return Left(
+        AuthFailure.storage(
+          e.toString(),
+        ),
       );
     }
   }

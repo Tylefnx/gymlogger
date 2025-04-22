@@ -17,4 +17,21 @@ class LiftLog with _$LiftLog {
 
   factory LiftLog.fromJson(Map<String, Object?> json) =>
       _$LiftLogFromJson(json);
+
+  factory LiftLog.fromPredictions(
+      {required DateTime lastDate,
+      required double prediction,
+      required String exercise,
+      required int age,
+      required double bodyWeight,
+      required String sex}) {
+    return LiftLog(
+      exercise: exercise,
+      age: age,
+      bodyweight: bodyWeight,
+      date: lastDate.toString(),
+      sex: sex,
+      weight: prediction,
+    );
+  }
 }
