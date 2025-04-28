@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:gymlogger/authentication/domain/user.dart';
+import 'package:gymlogger/core/shared/dio.dart';
 
 class AuthenticationService {
   final Dio _dio;
@@ -66,9 +67,11 @@ class AuthenticationService {
     // ignore: prefer_final_locals
     var userData = updatedUser.toJson();
     userData.addAll({"password": password});
+    userData.removeWhere((key, value) => key == 'token');
     final response = await _dio.post(
       updateUserEndPoint,
       data: userData,
+      options: authenticator(token: token),
     );
     return response;
   }

@@ -119,19 +119,34 @@ class LiftGraphics extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final movementLogs = useState(movementLogsForSpecificLift.logs.toList());
-    final lastMovementLog = movementLogsForSpecificLift.logs.last;
-    final lastDate = useState(
-      parseDateString(
-        lastMovementLog.date,
-      ),
-    );
-    useEffect(
-      () {
-        getLiftLogsFromPredictions(lastDate, movementLogs, lastMovementLog);
-        return null;
-      },
-      [],
-    );
+    if (movementLogs.value != []) {
+      final lastMovementLog = movementLogsForSpecificLift.logs.last;
+      final lastDate = useState(
+        parseDateString(
+          lastMovementLog.date,
+        ),
+      );
+
+      useEffect(
+        () {
+          getLiftLogsFromPredictions(lastDate, movementLogs, lastMovementLog);
+          return null;
+        },
+        [],
+      );
+    } else {
+      movementLogs.value.add(
+        LiftLog(
+          exercise: liftName,
+          age: 0,
+          bodyweight: 0,
+          date: DateTime.now().toString(),
+          sex: 'male',
+          weight: 0,
+        ),
+      );
+    }
+
     return SfCartesianChart(
       primaryXAxis: const DateTimeAxis(
         labelRotation: -45,
@@ -140,7 +155,7 @@ class LiftGraphics extends HookConsumerWidget {
       series: <CartesianSeries>[
         // Tüm veriler
         LineSeries<LiftLog, DateTime>(
-          dataSource: movementLogs.value,
+          dataSource: movementLogs.value == [] ? [] : movementLogs.value,
           xValueMapper: (LiftLog log, _) => DateTime.parse(log.date).toLocal(),
           yValueMapper: (LiftLog log, _) => log.weight,
           dataLabelSettings: const DataLabelSettings(
@@ -148,7 +163,7 @@ class LiftGraphics extends HookConsumerWidget {
           ),
         ),
         // Son 6 veri
-        if (movementLogs.value.length >= 6)
+        if (movementLogs.value.length >= 6 && movementLogs.value.isNotEmpty)
           LineSeries<LiftLog, DateTime>(
             dataSource:
                 movementLogs.value.sublist(movementLogs.value.length - 6),
@@ -156,9 +171,7 @@ class LiftGraphics extends HookConsumerWidget {
                 DateTime.parse(log.date).toLocal(),
             yValueMapper: (LiftLog log, _) => log.weight,
             color: Colors.red,
-            width: 1,
-            markerSettings:
-                const MarkerSettings(isVisible: true, color: Colors.red),
+            width: 2,
             dataLabelSettings: const DataLabelSettings(
               isVisible: true,
               textStyle: TextStyle(color: Colors.red),
@@ -254,12 +267,17 @@ class PredictionListTile extends HookWidget {
         text:
             '${predictionDate.value.toString().substring(8, 10)}/${predictionDate.value.month}/${predictionDate.value.year}:',
       ),
-      trailing: AppText.big_bold(
-        text: '${prediction.toStringAsFixed(2)} KG',
-      ),
-      subtitle: AppText.normal(
-        text: 'Prediction',
-        color: Colors.pink,
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AppText.big_bold(
+            text: '${prediction.toStringAsFixed(2)}KG',
+          ),
+          AppText.normal(
+            text: 'Prediction',
+            color: Colors.pink,
+          ),
+        ],
       ),
     );
   }

@@ -21,6 +21,7 @@ class App extends StatelessWidget {
     return ProviderScope(
       child: ToastificationWrapper(
         child: MaterialApp.router(
+          // theme: ThemeData.dark(),
           routerConfig: _appRouter.config(),
           title: 'Gymlogger',
         ),
