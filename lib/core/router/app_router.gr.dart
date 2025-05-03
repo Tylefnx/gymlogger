@@ -94,17 +94,10 @@ class RoutesRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CreateRoutineScreen]
-class CreateRoutineRoute extends PageRouteInfo<CreateRoutineRouteArgs> {
-  CreateRoutineRoute({
-    Key? key,
-    required ValueNotifier<Map<String, Map<String, List<int>>>> routineList,
-    List<PageRouteInfo>? children,
-  }) : super(
+class CreateRoutineRoute extends PageRouteInfo<void> {
+  const CreateRoutineRoute({List<PageRouteInfo>? children})
+      : super(
           CreateRoutineRoute.name,
-          args: CreateRoutineRouteArgs(
-            key: key,
-            routineList: routineList,
-          ),
           initialChildren: children,
         );
 
@@ -113,29 +106,9 @@ class CreateRoutineRoute extends PageRouteInfo<CreateRoutineRouteArgs> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<CreateRoutineRouteArgs>();
-      return CreateRoutineScreen(
-        key: args.key,
-        routineList: args.routineList,
-      );
+      return const CreateRoutineScreen();
     },
   );
-}
-
-class CreateRoutineRouteArgs {
-  const CreateRoutineRouteArgs({
-    this.key,
-    required this.routineList,
-  });
-
-  final Key? key;
-
-  final ValueNotifier<Map<String, Map<String, List<int>>>> routineList;
-
-  @override
-  String toString() {
-    return 'CreateRoutineRouteArgs{key: $key, routineList: $routineList}';
-  }
 }
 
 /// generated route for

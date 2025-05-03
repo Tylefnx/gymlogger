@@ -13,8 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class CreateRoutineScreen extends HookConsumerWidget {
-  final ValueNotifier<Map<String, Map<String, List<int>>>> routineList;
-  const CreateRoutineScreen({super.key, required this.routineList});
+  const CreateRoutineScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

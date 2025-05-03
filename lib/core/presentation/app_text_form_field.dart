@@ -10,6 +10,7 @@ class AppTextFormField extends StatelessWidget {
     required this.label,
     this.suffixText,
     this.onChanged,
+    this.icon,
     this.obscureText,
     required this.controller,
   });
@@ -18,6 +19,7 @@ class AppTextFormField extends StatelessWidget {
   final TextInputType textInputType;
   final String? suffixText;
   final String label;
+  final IconData? icon;
   final bool? obscureText;
   final void Function(String)? onChanged;
 
@@ -38,6 +40,7 @@ class AppTextFormField extends StatelessWidget {
     required String label,
     required TextEditingController controller,
     String? suffixText,
+    IconData? icon,
     void Function(String)? onChanged,
   }) {
     return AppTextFormField(
@@ -45,12 +48,14 @@ class AppTextFormField extends StatelessWidget {
       label: label,
       controller: controller,
       suffixText: suffixText,
+      icon: icon,
     );
   }
 
   factory AppTextFormField.password({
     required String label,
     required TextEditingController controller,
+    IconData? icon,
     String? suffixText,
     void Function(String)? onChanged,
   }) {
@@ -60,6 +65,7 @@ class AppTextFormField extends StatelessWidget {
       obscureText: true,
       controller: controller,
       suffixText: suffixText,
+      icon: icon,
     );
   }
 
@@ -69,12 +75,15 @@ class AppTextFormField extends StatelessWidget {
       onChanged: onChanged,
       controller: controller,
       keyboardType: textInputType,
-      textAlign: TextAlign.center,
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
+        prefixIcon: Icon(icon),
+        floatingLabelBehavior: FloatingLabelBehavior.never,
         suffixText: suffixText,
-        label: AppText.bold(text: label),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+        label: AppText.bold(
+          text: label,
+        ),
+        // border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/authentication/presentation/login_screen.dart';
 import 'package:gymlogger/authentication/shared/providers.dart';
+import 'package:gymlogger/color_scemes/color_schemes_state.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_items.dart';
@@ -18,14 +19,26 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
+    return const ProviderScope(
       child: ToastificationWrapper(
-        child: MaterialApp.router(
-          // theme: ThemeData.dark(),
-          routerConfig: _appRouter.config(),
-          title: 'Gymlogger',
-        ),
+        child: AppMaterialApp(),
       ),
+    );
+  }
+}
+
+class AppMaterialApp extends ConsumerWidget {
+  const AppMaterialApp({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeState = ref.watch(colorSchemeStateNotifierProvider);
+    return MaterialApp.router(
+      theme: themeState.themeData,
+      routerConfig: _appRouter.config(),
+      title: 'Gymlogger',
     );
   }
 }
@@ -56,19 +69,23 @@ class DashboardScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomNavigationIndex = useState(0);
-    final state = ref.watch(authStateNotifierProvider);
-    final uid =
-        state.maybeMap(authenticated: (_) => _.user.token, orElse: () {});
+    final title = bottomNavigationLabels[bottomNavigationIndex.value]!;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => ref.read(authStateNotifierProvider.notifier).logout(
-                token: uid!,
-              ),
-          icon: const Icon(Icons.logout),
-        ),
-        centerTitle: true,
-        title: AppText.bold(
+        actions: title == 'Profile'
+            ? [
+                IconButton(
+                  onPressed: () => AutoRouter.of(context).push(
+                    const UpdateUserRoute(),
+                  ),
+                  icon: const Icon(
+                    Icons.edit,
+                    size: 18,
+                  ),
+                ),
+              ]
+            : null,
+        title: AppText.big_bold(
           text: bottomNavigationLabels[bottomNavigationIndex.value]!,
         ),
       ),

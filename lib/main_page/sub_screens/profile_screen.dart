@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gymlogger/authentication/shared/providers.dart';
-import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
@@ -15,48 +14,30 @@ class ProfileScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateNotifierProvider);
+
     return authState.maybeMap(
       orElse: () => const Scaffold(),
-      authenticated: (_) => Scaffold(
-        body: Center(
+      authenticated: (_) => AppPadding.h10v20(
+        child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Center(child: ProfilePictureWidget()),
+              const ProfilePictureWidget(),
               SBAppPadding.h10(),
-              ListTile(
-                tileColor: Colors.grey[200],
-                leading: const Icon(Icons.person),
-                title: AppText.bold(text: 'Username:'),
-                subtitle: AppText.bold(text: _.user.username),
-              ),
-              ListTile(
-                tileColor: Colors.white,
-                leading: const Icon(Icons.mail),
-                title: AppText.bold(text: 'Email:'),
-                subtitle: AppText.bold(text: _.user.email ?? 'Email not found'),
-              ),
-              ListTile(
-                tileColor: Colors.grey[200],
-                leading: const Icon(Icons.person_pin),
-                title: AppText.bold(text: 'Full Name:'),
-                subtitle: AppText.bold(
-                  text: '${_.user.name} ${_.user.surname}',
-                ),
-              ),
-              ListTile(
-                tileColor: Colors.white,
-                leading: const Icon(Icons.star),
-                title: AppText.bold(text: 'Overall Level:'),
-                subtitle: AppText.bold(text: 'Elite'),
-              ),
-              AppPadding.h10(
-                child: AppButton(
-                  onPressed: () =>
-                      AutoRouter.of(context).push(const UpdateUserRoute()),
-                  title: 'Update Profile',
-                ),
-              ),
+              _ProfileInfoTile(
+                  icon: Icons.person,
+                  label: 'Username',
+                  value: _.user.username),
+              _ProfileInfoTile(
+                  icon: Icons.mail,
+                  label: 'Email',
+                  value: _.user.email ?? 'Email not found'),
+              _ProfileInfoTile(
+                  icon: Icons.person_pin,
+                  label: 'Full Name',
+                  value: '${_.user.name} ${_.user.surname}'),
+              const _ProfileInfoTile(
+                  icon: Icons.star, label: 'Overall Level', value: 'Elite'),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -65,19 +46,52 @@ class ProfileScreen extends HookConsumerWidget {
   }
 }
 
+// 🔹 Profil Fotoğrafı (Kompakt)
 class ProfilePictureWidget extends StatelessWidget {
-  const ProfilePictureWidget({
-    super.key,
-  });
+  const ProfilePictureWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const ClipOval(
-      child: ColoredBox(
-        color: Colors.grey,
-        child: Icon(
-          Icons.person_2_rounded,
-          size: 128,
+    return ClipOval(
+      child: Container(
+        width: 100,
+        height: 100,
+        color: Colors.deepPurpleAccent.withOpacity(0.2),
+        child: const Icon(Icons.person_2_rounded,
+            size: 72, color: Colors.deepPurple),
+      ),
+    );
+  }
+}
+
+// 🔹 Kullanıcı Bilgileri İçin Kart Bileşeni
+class _ProfileInfoTile extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const _ProfileInfoTile(
+      {required this.icon, required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.deepPurple),
+            const SizedBox(width: 15),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText.bold(text: label),
+                AppText.normal(text: value),
+              ],
+            ),
+          ],
         ),
       ),
     );

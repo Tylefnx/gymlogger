@@ -10,12 +10,14 @@ class CustomBottomNavigationBar extends HookWidget {
   });
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return BottomNavigationBar(
-      unselectedItemColor: Colors.grey,
-      showUnselectedLabels: true,
+      unselectedItemColor: Colors.white38,
+      fixedColor: colorScheme.onPrimary,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: colorScheme.primary,
       currentIndex: selectedIndex.value,
-      fixedColor: Colors.blueAccent,
-      elevation: 50,
+      elevation: 5,
       items: bottomNavigationItems,
       onTap: (_) {
         selectedIndex.value = _;

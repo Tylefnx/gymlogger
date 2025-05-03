@@ -65,67 +65,70 @@ class _UpdateProfilePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: AppText.bold(text: 'Update User'),
+        title: AppText.bold(text: 'Update Profile'),
       ),
-      body: AppPadding.h30v40(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: 15,
-            children: [
-              AppTextFormField.name(
-                label: 'Name',
-                controller: nameController,
-              ),
-              AppTextFormField.name(
-                label: 'Surname',
-                controller: surnameController,
-              ),
-              AppTextFormField.name(
-                label: 'Email',
-                controller: emailController,
-              ),
-              AppTextFormField.name(
-                label: 'Email Again',
-                controller: emailAgainController,
-              ),
-              AppTextFormField.password(
-                label: 'Password',
-                controller: passwordController,
-              ),
-              AppButton(
-                onPressed: () async {
-                  await _submit(
-                    ref: ref,
-                    emailController: emailController,
-                    emailAgainController: emailAgainController,
-                    nameController: nameController,
-                    surnameController: surnameController,
-                    passwordController: passwordController,
-                    context: context,
-                  );
-                  final state = ref.watch(authStateNotifierProvider);
-                  state.maybeMap(
-                    orElse: () {},
-                    authenticated: (_) {
-                      if (_.failure == null) {
-                        successToast(
-                          success: 'User successfuly updated',
-                          context: context,
-                        );
-                      } else if (_.failure?.error == "Wrong Password") {
-                        failureToast(
-                          error: _.failure!.error!,
-                          context: context,
-                        );
-                      }
-                    },
-                  );
-                },
-                title: 'Submit',
-              ),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: ListView(
+          children: [
+            const SizedBox(height: 16),
+            AppTextFormField.name(
+              label: 'First Name',
+              controller: nameController,
+            ),
+            const SizedBox(height: 16),
+            AppTextFormField.name(
+              label: 'Last Name',
+              controller: surnameController,
+            ),
+            const SizedBox(height: 16),
+            AppTextFormField.name(
+              label: 'Email',
+              controller: emailController,
+            ),
+            const SizedBox(height: 16),
+            AppTextFormField.name(
+              label: 'Confirm Email',
+              controller: emailAgainController,
+            ),
+            const SizedBox(height: 16),
+            AppTextFormField.password(
+              label: 'Password',
+              controller: passwordController,
+            ),
+            const SizedBox(height: 32),
+            AppButton(
+              title: 'Save Changes',
+              onPressed: () async {
+                await _submit(
+                  ref: ref,
+                  emailController: emailController,
+                  emailAgainController: emailAgainController,
+                  nameController: nameController,
+                  surnameController: surnameController,
+                  passwordController: passwordController,
+                  context: context,
+                );
+                final state = ref.watch(authStateNotifierProvider);
+                state.maybeMap(
+                  orElse: () {},
+                  authenticated: (_) {
+                    if (_.failure == null) {
+                      successToast(
+                        success: 'Profile successfully updated!',
+                        context: context,
+                      );
+                    } else if (_.failure?.error == "Wrong Password") {
+                      failureToast(
+                        error: _.failure!.error!,
+                        context: context,
+                      );
+                    }
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

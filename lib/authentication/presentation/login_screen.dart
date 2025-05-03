@@ -19,45 +19,66 @@ class LoginScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final username = useTextEditingController(text: '');
     final password = useTextEditingController(text: '');
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      body: AppPadding.h30v40(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AppText.very_big_bold(text: 'Welcome to Gymlogger'),
-            SBAppPadding.h30(),
-            AppTextFormField.name(
-              label: 'Username',
-              controller: username,
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/background.jpg',
             ),
-            AppPadding.v15(
-              child: AppTextFormField.password(
-                label: 'password',
-                controller: password,
-              ),
-            ),
-            AppButton(
-              onPressed: () => _login(
-                ref: ref,
-                username: username.text,
-                password: password.text,
-                context: context,
-              ),
-              title: 'Login',
-            ),
-            Row(
-              children: [
-                AppText.bold(text: "Don't have an account? Then"),
-                TextButton(
-                  onPressed: () => AutoRouter.of(context).popAndPush(
-                    const RegisterRoute(),
-                  ),
-                  child: AppText.big_bold(text: 'Register'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: AppPadding.h30v40(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: AppText.little_big_bold(
+                  text: 'Welcome to Gymlogger',
+                  color: colorScheme.onSurface,
                 ),
-              ],
-            ),
-          ],
+              ),
+              SBAppPadding.h30(),
+              AppTextFormField.name(
+                icon: Icons.person,
+                label: 'Username',
+                controller: username,
+              ),
+              AppPadding.v15(
+                child: AppTextFormField.password(
+                  icon: Icons.lock,
+                  label: 'Password',
+                  controller: password,
+                ),
+              ),
+              AppButton(
+                onPressed: () => _login(
+                  ref: ref,
+                  username: username.text,
+                  password: password.text,
+                  context: context,
+                ),
+                title: 'Login',
+              ),
+              Row(
+                children: [
+                  AppText.bold(
+                    text: "Don't have an account? Then",
+                    color: colorScheme.onSurface,
+                  ),
+                  TextButton(
+                    onPressed: () => AutoRouter.of(context).popAndPush(
+                      const RegisterRoute(),
+                    ),
+                    child: AppText.big_bold(text: 'Register'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

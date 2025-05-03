@@ -11,11 +11,12 @@ class AppAddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ElevatedButton(
       onPressed: () {},
       child: Row(
         children: [
-          const Icon(Icons.add),
+          Icon(Icons.add, color: colorScheme.onPrimary),
           AppPadding.h10v20(
             child: AppText(
               text: text,
@@ -40,12 +41,18 @@ class AppTallButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ElevatedButton(
       onPressed: onPressed,
-      child: AppPadding.v25(
+      child: AppPadding.v15(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (icondata != null) Icon(icondata),
+            if (icondata != null)
+              Icon(
+                icondata,
+                color: colorScheme.onPrimary,
+              ),
             AppText.big_bold(text: text),
           ],
         ),
@@ -66,10 +73,11 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.lightBlue,
-        foregroundColor: Colors.white,
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
       ),
       onPressed: onPressed,
       child: AppText.big_bold(
