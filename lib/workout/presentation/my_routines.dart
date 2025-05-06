@@ -18,7 +18,7 @@ class MyRoutines extends HookConsumerWidget {
     _getWorkoutRoutine(authState, ref);
     return routines.map(
       loading: (_) => const CircularProgressIndicator(),
-      failed: (_) => AppText.big_bold(text: _.failure?.error ?? ''),
+      failed: (_) => AppText.big_bold(text: 'Failed to load routines'),
       loaded: (_) => ListView.builder(
         itemCount: _.liftLogs.routines.length,
         itemBuilder: (BuildContext context, int index) {

@@ -10,8 +10,14 @@ class AppNumberPicker extends StatelessWidget {
     return NumberPicker(
       itemCount: 5,
       infiniteLoop: true,
-      textStyle: const TextStyle(fontSize: 18),
-      selectedTextStyle: const TextStyle(fontSize: 32),
+      itemWidth: 67,
+      textStyle: const TextStyle(
+        fontSize: 16,
+      ),
+      selectedTextStyle: const TextStyle(
+        fontSize: 24,
+        color: Colors.purple,
+      ),
       axis: Axis.horizontal,
       minValue: 1,
       maxValue: 10,

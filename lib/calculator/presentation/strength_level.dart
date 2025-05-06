@@ -6,7 +6,6 @@ import 'package:gymlogger/core/constant_lists.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
-import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 
 @RoutePage()
 class StrengthLevelCalculator extends HookWidget {
@@ -24,42 +23,48 @@ class StrengthLevelCalculator extends HookWidget {
         title: const Text('Strength Level Calculator'),
       ),
       body: AppPadding.h30v40(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            WeightSelectionSection(
-              weightController: weightController,
-            ),
-            SBAppPadding.h10(),
-            BWSelectionSection(bwController: bwController),
-            SBAppPadding.h10(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GenderSelectionWidget(gender: gender),
-                ExcersizeSelectionSection(
-                  excersize: excersize,
-                  strengthLevelExcersize: strengthLevelExcersize,
-                ),
-              ],
-            ),
-            Row(
-              children: row.value,
-            ),
-            const Spacer(),
-            AppButton(
-              onPressed: () {
-                strLevel.value = strengthLevel(
-                  weightController.text,
-                  excersize.value,
-                  bwController.text,
-                  gender.value ?? 'male', //TODO: create error if null
-                );
-                row.value = addStars(strLevel.value);
-              },
-              title: 'Submit',
-            ),
-          ],
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            spacing: 10,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              WeightSelectionSection(
+                weightController: weightController,
+              ),
+              BWSelectionSection(bwController: bwController),
+              Row(
+                spacing: 10,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GenderSelectionWidget(gender: gender),
+                  ),
+                  Expanded(
+                    child: ExcersizeSelectionSection(
+                      excersize: excersize,
+                      strengthLevelExcersize: strengthLevelExcersize,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: row.value,
+              ),
+              AppButton(
+                onPressed: () {
+                  strLevel.value = strengthLevel(
+                    weightController.text,
+                    excersize.value,
+                    bwController.text,
+                    gender.value ?? 'male', //TODO: create error if null
+                  );
+                  row.value = addStars(strLevel.value);
+                },
+                title: 'Submit',
+              ),
+            ],
+          ),
         ),
       ),
     );

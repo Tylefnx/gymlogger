@@ -64,9 +64,12 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
   Future<void> saveUserLifts({
     required String username,
     required String exercize,
-    required String token,
     required String date,
     required double weight,
+    required double bodyWeight,
+    required String sex,
+    required int age,
+    required String token,
   }) async {
     state = const MovementsState.loading();
     final saveOrFailure = await _repository.saveUserLifts(

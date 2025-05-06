@@ -6,6 +6,7 @@ import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
+import 'package:gymlogger/core/presentation/extra_long_widget_for_decorated_box_usage_widget.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
 import 'package:gymlogger/core/router/app_router.dart';
 import 'package:gymlogger/core/shared/app_toasts.dart';
@@ -20,67 +21,79 @@ class LoginScreen extends HookConsumerWidget {
     final username = useTextEditingController(text: '');
     final password = useTextEditingController(text: '');
     final colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      body: DecoratedBox(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              'assets/images/background.jpg',
-            ),
-            fit: BoxFit.fill,
-          ),
-        ),
-        child: AppPadding.h30v40(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: AppText.little_big_bold(
-                  text: 'Welcome to Gymlogger',
-                  color: colorScheme.onSurface,
-                ),
-              ),
-              SBAppPadding.h30(),
-              AppTextFormField.name(
-                icon: Icons.person,
-                label: 'Username',
-                controller: username,
-              ),
-              AppPadding.v15(
-                child: AppTextFormField.password(
-                  icon: Icons.lock,
-                  label: 'Password',
-                  controller: password,
-                ),
-              ),
-              AppButton(
-                onPressed: () => _login(
-                  ref: ref,
-                  username: username.text,
-                  password: password.text,
-                  context: context,
-                ),
-                title: 'Login',
-              ),
-              Row(
-                children: [
-                  AppText.bold(
-                    text: "Don't have an account? Then",
-                    color: colorScheme.onSurface,
-                  ),
-                  TextButton(
-                    onPressed: () => AutoRouter.of(context).popAndPush(
-                      const RegisterRoute(),
-                    ),
-                    child: AppText.big_bold(text: 'Register'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+    return ExtraLongWidgetForDecoratedBoxUsageWidget(
+      child: LogicScreenComponents(
+        colorScheme: colorScheme,
+        username: username,
+        password: password,
       ),
+    );
+  }
+}
+
+class LogicScreenComponents extends ConsumerWidget {
+  const LogicScreenComponents({
+    super.key,
+    required this.colorScheme,
+    required this.username,
+    required this.password,
+  });
+
+  final ColorScheme colorScheme;
+  final TextEditingController username;
+  final TextEditingController password;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Spacer(),
+        Center(
+          child: AppText.little_big_bold(
+            text: 'Welcome to Gymlogger',
+            color: colorScheme.onSurface,
+          ),
+        ),
+        SBAppPadding.h30(),
+        AppTextFormField.name(
+          icon: Icons.person,
+          label: 'Username',
+          controller: username,
+        ),
+        AppPadding.v15(
+          child: AppTextFormField.password(
+            icon: Icons.lock,
+            label: 'Password',
+            controller: password,
+          ),
+        ),
+        AppButton(
+          onPressed: () => _login(
+            username: username.text,
+            password: password.text,
+            context: context,
+            ref: ref,
+          ),
+          title: 'Login',
+        ),
+        Row(
+          children: [
+            AppText.bold(
+              text: "Don't have an account? Then",
+              color: colorScheme.onSurface,
+            ),
+            TextButton(
+              onPressed: () => AutoRouter.of(context).popAndPush(
+                const RegisterRoute(),
+              ),
+              child: AppText.big_bold(text: 'Register'),
+            ),
+          ],
+        ),
+        const Spacer(),
+      ],
     );
   }
 }

@@ -1,0 +1,2 @@
+/home/tylefnx/.dev/senior_project/gymlogger/android/app/.cxx/RelWithDebInfo/1x117653/arm64-v8a/CMakeFiles/edit_cache.dir
+/home/tylefnx/.dev/senior_project/gymlogger/android/app/.cxx/RelWithDebInfo/1x117653/arm64-v8a/CMakeFiles/rebuild_cache.dir

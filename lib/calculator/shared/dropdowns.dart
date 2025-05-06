@@ -23,7 +23,10 @@ class ExcersizeSelectionSection extends StatelessWidget {
       items: strengthLevelExcersize.map<DropdownMenuItem<String?>>((String? _) {
         return DropdownMenuItem(
           value: _,
-          child: AppText.bold(text: _ ?? ''),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: AppText.bold(text: _ ?? ''),
+          ),
         );
       }).toList(),
     );
@@ -100,7 +103,9 @@ class GenderSelectionWidget extends StatelessWidget {
       items: genders.map<DropdownMenuItem<String>>((String? _) {
         return DropdownMenuItem(
           value: _,
-          child: AppText.bold(text: _ ?? ''),
+          child: Align(
+            child: AppText.bold(text: _ ?? ''),
+          ),
         );
       }).toList(),
     );

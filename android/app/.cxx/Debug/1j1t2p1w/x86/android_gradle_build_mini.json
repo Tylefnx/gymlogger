@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/home/tylefnx/.dev/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/tylefnx/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/tylefnx/.dev/senior_project/gymlogger/android/app/.cxx/Debug/1j1t2p1w/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/tylefnx/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/tylefnx/.dev/senior_project/gymlogger/android/app/.cxx/Debug/1j1t2p1w/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

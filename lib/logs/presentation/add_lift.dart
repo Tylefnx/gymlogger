@@ -6,14 +6,12 @@ import 'package:gymlogger/calculator/presentation/1rm_calculator.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_numberpicker.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
-import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/logs/domain/movement_log_for_specific_lift.dart';
 import 'package:gymlogger/logs/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
-//TODO: ADD AGE ETC.
 @RoutePage()
 class AddLiftScreen extends HookWidget {
   final String lift;
@@ -31,37 +29,66 @@ class AddLiftScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final weightController = useTextEditingController();
+    final bodyweightController = useTextEditingController();
+    final ageController = useTextEditingController();
     final selectedRep = useState<int>(1);
     final selectedLiftDate = useState<DateTime>(DateTime.now());
     final now = DateTime.now();
     return AppPadding.h30v40(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: AppText.very_big_bold(
-              text: 'Date selection',
-            ),
+      child: SingleChildScrollView(
+        child: IntrinsicHeight(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: 150,
+                child: _AddLiftDatePicker(
+                  now: now,
+                  selectedLiftDate: selectedLiftDate,
+                ),
+              ),
+              _OneRepMaxCalculator(
+                weightController: weightController,
+              ),
+              AppNumberPicker(
+                selectedReps: selectedRep,
+              ),
+              Expanded(
+                child: Row(
+                  spacing: 10,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: AppTextFormField.numberWithOptions(
+                        label: 'BW',
+                        controller: bodyweightController,
+                      ),
+                    ),
+                    Expanded(
+                      child: AppTextFormField.numberWithOptions(
+                        label: 'Age',
+                        controller: ageController,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              AppPadding.v15(
+                child: _AddLiftButton(
+                  lift: lift,
+                  weightController: weightController,
+                  selectedRep: selectedRep,
+                  selectedLiftDate: selectedLiftDate,
+                  movementLogsForSpecificLift: movementLogsForSpecificLift,
+                  pageController: pageController,
+                  navigatorIndex: navigatorIndex,
+                  ageController: ageController,
+                  bwController: bodyweightController,
+                ),
+              ),
+            ],
           ),
-          _AddLiftDatePicker(now: now, selectedLiftDate: selectedLiftDate),
-          AppPadding.h10v20(
-            child: _OneRepMaxCalculator(
-              weightController: weightController,
-            ),
-          ),
-          AppNumberPicker(selectedReps: selectedRep),
-          AppPadding.h10v20(
-            child: _AddLiftButton(
-              lift: lift,
-              weightController: weightController,
-              selectedRep: selectedRep,
-              selectedLiftDate: selectedLiftDate,
-              movementLogsForSpecificLift: movementLogsForSpecificLift,
-              pageController: pageController,
-              navigatorIndex: navigatorIndex,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -79,9 +106,13 @@ class _AddLiftButton extends ConsumerWidget {
     required this.movementLogsForSpecificLift,
     required this.pageController,
     required this.navigatorIndex,
+    required this.ageController,
+    required this.bwController,
   });
 
   final TextEditingController weightController;
+  final TextEditingController bwController;
+  final TextEditingController ageController;
   final ValueNotifier<int> selectedRep;
   final ValueNotifier<DateTime> selectedLiftDate;
   final MovementLogsForSpecificLift movementLogsForSpecificLift;
@@ -112,6 +143,9 @@ class _AddLiftButton extends ConsumerWidget {
                   orElse: () => '',
                   authenticated: (_) => _.user.token,
                 ),
+                bodyWeight: double.parse(bwController.text),
+                sex: 'male',
+                age: int.parse(ageController.text),
               );
         }
         navigatorIndex.value = 1;
@@ -133,17 +167,37 @@ class _AddLiftDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ScrollDatePicker(
-        minimumDate: DateTime(
-          _now.year - 3,
-          _now.month,
-          _now.day,
+    final colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: ScrollDatePicker(
+          minimumDate: DateTime(
+            _now.year - 3,
+            _now.month,
+            _now.day,
+          ),
+          selectedDate: selectedLiftDate.value,
+          onDateTimeChanged: (_) {
+            selectedLiftDate.value = _;
+          },
+          options: DatePickerOptions(
+            backgroundColor: colorScheme.primary,
+            isLoop: true,
+          ),
         ),
-        selectedDate: selectedLiftDate.value,
-        onDateTimeChanged: (_) {
-          selectedLiftDate.value = _;
-        },
       ),
     );
   }
@@ -155,17 +209,10 @@ class _OneRepMaxCalculator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: AppTextFormField.numberWithOptions(
-            controller: weightController,
-            label: 'Weight',
-            suffixText: 'KG',
-          ),
-        ),
-      ],
+    return AppTextFormField.numberWithOptions(
+      controller: weightController,
+      label: 'Weight',
+      suffixText: 'KG',
     );
   }
 }

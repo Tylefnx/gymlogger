@@ -17,6 +17,7 @@ class CreateRoutineScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = useScrollController();
     final authState = ref.watch(authStateNotifierProvider);
     final routineController = useTextEditingController();
     final textEditingControllers = useState<List<List<TextEditingController>>>(
@@ -32,6 +33,12 @@ class CreateRoutineScreen extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const AppText(text: 'Create Routine'),
+        actions: [
+          IconButton(
+            onPressed: _addMovement(textEditingControllers, scrollController),
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: AppPadding.h30v40(
         child: Column(
@@ -42,83 +49,39 @@ class CreateRoutineScreen extends HookConsumerWidget {
               controller: routineController,
             ),
             SBAppPadding.h10(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: textEditingControllers.value.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      AppText.big_bold(text: 'Movement ${index + 1}'),
-                      SBAppPadding.h10(),
-                      AppTextFormField.name(
-                        label: 'Movement Name',
-                        controller: textEditingControllers.value[index][0],
-                      ),
-                      SBAppPadding.h10(),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: AppTextFormField.numberWithOptions(
-                              label: 'Weight',
-                              controller: textEditingControllers.value[index]
-                                  [1],
-                            ),
-                          ),
-                          SBAppPadding.w15(),
-                          Expanded(
-                            child: AppTextFormField.numberWithOptions(
-                              label: 'Sets',
-                              controller: textEditingControllers.value[index]
-                                  [2],
-                            ),
-                          ),
-                          SBAppPadding.w15(),
-                          Expanded(
-                            child: AppTextFormField.numberWithOptions(
-                              label: 'Reps',
-                              controller: textEditingControllers.value[index]
-                                  [3],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SBAppPadding.h30(),
-                    ],
-                  );
-                },
-              ),
+            MovementBlockBuilder(
+              scrollController: scrollController,
+              textEditingControllers: textEditingControllers,
             ),
             AppButton(
               onPressed: () {
                 for (final ctList in textEditingControllers.value) {
                   for (final b in ctList) {
-                    if (b.text == '') {
+                    if (b.text.isEmpty) {
                       continue;
                     }
                   }
                 }
+
                 authState.maybeMap(
-                  orElse: () {},
-                  authenticated: (_) {
-                    final username = _.user.username;
-                    final token = _.user.token;
-                    var exercises = <String, List<int>>{};
-                    for (final ctList in textEditingControllers.value) {
-                      final exerciseName = ctList[0].text;
-                      final weight = int.parse(ctList[1].text);
-                      final sets = int.parse(ctList[2].text);
-                      final reps = int.parse(ctList[3].text);
-                      exercises.addEntries(
-                        [
-                          MapEntry(exerciseName, [weight, sets, reps])
-                        ],
-                      );
-                    }
+                  authenticated: (auth) {
+                    final username = auth.user.username;
+                    final token = auth.user.token;
+
+                    final Map<String, List<int>> exercises = {
+                      for (final ctList in textEditingControllers.value)
+                        ctList[0].text: [
+                          int.parse(ctList[1].text), // weight
+                          int.parse(ctList[2].text), // sets
+                          int.parse(ctList[3].text) // reps
+                        ]
+                    };
+
                     final routine = Routine(
                       routineName: routineController.text,
                       exercises: exercises,
                     );
-                    print(routine);
+
                     ref
                         .read(workoutStateNotifierProvider.notifier)
                         .saveWorkoutRoutine(
@@ -128,31 +91,110 @@ class CreateRoutineScreen extends HookConsumerWidget {
                           exercises: exercises,
                         );
                   },
+                  orElse: () {},
                 );
-                context.maybePop(); // TODO: MAYBEPOP?
+                context.maybePop();
               },
               title: 'Add Routine',
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final tempList = List<List<TextEditingController>>.from(
-            textEditingControllers.value,
+    );
+  }
+}
+
+class MovementBlockBuilder extends StatelessWidget {
+  const MovementBlockBuilder({
+    super.key,
+    required this.scrollController,
+    required this.textEditingControllers,
+  });
+
+  final ScrollController scrollController;
+  final ValueNotifier<List<List<TextEditingController>>> textEditingControllers;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        controller: scrollController,
+        itemCount: textEditingControllers.value.length,
+        itemBuilder: (BuildContext context, int index) {
+          return AddMovementBlock(
+            textEditingControllers: textEditingControllers,
+            index: index,
           );
-          tempList.add(
-            [
-              TextEditingController(),
-              TextEditingController(),
-              TextEditingController(),
-              TextEditingController(),
-            ],
-          );
-          textEditingControllers.value = tempList;
         },
-        child: const Icon(Icons.add),
       ),
     );
   }
+}
+
+class AddMovementBlock extends StatelessWidget {
+  const AddMovementBlock({
+    super.key,
+    required this.textEditingControllers,
+    required this.index,
+  });
+
+  final ValueNotifier<List<List<TextEditingController>>> textEditingControllers;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppText.big_bold(text: 'Movement ${index + 1}'),
+        SBAppPadding.h10(),
+        AppTextFormField.name(
+          label: 'Movement Name',
+          controller: textEditingControllers.value[index][0],
+        ),
+        SBAppPadding.h10(),
+        AppTextFormField.numberWithOptions(
+          label: 'Weight',
+          controller: textEditingControllers.value[index][1],
+        ),
+        SBAppPadding.h10(),
+        Row(
+          children: [
+            Expanded(
+              child: AppTextFormField.numberWithOptions(
+                label: 'Sets',
+                controller: textEditingControllers.value[index][2],
+              ),
+            ),
+            SBAppPadding.w15(),
+            Expanded(
+              child: AppTextFormField.numberWithOptions(
+                label: 'Reps',
+                controller: textEditingControllers.value[index][3],
+              ),
+            ),
+          ],
+        ),
+        SBAppPadding.h30(),
+      ],
+    );
+  }
+}
+
+void Function() _addMovement(
+  ValueNotifier<List<List<TextEditingController>>> textEditingControllers,
+  ScrollController scrollController,
+) {
+  return () {
+    textEditingControllers.value.add(
+      [
+        TextEditingController(),
+        TextEditingController(),
+        TextEditingController(),
+        TextEditingController(),
+      ],
+    );
+    textEditingControllers.value = List.from(textEditingControllers.value);
+    scrollController.position.jumpTo(
+      scrollController.position.maxScrollExtent * 3,
+    );
+  };
 }

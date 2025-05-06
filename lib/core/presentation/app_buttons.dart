@@ -86,3 +86,25 @@ class AppButton extends StatelessWidget {
     );
   }
 }
+
+class AppTextButton extends StatelessWidget {
+  const AppTextButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+  });
+
+  final void Function() onPressed;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: TextButton.styleFrom(),
+      onPressed: onPressed,
+      child: AppText.big_bold(
+        text: title,
+      ),
+    );
+  }
+}

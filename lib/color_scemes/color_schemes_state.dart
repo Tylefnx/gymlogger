@@ -32,6 +32,7 @@ class ColorSchemeStateNotifier extends StateNotifier<ColorSchemeState> {
   );
 
   static final ThemeData _lightTheme = ThemeData(
+    fontFamily: 'Roboto',
     useMaterial3: true,
     colorScheme: _lightColorScheme,
     appBarTheme: AppBarTheme(
@@ -86,6 +87,7 @@ class ColorSchemeStateNotifier extends StateNotifier<ColorSchemeState> {
   );
 
   static final ThemeData _darkTheme = ThemeData(
+    fontFamily: 'Roboto',
     useMaterial3: true,
     colorScheme: _darkColorScheme,
     appBarTheme: AppBarTheme(

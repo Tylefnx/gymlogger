@@ -1,16 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gymlogger/core/presentation/app_buttons.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
-import 'package:gymlogger/logs/domain/lift_logs.dart';
 import 'package:gymlogger/logs/domain/movement_log.dart';
 import 'package:gymlogger/logs/domain/movement_log_for_specific_lift.dart';
 import 'package:gymlogger/logs/domain/predictions.dart';
 import 'package:gymlogger/logs/presentation/add_lift.dart';
+import 'package:gymlogger/logs/presentation/lift_graphics.dart';
+import 'package:gymlogger/logs/presentation/one_lift_list.dart';
 import 'package:gymlogger/logs/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 @RoutePage()
 class LiftLogScreen extends HookConsumerWidget {
@@ -45,14 +46,18 @@ class LiftLogScreen extends HookConsumerWidget {
       ),
       body: PageView(
         controller: pageController,
-        onPageChanged: (_) => navIndex.value = _,
+        onPageChanged: (_) {
+          navIndex.value = _;
+        },
         children: [
           LiftGraphics(
+            pageController: pageController,
             liftName: lift,
             movementLogsForSpecificLift: movementLogsForSpecificLift,
             predictions: predictions,
           ),
           OneLiftList(
+            pageController: pageController,
             liftName: lift,
             movementLogsForSpecificLift: movementLogsForSpecificLift,
             predictions: predictions,
@@ -81,8 +86,14 @@ class LiftLogPageNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return BottomNavigationBar(
+      unselectedItemColor: Colors.white38,
+      fixedColor: colorScheme.onPrimary,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: colorScheme.primary,
       currentIndex: navIndex.value,
+      elevation: 5,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.graphic_eq),
@@ -105,206 +116,22 @@ class LiftLogPageNavigationBar extends StatelessWidget {
   }
 }
 
-class LiftGraphics extends HookConsumerWidget {
-  final String liftName;
-  final MovementLogsForSpecificLift movementLogsForSpecificLift;
-  final Predictions predictions;
-  const LiftGraphics({
+class NoLogsFound extends StatelessWidget {
+  const NoLogsFound({
     super.key,
-    required this.liftName,
-    required this.movementLogsForSpecificLift,
-    required this.predictions,
+    required this.pageController,
   });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final movementLogs = useState(movementLogsForSpecificLift.logs.toList());
-    if (movementLogs.value != []) {
-      final lastMovementLog = movementLogsForSpecificLift.logs.last;
-      final lastDate = useState(
-        parseDateString(
-          lastMovementLog.date,
-        ),
-      );
-
-      useEffect(
-        () {
-          getLiftLogsFromPredictions(lastDate, movementLogs, lastMovementLog);
-          return null;
-        },
-        [],
-      );
-    } else {
-      movementLogs.value.add(
-        LiftLog(
-          exercise: liftName,
-          age: 0,
-          bodyweight: 0,
-          date: DateTime.now().toString(),
-          sex: 'male',
-          weight: 0,
-        ),
-      );
-    }
-
-    return SfCartesianChart(
-      primaryXAxis: const DateTimeAxis(
-        labelRotation: -45,
-      ),
-      title: ChartTitle(text: '$liftName PR Progress'),
-      series: <CartesianSeries>[
-        // Tüm veriler
-        LineSeries<LiftLog, DateTime>(
-          dataSource: movementLogs.value == [] ? [] : movementLogs.value,
-          xValueMapper: (LiftLog log, _) => DateTime.parse(log.date).toLocal(),
-          yValueMapper: (LiftLog log, _) => log.weight,
-          dataLabelSettings: const DataLabelSettings(
-            isVisible: true,
-          ),
-        ),
-        // Son 6 veri
-        if (movementLogs.value.length >= 6 && movementLogs.value.isNotEmpty)
-          LineSeries<LiftLog, DateTime>(
-            dataSource:
-                movementLogs.value.sublist(movementLogs.value.length - 6),
-            xValueMapper: (LiftLog log, _) =>
-                DateTime.parse(log.date).toLocal(),
-            yValueMapper: (LiftLog log, _) => log.weight,
-            color: Colors.red,
-            width: 2,
-            dataLabelSettings: const DataLabelSettings(
-              isVisible: true,
-              textStyle: TextStyle(color: Colors.red),
-            ),
-          ),
-      ],
-    );
-  }
-
-  void getLiftLogsFromPredictions(ValueNotifier<DateTime> lastDate,
-      ValueNotifier<List<LiftLog>> movementLogs, LiftLog lastMovementLog) {
-    for (final prediction in predictions.prediction) {
-      final fixedPrediction = double.parse(prediction.toStringAsFixed(2));
-      lastDate.value = lastDate.value.add(const Duration(days: 30));
-      movementLogs.value.add(
-        LiftLog.fromPredictions(
-          lastDate: lastDate.value,
-          prediction: fixedPrediction,
-          exercise: liftName,
-          age: lastMovementLog.age,
-          bodyWeight: lastMovementLog.bodyweight,
-          sex: lastMovementLog.sex,
-        ),
-      );
-    }
-  }
-}
-
-class OneLiftList extends HookWidget {
-  final MovementLogsForSpecificLift movementLogsForSpecificLift;
-  final String liftName;
-  final Predictions predictions;
-  const OneLiftList({
-    super.key,
-    required this.liftName,
-    required this.movementLogsForSpecificLift,
-    required this.predictions,
-  });
-
+  final PageController pageController;
   @override
   Widget build(BuildContext context) {
-    final lastLogDate = movementLogsForSpecificLift.logs.last.date;
-    return Stack(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ListView.builder(
-          itemCount: movementLogsForSpecificLift.logs.length +
-              predictions.prediction.length,
-          itemBuilder: (BuildContext context, int index) {
-            final predictionIndex =
-                index - movementLogsForSpecificLift.logs.length;
-            if (index < movementLogsForSpecificLift.logs.length) {
-              return LiftEntryListTile(
-                movementLogsForSpecificLift: movementLogsForSpecificLift,
-                index: index,
-              );
-            } else {
-              return PredictionListTile(
-                predictionIndex: predictionIndex,
-                index: index,
-                predictions: predictions,
-                lastLogDate: lastLogDate,
-              );
-            }
-          },
+        AppTextButton(
+          onPressed: () => pageController.jumpToPage(2),
+          title: 'No logs found\nTap here to add a new lift',
         ),
       ],
-    );
-  }
-}
-
-class PredictionListTile extends HookWidget {
-  const PredictionListTile({
-    super.key,
-    required this.predictionIndex,
-    required this.index,
-    required this.predictions,
-    required this.lastLogDate,
-  });
-
-  final int predictionIndex;
-  final int index;
-  final Predictions predictions;
-  final String lastLogDate;
-
-  @override
-  Widget build(BuildContext context) {
-    final prediction = predictions.prediction[predictionIndex];
-    final predictionDate = useState(parseDateString(lastLogDate));
-    predictionDate.value.add(const Duration(days: 30));
-    return ListTile(
-      tileColor: index.isOdd ? Colors.grey[200] : Colors.white,
-      leading: AppText.big_bold(
-        text:
-            '${predictionDate.value.toString().substring(8, 10)}/${predictionDate.value.month}/${predictionDate.value.year}:',
-      ),
-      trailing: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppText.big_bold(
-            text: '${prediction.toStringAsFixed(2)}KG',
-          ),
-          AppText.normal(
-            text: 'Prediction',
-            color: Colors.pink,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class LiftEntryListTile extends StatelessWidget {
-  const LiftEntryListTile({
-    super.key,
-    required this.movementLogsForSpecificLift,
-    required this.index,
-  });
-
-  final MovementLogsForSpecificLift movementLogsForSpecificLift;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    final liftEntry = movementLogsForSpecificLift.logs[index];
-    final date = liftEntry.date.split('-');
-    return ListTile(
-      tileColor: index.isOdd ? Colors.grey[200] : Colors.white,
-      leading: AppText.big_bold(
-        text: '${date[2]}/${date[1]}/${date[0]}:',
-      ),
-      trailing: AppText.big_bold(
-        text: '${liftEntry.weight}KG',
-      ),
     );
   }
 }
