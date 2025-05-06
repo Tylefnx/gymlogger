@@ -4,7 +4,6 @@ import 'package:gymlogger/authentication/shared/providers.dart';
 import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/sb_app_padding.dart';
-import 'package:gymlogger/core/router/app_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()

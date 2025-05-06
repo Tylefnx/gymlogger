@@ -19,7 +19,7 @@ class OneRepMaxCalculator extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('One Rep Max Calculator'),
+        title: AppText.normal(text: 'One Rep Max Calculator'),
       ),
       body: AppPadding.h10v20(
         child: Column(
@@ -40,12 +40,9 @@ class OneRepMaxCalculator extends HookWidget {
             ),
             SBAppPadding.h10(),
             Expanded(
-              child: Card(
-                elevation: 0,
-                child: RepMaxCalculatorResult(
-                  selectedNumber: selectedNumber,
-                  repMaxes: repMaxes,
-                ),
+              child: RepMaxCalculatorResult(
+                selectedNumber: selectedNumber,
+                repMaxes: repMaxes,
               ),
             ),
           ],
@@ -66,23 +63,29 @@ class RepMaxCalculatorResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ListView.builder(
       itemCount: repMaxes.value.length,
       itemBuilder: (BuildContext context, int index) {
         final color = index == selectedNumber.value - 1 ? Colors.red : null;
-        return ListTile(
-          tileColor: index.isOdd ? Colors.white : Colors.grey[300],
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppText.big_bold(
-                text: '${index + 1}RM',
-                color: color,
-              ), // Added space
-              AppText.big_bold(
-                text: repMaxes.value[index].toStringAsFixed(2),
-              ),
-            ],
+        return Card(
+          color: index.isOdd
+              ? colorScheme.inversePrimary
+              : colorScheme.primaryContainer,
+          // tileColor: index.isOdd ? Colors.white : Colors.grey[300],
+          child: AppPadding.h10v20(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppText.big_bold(
+                  text: '${index + 1}RM',
+                  color: color,
+                ), // Added space
+                AppText.big_bold(
+                  text: '${repMaxes.value[index].toStringAsFixed(2)} KG',
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -104,11 +107,15 @@ class RepsPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return NumberPicker(
       itemCount: 5,
       infiniteLoop: true,
       textStyle: const TextStyle(fontSize: 18),
-      selectedTextStyle: const TextStyle(fontSize: 32),
+      selectedTextStyle: TextStyle(
+        fontSize: 32,
+        color: colorScheme.primary,
+      ),
       axis: Axis.horizontal,
       minValue: 1,
       maxValue: 10,

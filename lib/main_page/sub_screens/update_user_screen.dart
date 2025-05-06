@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gymlogger/authentication/domain/user.dart';
 import 'package:gymlogger/authentication/shared/providers.dart';
 import 'package:gymlogger/core/presentation/app_buttons.dart';
-import 'package:gymlogger/core/presentation/app_padding.dart';
 import 'package:gymlogger/core/presentation/app_text.dart';
 import 'package:gymlogger/core/presentation/app_text_form_field.dart';
 import 'package:gymlogger/core/presentation/loading_screen.dart';
