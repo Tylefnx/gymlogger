@@ -14,8 +14,12 @@ class WorkoutService {
     required String username,
     required String token,
   }) async {
+    print(31);
     final response = await _dio.post(getWorkoutRoutineEndpoint,
-        data: {"username": username}, options: authenticator(token: token));
+        data: {
+          "username": username,
+        },
+        options: authenticator(token: token));
     return response;
   }
 
