@@ -174,11 +174,11 @@ Future<void> _submit({
           await ref.read(authStateNotifierProvider.notifier).updateUser(
                 token: _.user.token,
                 username: _.user.username,
-                password: passwordController.text,
                 photoUrl: 'https://tylefnx.example.com',
                 email: emailController.text,
                 name: nameController.text,
                 surname: surnameController.text,
+                sex: _.user.sex ?? 'Unknown',
               ),
     );
     authState.maybeMap(

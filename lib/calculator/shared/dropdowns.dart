@@ -111,3 +111,29 @@ class GenderSelectionWidget extends StatelessWidget {
     );
   }
 }
+
+class SpecifyGenderWidget extends StatelessWidget {
+  const SpecifyGenderWidget({
+    super.key,
+    required this.gender,
+  });
+
+  final ValueNotifier<String?> gender;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppDropDownButton<String?>(
+      hint: 'Select Gender',
+      value: gender.value,
+      onChanged: (_) => gender.value = _,
+      items: selectGenderOptions.map<DropdownMenuItem<String>>((String? _) {
+        return DropdownMenuItem(
+          value: _,
+          child: Align(
+            child: AppText.bold(text: _ ?? ''),
+          ),
+        );
+      }).toList(),
+    );
+  }
+}

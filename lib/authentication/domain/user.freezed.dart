@@ -26,6 +26,7 @@ mixin _$User {
   String? get photo_url => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get surname => throw _privateConstructorUsedError;
+  String? get sex => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +48,8 @@ abstract class $UserCopyWith<$Res> {
       String? email,
       String? photo_url,
       String? name,
-      String? surname});
+      String? surname,
+      String? sex});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? photo_url = freezed,
     Object? name = freezed,
     Object? surname = freezed,
+    Object? sex = freezed,
   }) {
     return _then(_value.copyWith(
       token: null == token
@@ -97,6 +100,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.surname
           : surname // ignore: cast_nullable_to_non_nullable
               as String?,
+      sex: freezed == sex
+          ? _value.sex
+          : sex // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? email,
       String? photo_url,
       String? name,
-      String? surname});
+      String? surname,
+      String? sex});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? photo_url = freezed,
     Object? name = freezed,
     Object? surname = freezed,
+    Object? sex = freezed,
   }) {
     return _then(_$UserImpl(
       token: null == token
@@ -161,6 +170,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.surname
           : surname // ignore: cast_nullable_to_non_nullable
               as String?,
+      sex: freezed == sex
+          ? _value.sex
+          : sex // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -174,7 +187,8 @@ class _$UserImpl implements _User {
       this.email,
       this.photo_url,
       this.name,
-      this.surname});
+      this.surname,
+      this.sex});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -191,10 +205,12 @@ class _$UserImpl implements _User {
   final String? name;
   @override
   final String? surname;
+  @override
+  final String? sex;
 
   @override
   String toString() {
-    return 'User(token: $token, username: $username, email: $email, photo_url: $photo_url, name: $name, surname: $surname)';
+    return 'User(token: $token, username: $username, email: $email, photo_url: $photo_url, name: $name, surname: $surname, sex: $sex)';
   }
 
   @override
@@ -209,13 +225,14 @@ class _$UserImpl implements _User {
             (identical(other.photo_url, photo_url) ||
                 other.photo_url == photo_url) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.surname, surname) || other.surname == surname));
+            (identical(other.surname, surname) || other.surname == surname) &&
+            (identical(other.sex, sex) || other.sex == sex));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, token, username, email, photo_url, name, surname);
+      runtimeType, token, username, email, photo_url, name, surname, sex);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -240,7 +257,8 @@ abstract class _User implements User {
       final String? email,
       final String? photo_url,
       final String? name,
-      final String? surname}) = _$UserImpl;
+      final String? surname,
+      final String? sex}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -256,6 +274,8 @@ abstract class _User implements User {
   String? get name;
   @override
   String? get surname;
+  @override
+  String? get sex;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

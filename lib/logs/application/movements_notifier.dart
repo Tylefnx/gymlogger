@@ -78,6 +78,9 @@ class MovementsStateNotifier extends StateNotifier<MovementsState> {
       date: date,
       weight: weight,
       token: token,
+      bodyWeight: bodyWeight,
+      sex: sex,
+      age: age,
     );
     state = saveOrFailure.fold((l) => MovementsState.failed(l), (r) => state);
     await getUserLifts(

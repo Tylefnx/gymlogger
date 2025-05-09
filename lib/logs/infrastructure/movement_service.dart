@@ -30,15 +30,20 @@ class MovementLogsService {
   Future<Response> saveUserLifts({
     required String username,
     required String exercize,
-    required String token,
     required String date,
     required double weight,
+    required double bodyWeight,
+    required String sex,
+    required int age,
+    required String token,
   }) async {
     final response = await _dio.post(
       saveEndpoint,
       data: {
         'username': username,
         'exercise': exercize,
+        'age': age,
+        'bodyweight': bodyWeight,
         'date': date,
         'weight': weight,
       },

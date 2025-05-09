@@ -55,40 +55,42 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       (l) => AuthState.unauthenticated(l),
       (r) => const AuthState.unauthenticated(null),
     );
-    await login(
-      username: username,
-      password: password,
-    );
   }
 
   Future<void> updateUser({
     required String token,
     required String username,
-    required String password,
+    String? sex,
     String? name,
     String? surname,
     String? photoUrl,
     String? email,
   }) async {
+    // TODO: CHANGE PASSWORD
     final user = getUserFromState();
     state = const AuthState.loading();
     final updateOrFailure = await _repository.updateUser(
       token: token,
       username: username,
-      password: password,
       photoUrl: photoUrl,
       email: email,
       name: name,
       surname: surname,
+      sex: sex,
     );
     updateOrFailure.fold(
-      (l) => state = AuthState.authenticated(
-        user!,
-        const AuthFailure.storage('Wrong Password'),
-      ),
-      (r) => login(
-        username: username,
-        password: password,
+      (l) => null,
+      (r) => state = AuthState.authenticated(
+        User(
+          username: username,
+          token: token,
+          photo_url: user?.photo_url,
+          email: user?.email,
+          name: user?.name,
+          surname: user?.surname,
+          sex: sex ?? user?.sex,
+        ),
+        null,
       ),
     );
   }

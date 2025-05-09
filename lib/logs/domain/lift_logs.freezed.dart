@@ -167,7 +167,8 @@ class __$$LiftLogImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$LiftLogImpl extends _LiftLog {
   const _$LiftLogImpl(
       {required this.exercise,

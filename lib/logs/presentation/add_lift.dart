@@ -133,6 +133,8 @@ class _AddLiftButton extends ConsumerWidget {
           final oneRepMax = double.parse(
             calculateOneRepMax(weight, selectedRep.value).toStringAsFixed(2),
           );
+          print(double.parse(bwController.text));
+          print(int.parse(ageController.text));
           final date = selectedLiftDate.value.toString().substring(0, 10);
           ref.read(movementsStateNotifierProvider.notifier).saveUserLifts(
                 username: username,

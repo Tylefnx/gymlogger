@@ -4,4 +4,5 @@ const strengthLevelExcersize = <String>[
   'Deadlift',
   'Overhead Press',
 ];
-const genders = ['male', 'female'];
+const genders = ['Male', 'Female'];
+const selectGenderOptions = ['Male', 'Female', 'Prefer not to say'];

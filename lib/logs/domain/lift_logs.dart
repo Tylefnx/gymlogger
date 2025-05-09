@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'lift_logs.freezed.dart';
 part 'lift_logs.g.dart';
 
 @freezed
 class LiftLog with _$LiftLog {
+  @JsonSerializable(explicitToJson: true)
   const factory LiftLog({
     required String exercise,
     required int age,
@@ -18,13 +18,15 @@ class LiftLog with _$LiftLog {
   factory LiftLog.fromJson(Map<String, Object?> json) =>
       _$LiftLogFromJson(json);
 
-  factory LiftLog.fromPredictions(
-      {required DateTime lastDate,
-      required double prediction,
-      required String exercise,
-      required int age,
-      required double bodyWeight,
-      required String sex}) {
+  @override
+  factory LiftLog.fromPredictions({
+    required DateTime lastDate,
+    required double prediction,
+    required String exercise,
+    required int age,
+    required double bodyWeight,
+    required String sex,
+  }) {
     return LiftLog(
       exercise: exercise,
       age: age,

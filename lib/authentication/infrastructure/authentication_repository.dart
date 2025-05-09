@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:gymlogger/authentication/domain/auth_failure.dart';
@@ -32,13 +34,12 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      final response = await _service.register(
+      await _service.register(
         username: username,
         password: password,
       );
       // ignore: avoid_dynamic_calls
-      final uid = response.data['token'] as String;
-      return Right(uid);
+      return const Right('');
     } on DioException catch (e) {
       return left(
         AuthFailure.storage(e.message),
@@ -66,7 +67,7 @@ class AuthenticationRepository {
   Future<Either<AuthFailure, String>> updateUser({
     required String username,
     required String token,
-    required String password,
+    String? sex,
     String? email,
     String? name,
     String? surname,
@@ -80,9 +81,10 @@ class AuthenticationRepository {
         name: name,
         surname: surname,
         photoUrl: photoUrl,
-        password: password,
+        sex: sex,
       );
-      final json = response.data as Map<String, dynamic>;
+      print(response.data);
+      final json = jsonDecode(response.data.toString());
       return Right(json['message'].toString());
     } on DioException catch (e) {
       return left(

@@ -12,6 +12,7 @@ class User with _$User {
     String? photo_url,
     String? name,
     String? surname,
+    String? sex,
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

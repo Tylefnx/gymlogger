@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:gymlogger/authentication/domain/user.dart';
 import 'package:gymlogger/core/shared/dio.dart';
 
 class AuthenticationService {
@@ -50,28 +49,23 @@ class AuthenticationService {
   Future<Response> updateUser({
     required String username,
     required String token,
-    required String password,
+    String? sex,
     String? email,
     String? photoUrl,
     String? name,
     String? surname,
   }) async {
-    final updatedUser = User(
-      token: token,
-      username: username,
-      email: email,
-      photo_url: photoUrl,
-      name: name,
-      surname: surname,
-    );
-    // ignore: prefer_final_locals
-    var userData = updatedUser.toJson();
-    userData.addAll({"password": password});
-    userData.removeWhere((key, value) => key == 'token');
     final response = await _dio.post(
       updateUserEndPoint,
-      data: userData,
-      options: authenticator(token: token),
+      data: {
+        'username': username,
+        if (sex != null) 'sex': sex,
+        if (email != null) 'email': email,
+        if (photoUrl != null) 'photo_url': photoUrl,
+        if (name != null) 'name': name,
+        if (surname != null) 'surname': surname,
+      },
+      options: Authenticator(token),
     );
     return response;
   }

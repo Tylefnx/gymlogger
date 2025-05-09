@@ -9,6 +9,7 @@ import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigat
 import 'package:gymlogger/core/presentation/bottom_navigation_bar/bottom_navigation_items.dart';
 import 'package:gymlogger/core/presentation/loading_screen.dart';
 import 'package:gymlogger/core/router/app_router.dart';
+import 'package:gymlogger/main_page/sub_screens/specify_your_gender_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:toastification/toastification.dart';
 
@@ -55,7 +56,13 @@ class MainScreen extends HookConsumerWidget {
     return authState.map(
       loading: (_) => const LoadingScreen(),
       unauthenticated: (_) => const LoginScreen(),
-      authenticated: (_) => const DashboardScreen(),
+      authenticated: (_) {
+        if (_.user.sex == '') {
+          return const SpecifyYourGenderScreen();
+        } else {
+          return const DashboardScreen();
+        }
+      },
     );
   }
 }

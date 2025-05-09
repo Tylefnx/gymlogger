@@ -38,6 +38,9 @@ class MovementLogsRepository {
     required String exercize,
     required String date,
     required double weight,
+    required double bodyWeight,
+    required String sex,
+    required int age,
     required String token,
   }) async {
     try {
@@ -47,6 +50,9 @@ class MovementLogsRepository {
         date: date,
         weight: weight,
         token: token,
+        bodyWeight: bodyWeight,
+        sex: sex,
+        age: age,
       );
       final successMessage = response.data.toString();
       return Right(successMessage);
